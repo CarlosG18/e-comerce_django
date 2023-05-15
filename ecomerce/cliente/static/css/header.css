@@ -1,3 +1,71 @@
-h1{
-    color: red;
+*{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    color:white;
+}
+
+
+body {
+    font-size: 15pt;
+  
+}
+.container{
+  display: flex;
+  height: 120px;
+  justify-content: space-between;
+  background: rgb(201, 238, 246);
+  background: linear-gradient(90deg, rgba(201, 238, 246, 1) 27%, rgba(69, 169, 191, 1) 48%, rgba(31, 131, 170, 1) 100%);
+  
+
+}
+
+.listas{
+   display: flex;
+   list-style-type: none;
+   
+   
+}
+.listas li{
+  
+  margin-left: 80px;
+  margin-top: 40px;
+  font-size: 25px;
+  cursor: pointer;
+  transition: text-decoration .3;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  font-weight: normal;
+  
+  
+}
+.links:hover{
+   text-decoration: underline 2px;
+}
+
+
+
+
+.imagem{
+  max-width: 120px;
+}
+.imagem img {
+  width: 100%;
+  height: 100%;
+}
+.login{
+  background-color: indianred;
+  height: 23px;
+  width: 83px;
+  border-radius: 7px;
+  margin-right: 10px;
+  padding-left: 25px;
+  padding-bottom: 14px;
+  padding-top: 0px;
+  
+
+}
+.login:hover{
+   background-color: white;
+   color:indianred;
 }
