@@ -2,52 +2,40 @@
     text-decoration: none;
     padding: 0;
     margin: 0;
-    color:white;
 }
-
-
 body {
     font-size: 15pt;
-  
 }
-.container{
+header{
   display: flex;
-  height: 120px;
+  height: 5vh;
   justify-content: space-between;
+  align-items: center;
   background: rgb(201, 238, 246);
-  background: linear-gradient(90deg, rgba(201, 238, 246, 1) 27%, rgba(69, 169, 191, 1) 48%, rgba(31, 131, 170, 1) 100%);
-  
-
+  background: linear-gradient(90deg, rgba(201, 238, 246, 1) 20%, rgba(69, 169, 191, 1) 48%, rgba(31, 131, 170, 1) 100%);
 }
-
-.listas{
+ul{
    display: flex;
    list-style-type: none;
-   
-   
+   margin-right: 10px;
 }
-.listas li{
-  
+li{
   margin-left: 80px;
-  margin-top: 40px;
-  font-size: 25px;
   cursor: pointer;
   transition: text-decoration .3;
   font-family: 'Open Sans', sans-serif;
   color: white;
   font-weight: normal;
-  
-  
 }
-.links:hover{
+li > a{
+  color: white;
+}
+li:hover{
    text-decoration: underline 2px;
 }
-
-
-
-
 .imagem{
   max-width: 120px;
+  margin-left: 10px;
 }
 .imagem img {
   width: 100%;
@@ -55,15 +43,8 @@ body {
 }
 .login{
   background-color: indianred;
-  height: 23px;
-  width: 83px;
-  border-radius: 7px;
-  margin-right: 10px;
-  padding-left: 25px;
-  padding-bottom: 14px;
-  padding-top: 0px;
-  
-
+  padding: 2px 15px;
+  border-radius: 5px;
 }
 .login:hover{
    background-color: white;

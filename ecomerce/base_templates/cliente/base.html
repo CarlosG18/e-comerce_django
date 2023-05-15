@@ -16,28 +16,28 @@
     <title>Site</title>
 </head>
 <body>
-    <header class="container">
+    <header>
         <div class="imagem">
-          <img src="imgs/logo.png" alt="logo da loja">
+          <img src="{% static 'imgs/logo.png' %}" alt="logo da loja">
         </div>
       
-        <ul class="listas">
-          <li class="links"> <a href="home.html">Home</a>  </li>
-          <li class="links"> <a href="Produtos.html">Produtos</a>   </li>
-          <li class="links">  <a href="ofertas.html">Ofertas</a> </li>
-          <li class="login"> <a href="login.html">Login</a>  </li>
+        <ul>
+          <li><a href="home.html">Home</a>  </li>
+          <li><a href="Produtos.html">Produtos</a></li>
+          <li><a href="ofertas.html">Ofertas</a></li>
+          <li class="login"><a href="login.html">Login</a></li>
         </ul>
-
+    </header>
     <main>
-      <!-- <h1>listando os produtos</h1>
-      {% for prod i in produtos %}
+      <h1>listando os produtos</h1>
+      {% for prod in produtos %}
         <div>
           <p>nome do produto: {{ prod.nome }}</p>
           <p>codigo do produto: {{ prod.codigo }}</p>
           <p>preço: {{ prod.price }}</p>
           <p>descrição do produto: {{ prod.descrição }}</p>
         </div>
-      {% endfor %} -->
+      {% endfor %}
     </main>
 
 
