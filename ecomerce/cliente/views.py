@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from produto.models import Produto
 
 def index(request):
+  produtos = Produto.objects.all()
   return render(request, "cliente/base.html")
