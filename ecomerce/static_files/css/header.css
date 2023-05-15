@@ -24,7 +24,6 @@ li{
   cursor: pointer;
   transition: text-decoration .3;
   font-family: 'Open Sans', sans-serif;
-  color: white;
   font-weight: normal;
 }
 li > a{
