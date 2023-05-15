@@ -2,13 +2,14 @@
     text-decoration: none;
     padding: 0;
     margin: 0;
-    color:white;
 }
 
+header > ul > li > a{
+  color: white;
+}
 
 body {
     font-size: 15pt;
-  
 }
 .container{
   display: flex;
@@ -16,35 +17,25 @@ body {
   justify-content: space-between;
   background: rgb(201, 238, 246);
   background: linear-gradient(90deg, rgba(201, 238, 246, 1) 27%, rgba(69, 169, 191, 1) 48%, rgba(31, 131, 170, 1) 100%);
-  
-
 }
 
 .listas{
    display: flex;
    list-style-type: none;
-   
-   
 }
 .listas li{
-  
   margin-left: 80px;
   margin-top: 40px;
   font-size: 25px;
   cursor: pointer;
   transition: text-decoration .3;
   font-family: 'Open Sans', sans-serif;
-  color: white;
   font-weight: normal;
-  
-  
 }
+
 .links:hover{
    text-decoration: underline 2px;
 }
-
-
-
 
 .imagem{
   max-width: 120px;
@@ -62,8 +53,6 @@ body {
   padding-left: 25px;
   padding-bottom: 14px;
   padding-top: 0px;
-  
-
 }
 .login:hover{
    background-color: white;
