@@ -1,0 +1,16 @@
+{% extends '../base.html' %}
+
+{% block title%}Home{% endblock %}
+
+{% block content %}
+    <h1>listando clientes</h1>
+    {% for c in clientes %}
+    <div>
+        <div>
+            <img src="{{ c.avatar.url }}" alt="avatar">
+        </div>
+        <p>nome do cliente: {{ c.nome }}</p>
+        <p>email do cliente: {{ c.email }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}

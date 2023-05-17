@@ -6,14 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
-
-
-    <title>Site</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <header>
@@ -22,24 +19,19 @@
         </div>
       
         <ul>
-          <li><a href="home.html">Home</a>  </li>
-          <li><a href="Produtos.html">Produtos</a></li>
-          <li><a href="ofertas.html">Ofertas</a></li>
-          <li class="login"><a href="login.html">Login</a></li>
+          <li><a href="{% url 'cliente:index' %}">Home</a></li>
+          <li><a href="{% url 'produto:index' %}">Produtos</a></li>
+          <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
+          <li class="login"><a href="{% url 'cliente:login' %}">Login</a></li>
         </ul>
     </header>
 
     <main>
-      <h1>listando os produtos</h1>
-      {% for prod in produtos %}
-        <div>
-          <p>nome do produto: {{ prod.nome }}</p>
-          <p>codigo do produto: {{ prod.codigo }}</p>
-          <p>preço: {{ prod.price }}</p>
-          <p>descrição do produto: {{ prod.descrição }}</p>
-        </div>
-      {% endfor %}
+      {% block content %}{% endblock %}
     </main>
 
+    <footer>
+
+    </footer>
 </body>
 </html>

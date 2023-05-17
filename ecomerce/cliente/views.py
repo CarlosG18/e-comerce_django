@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from produto.models import Produto
+from .models import Cliente
 
 def index(request):
-  produtos = Produto.objects.all()
-  return render(request, "cliente/base.html", {
-    "produtos": produtos,
+  clientes = Cliente.objects.all()
+  return render(request, "cliente/index.html", {
+    "clientes": clientes,
   })
+
+def login(request):
+  return render(request, "cliente/login.html")
