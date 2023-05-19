@@ -3,14 +3,22 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
-    <h1>listando clientes</h1>
-    {% for c in clientes %}
+    <h1>listando produtos</h1>
+    
     <div>
-        <div>
-            <img src="{{ c.avatar.url }}" alt="avatar">
-        </div>
-        <p>nome do cliente: {{ c.nome }}</p>
-        <p>email do cliente: {{ c.email }}</p>
-    </div>
+    {% for p in produtos %}
+        <a href="">
+            <h1>{{ p.nome }}</h1>
+            <div>
+                {% for list in list_img %}
+                    {% if list.produto == p %}
+                        <img src="{{ list.foto.url }}" alt="">
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <p> R$ {{ p.price }}</p>
+        </a>    
     {% endfor %}
+    </div>
+    
 {% endblock %}

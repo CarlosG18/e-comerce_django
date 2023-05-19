@@ -15,16 +15,8 @@
 <body>
     <header>
         <div class="box-img">
-          <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo da loja">
+            <a href="{% url 'cliente:index' %}"><img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo"></a>
         </div>
-      
-        <ul>
-          <li><a href="{% url 'cliente:index' %}">Home</a></li>
-          <li><a href="{% url 'produto:index' %}">Produtos</a></li>
-          <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
-          <li><a href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
-          <li class="login"><a href="{% url 'cliente:login' %}">Login</a></li>
-        </ul>
     </header>
 
     <main>
