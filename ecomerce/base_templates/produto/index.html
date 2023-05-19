@@ -15,4 +15,6 @@
         <p>descrição do produto: {{ prod.descricao }}</p>
     </div>
     {% endfor %}
+
+    <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
 {% endblock %}

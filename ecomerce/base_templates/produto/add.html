@@ -1,0 +1,11 @@
+{% extends '../base.html' %}
+
+{% block content%}
+
+<form action="{% url 'produto:add' %}" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="enviar">
+</form>
+
+{% endblock %}

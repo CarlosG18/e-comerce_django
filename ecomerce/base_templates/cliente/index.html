@@ -1,13 +1,18 @@
 {% extends '../base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"> 
+{% endblock %}
 
 {% block title%}Home{% endblock %}
 
 {% block content %}
     <h1>listando produtos</h1>
     
-    <div>
+    <div class="flex column">
     {% for p in produtos %}
-        <a href="">
+        <div class="flex card column center">
             <h1>{{ p.nome }}</h1>
             <div>
                 {% for list in list_img %}
@@ -17,7 +22,8 @@
                 {% endfor %}
             </div>
             <p> R$ {{ p.price }}</p>
-        </a>    
+            <a class="button" href="{% url 'produto:detail' p.codigo %}">saiba mais sobre o produto</a>
+        </div>    
     {% endfor %}
     </div>
     

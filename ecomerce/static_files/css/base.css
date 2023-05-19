@@ -2,3 +2,32 @@
     margin: 0;
     padding: 0;
 }
+
+:root{
+    --azul: rgba(31, 131, 170, 1) 100%;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.flex{
+    display: flex;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    background-color: blue;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 10px;
+}

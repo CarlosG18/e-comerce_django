@@ -1,0 +1,15 @@
+body{
+
+}
+
+.card{
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: aquamarine;
+    box-shadow: 5px 5px 10px rgba(29, 29, 29, 0.151);
+}
+
+.card > *{
+    margin: 10px 0;
+}
