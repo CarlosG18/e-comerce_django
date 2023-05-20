@@ -8,7 +8,30 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
-  <div class="box">
+  <div class="box mb-50 flex center">
+    <div>
+      <img src="{% static 'imgs/address.png' %}" alt="img_address">
+    </div>
+    <div>
+      <h1 class="title-1">Calcule quanto de frete você irá pagar!</h1>
+      <form class="flex column center" action="">
+        <label for="cep">informe o cep:</label>
+        <input type="text">
+        <input class="button" type="submit" value="calcular">
+      </form>
+    </div>
+  </div>
+  
+  <div class="box mb-50 flex column">
+    <div>
+      <h1>categorias</h1>
+    </div>
+    <div>
+      
+    </div>
+  </div>
+
+  <div class="box flex column">
     <div class="flex align-center title">
       <h1>produtos em promoção</h1>
       <a class="ml-20" href="{% url 'produto:index' %}">ver todos os produtos</a>

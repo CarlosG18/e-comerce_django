@@ -8,6 +8,7 @@
     --cinza: rgba(0, 0, 0, 0.05);
     --vermelho: indianred;
     --font: 'Nunito Sans', sans-serif;
+    --font2: 'Oswald', sans-serif;
 }
 
 body{
@@ -22,6 +23,10 @@ body{
 .mx-10{
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.mb-50{
+  margin-bottom: 50px;
 }
 
 .ml-20{
@@ -39,6 +44,10 @@ a{
 
 .flex{
     display: flex;
+}
+
+.title-1{
+  font-family: var(--font2);
 }
 
 .column{
@@ -66,8 +75,6 @@ main{
 }
 
 .box{
-  display: flex;
-  flex-direction: column;
   border-radius: 10px;
   background-color: white;
   padding: 20px;
