@@ -1,20 +1,29 @@
 {% extends '../base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/home.css' %}"> 
+{% endblock %}
 
 {% block title %}Produtos{% endblock %}
 
 {% block content %}
-    <h1>listando os produtos</h1>
-    {% for prod in produtos %}
-    <div>
-        <div>
-            <img src="{{ prod.fotos.url }}" alt="fotos_produto">
-        </div>
-        <p>nome do produto: {{ prod.nome }}</p>
-        <p>codigo do produto: {{ prod.codigo }}</p>
-        <p>preço: {{ prod.price }}</p>
-        <p>descrição do produto: {{ prod.descricao }}</p>
+    <div class="box flex column mb-50">
+    <div class="flex align-center title">
+      <h1>produtos</h1>
     </div>
+    <div class="flex space-around wrap">
+    {% for p in produtos %}
+      <div class="flex card column">
+        <h1>{{ p.nome }}</h1>
+        <div class="box-img">
+            <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
+        </div>
+          <p> R$ {{ p.price }}</p>
+          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+        </div>    
     {% endfor %}
-
-    <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
+    </div>
+  </div>
+  <a class="button ml-20" href="{% url 'produto:add' %}">adicionar novo produto</a>
 {% endblock %}

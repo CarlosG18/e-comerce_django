@@ -14,12 +14,32 @@ body{
   box-shadow: 3px 3px 25px rgb(0,0,0,0.05);
 }
 
+.card-p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  max-width: 200px;
+  border-radius: 15px;
+  border: 2px solid var(--azul);
+  margin: 20px 20px;
+  box-shadow: 3px 3px 25px rgb(0,0,0,0.05);
+}
+
+.card-p:hover{
+  background-color: var(--azul);
+}
+
+.card-p:hover > a{
+  color: white;
+}
+
 .card > *{
   margin: 10px 0;
 }
 
 form > *{
-  margin: 50px 0;
+  margin: 10px 0;
 }
 
 .title{

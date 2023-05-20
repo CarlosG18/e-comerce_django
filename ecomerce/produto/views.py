@@ -28,19 +28,16 @@ def add(request):
   if request.method == "POST":
     form = FormProduto(request.POST, request.FILES)
     if form.is_valid():
-      nome = form.cleaned_data['nome']
-      price = form.cleaned_data['price']
-      descricao = form.cleaned_data['descricao']
-      foto = form.cleaned_data['foto']
-
-      new_produto = Produto(codigo=88237802378278,nome=nome,price=price,descricao=descricao)
-      new_produto.save()
-      img_produto = ListImages(new_produto, foto=foto)
-      img_produto.save()
+      form.save()
       return HttpResponseRedirect(reverse('produto:index'))
   else:
     form = FormProduto()
-
   return render(request, "produto/add.html", {
     "form": form,
+  })
+  
+def categoria(request, cat):
+  produtos = Produto.objects.filter(categoria__nome=cat)
+  return render(request, "produto/list_categoria.html", {
+    "produtos": produtos,
   })

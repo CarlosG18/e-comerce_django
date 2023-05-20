@@ -7,7 +7,7 @@
     --azul: rgba(31, 131, 170, 1);
     --cinza: rgba(0, 0, 0, 0.05);
     --vermelho: indianred;
-    --font: 'Nunito Sans', sans-serif;
+    --font: 'Roboto', sans-serif;
     --font2: 'Oswald', sans-serif;
 }
 
@@ -33,6 +33,10 @@ body{
   margin-left: 20px;
 }
 
+.text-center{
+  text-align: center;
+}
+
 .align-center{
   align-items: center;
 }
@@ -47,7 +51,7 @@ a{
 }
 
 .title-1{
-  font-family: var(--font2);
+  font-family: var(--font);
 }
 
 .column{

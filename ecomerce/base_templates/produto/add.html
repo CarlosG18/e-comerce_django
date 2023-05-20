@@ -2,9 +2,9 @@
 
 {% block content%}
 
-<form action="{% url 'produto:add' %}" method="POST">
+<form action="{% url 'produto:add' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <input type="submit" value="enviar">
 </form>
 

@@ -13,7 +13,7 @@
       <img src="{% static 'imgs/address.png' %}" alt="img_address">
     </div>
     <div>
-      <h1 class="title-1">Calcule quanto de frete você irá pagar!</h1>
+      <h1 class="title-1 text-center">Calcule quanto de frete você irá pagar!</h1>
       <form class="flex column center" action="">
         <label for="cep">informe o cep:</label>
         <input type="text">
@@ -26,8 +26,15 @@
     <div>
       <h1>categorias</h1>
     </div>
-    <div>
-      
+    <div class="flex wrap">
+    {% for c in categorias %}
+      <div class="card-p">
+        <a class="title-1" href="{% url 'produto:categoria' c.nome %}">{{ c.nome }}</a>
+        <div>
+          <img src="" alt="">
+        </div>
+      </div>
+    {% endfor %}
     </div>
   </div>
 
@@ -41,11 +48,7 @@
       <div class="flex card column">
         <h1>{{ p.nome }}</h1>
         <div class="box-img">
-        {% for list in list_img %}
-          {% if list.produto == p %}
-            <img src="{{ list.foto.url }}" alt="img{{p.nome}}">
-          {% endif %}
-        {% endfor %}
+            <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
         </div>
           <p> R$ {{ p.price }}</p>
           <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>

@@ -1,17 +1,29 @@
 from django.shortcuts import render
 from .models import Cliente
-from produto.models import Produto, ListImages
+from produto.models import Produto, ListImages, Categoria
+from .forms import FormCriarCliente
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def index(request):
-  produtos = Produto.objects.all()
-  list_imgs = ListImages.objects.all()
+  produtos = Produto.objects.filter(status="o")
+  categorias = Categoria.objects.all()
   return render(request, "cliente/index.html", {
     "produtos": produtos,
-    "list_img": list_imgs,
+    "categorias": categorias,
   })
 
 def login(request):
   return render(request, "cliente/login.html")
 
 def criar_conta(request):
-  return render(request, "cliente/criar_conta.html")
+  if request.method == "POST":
+    form = FormCriarCliente(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return HttpResponseRedirect(reverse('cliente:index'))
+  else:
+    form = FormCriarCliente()
+  return render(request, "cliente/criar_conta.html", {
+      "form": form,
+  })

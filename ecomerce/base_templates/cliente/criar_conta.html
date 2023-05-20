@@ -1,3 +1,14 @@
 {% extends '../base_create_login.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/criar_conta.css' %}"> {% endblock %}
 
 {% block title %}Criar conta{% endblock %}
+
+{% block content %}
+<form action="{% url 'cliente:criar_conta' %}" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <input class="button" type="submit" value="enviar">
+</form>
+{% endblock %}
