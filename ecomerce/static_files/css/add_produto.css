@@ -1,0 +1,12 @@
+.form-group{
+  margin: 20px 0;
+  display: flex;
+}
+
+.form-group > div{
+  margin: 0 10px;
+}
+
+form{
+  max-width: 400px;
+}

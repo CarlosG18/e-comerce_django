@@ -1,11 +1,107 @@
 {% extends '../base.html' %}
+{% load static %}
 
-{% block content%}
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/add_produto.css' %}"> 
+{% endblock %}
 
-<form action="{% url 'produto:add' %}" method="POST" enctype="multipart/form-data">
+{% block content %}
+<div class="flex column center">
+  
+  <form class="box shadow" action="{% url 'produto:add' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="enviar">
-</form>
-
+    <h1 class="text-center">criando produto</h1>
+    <div>
+      <div class="form-group">
+        <div>
+          {{ form.codigo.label }}
+        </div>
+        <div>
+          {{ form.codigo }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          {{ form.nome.label }}
+        </div>
+        <div>
+          {{ form.nome }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          {{ form.price.label }}
+        </div>
+        <div>
+          {{ form.price }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group flex column">
+        <div>
+          {{ form.descricao.label }}
+        </div>
+        <div>
+          {{ form.descricao }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          {{ form.quantidade.label }}
+        </div>
+        <div>
+          {{ form.quantidade }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          {{ form.categoria.label }}
+        </div>
+        <div>
+          {{ form.categoria }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          {{ form.foto.label }}
+        </div>
+        <div>
+          {{ form.foto }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          {{ form.status.label }}
+        </div>
+        <div>
+          {{ form.status }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <input class="button" type="submit" value="enviar">
+    </div>
+  </form>
+</div>
 {% endblock %}

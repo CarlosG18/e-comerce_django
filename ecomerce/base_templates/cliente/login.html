@@ -3,5 +3,36 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-
+<div class="flex column center">
+  
+  <form class="box shadow" action="{% url 'cliente:criar_conta' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 class="text-center">Login</h1>
+    <div>
+      <div class="form-group">
+        <div>
+          {{ form.nome.label }}
+        </div>
+        <div>
+          {{ form.nome }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          {{ form.senha.label }}
+        </div>
+        <div>
+          {{ form.senha }}
+        </div>
+        <div>
+          {{ form.errors }}
+        </div>
+      </div>
+      <input class="button" type="submit" value="enviar">
+    </div>
+  </form>
+</div>
 {% endblock %}
