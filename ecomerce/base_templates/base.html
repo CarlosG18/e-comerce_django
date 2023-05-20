@@ -6,25 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block css %}{% endblock %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <header>
-        <div class="box-img">
+        <div class="box-img-logo">
           <a href="{% url 'cliente:index' %}"><img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo"></a>
         </div>
       
         <ul>
-          <li><a href="{% url 'cliente:index' %}">Home</a></li>
-          <li><a href="{% url 'produto:index' %}">Produtos</a></li>
-          <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
-          <li><a href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
-          <li class="login"><a href="{% url 'cliente:login' %}">Login</a></li>
+          <li><a class="color-white" href="{% url 'cliente:index' %}">Home</a></li>
+          <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>
+          <li><a class="color-white" href="{% url 'produto:ofertas' %}">Ofertas</a></li>
+          <li><a class="color-white" href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
+          <li class="button"><a href="{% url 'cliente:login' %}">Login</a></li>
         </ul>
     </header>
 
@@ -33,7 +37,47 @@
     </main>
 
     <footer>
-
+      <div class="flex space-around">
+        <div>
+          <p class="destaque">midias digitais</p>
+        <ul class="flex column">
+          <li><a href="{% url 'cliente:index' %}">Home</a></li>
+          <li><a href="{% url 'produto:index' %}">Produtos</a></li>
+          <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
+          <li><a href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
+          <li><a href="{% url 'cliente:login' %}">Login</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="destaque">ComproOnline</p>
+        <ul class="flex column">
+          <li><a href="{% url 'cliente:index' %}">Home</a></li>
+          <li><a href="{% url 'produto:index' %}">Produtos</a></li>
+          <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
+          <li><a href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
+          <li><a href="{% url 'cliente:login' %}">Login</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="destaque">contatos</p>
+        <ul class="flex column">
+          <li><a href="{% url 'cliente:index' %}">Home</a></li>
+          <li><a href="{% url 'produto:index' %}">Produtos</a></li>
+          <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
+          <li><a href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
+          <li><a href="{% url 'cliente:login' %}">Login</a></li>
+        </ul>
+      </div>
+      </div>
+      <div class="flex center mt-50 mx-10">
+        <ul class="flex space-around">
+          <li><a href="{% url 'cliente:index' %}">Home</a></li>
+          <li><a href="{% url 'produto:index' %}">Produtos</a></li>
+          <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
+          <li><a href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
+          <li><a href="{% url 'cliente:login' %}">Login</a></li>
+        </ul>
+      </div>
     </footer>
 
     <script src="{% static 'js/main.js' %}"></script>

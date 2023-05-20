@@ -4,7 +4,32 @@
 }
 
 :root{
-    --azul: rgba(31, 131, 170, 1) 100%;
+    --azul: rgba(31, 131, 170, 1);
+    --cinza: rgba(0, 0, 0, 0.05);
+    --vermelho: indianred;
+    --font: 'Nunito Sans', sans-serif;
+}
+
+body{
+  font-family: var(--font);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mt-50{
+  margin-top: 50px;
+}
+
+.mx-10{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.ml-20{
+  margin-left: 20px;
+}
+
+.align-center{
+  align-items: center;
 }
 
 a{
@@ -26,8 +51,28 @@ a{
 }
 
 .button{
-    background-color: blue;
+    background-color: var(--vermelho);
     color: white;
     padding: 7px 15px;
     border-radius: 10px;
+}
+
+main{
+  margin: 20px;
+}
+
+.space-around{
+  justify-content: space-around;
+}
+
+.box{
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+}
+
+.wrap{
+  flex-wrap: wrap;
 }

@@ -8,23 +8,26 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
-    <h1>listando produtos</h1>
-    
-    <div class="flex column">
+  <div class="box">
+    <div class="flex align-center title">
+      <h1>produtos em promoção</h1>
+      <a class="ml-20" href="{% url 'produto:index' %}">ver todos os produtos</a>
+    </div>
+    <div class="flex space-around wrap">
     {% for p in produtos %}
-        <div class="flex card column center">
-            <h1>{{ p.nome }}</h1>
-            <div>
-                {% for list in list_img %}
-                    {% if list.produto == p %}
-                        <img src="{{ list.foto.url }}" alt="">
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <p> R$ {{ p.price }}</p>
-            <a class="button" href="{% url 'produto:detail' p.codigo %}">saiba mais sobre o produto</a>
+      <div class="flex card column">
+        <h1>{{ p.nome }}</h1>
+        <div class="box-img">
+        {% for list in list_img %}
+          {% if list.produto == p %}
+            <img src="{{ list.foto.url }}" alt="img{{p.nome}}">
+          {% endif %}
+        {% endfor %}
+        </div>
+          <p> R$ {{ p.price }}</p>
+          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
         </div>    
     {% endfor %}
     </div>
-    
+  </div>
 {% endblock %}

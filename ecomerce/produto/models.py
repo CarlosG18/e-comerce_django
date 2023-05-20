@@ -20,3 +20,6 @@ class Produto(models.Model):
 class ListImages(models.Model):
   produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
   foto = models.ImageField(upload_to=caminho_personalizado, default="produto/produto_default.png")
+  
+  def __str__(self):
+    return f'imagem do produto {self.produto.nome}'
