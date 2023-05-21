@@ -2,28 +2,42 @@
 {% load static %}
 
 {% block css %} 
-    <link rel="stylesheet" href="{% static 'css/home.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/list_produtos.css' %}"> 
 {% endblock %}
 
 {% block title %}Produtos{% endblock %}
 
 {% block content %}
-    <div class="box flex column mb-50">
-    <div class="flex align-center title">
-      <h1>produtos</h1>
+  <div class="box flex column">
+    <div class="title flex space-between">
+      <h1>Listando produtos</h1>
+      <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
     </div>
-    <div class="flex space-around wrap">
-    {% for p in produtos %}
-      <div class="flex card column">
-        <h1>{{ p.nome }}</h1>
-        <div class="box-img">
-            <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
-        </div>
-          <p> R$ {{ p.price }}</p>
+    <div>
+      {% if produtos %}
+        {% for p in produtos %}
+        <div class="card shadow flex align-center">
+          <div class="box-img-p">
+            <img src="{{ p.foto.url }}" alt="img_{{ p.nome }}">
+          </div>
+          <div class="descricao">
+            <p><b>nome:</b> {{ p.nome }}</p>
+            {% if p.status == "o" %}
+              <p><b>status:</b> oferta</p>
+            {% elif p.status == "n" %}
+              <p><b>status:</b> normal</p>
+            {% else %}
+              <p><b>status:</b> falta</p>
+            {% endif %}
+            <p><b>quantidade:</b> {{ p.quantidade }}</p>
+          </div>
+          <p class="destaque-1">R${{ p.price }}</p>
           <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
-        </div>    
-    {% endfor %}
+        </div>
+      {% endfor %}
+      {% else %}
+        <p class="destaque-1">esta categoria não possui produtos</p>
+      {% endif %}
     </div>
   </div>
-  <a class="button ml-20" href="{% url 'produto:add' %}">adicionar novo produto</a>
 {% endblock %}

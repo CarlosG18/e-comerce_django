@@ -20,6 +20,14 @@ body{
   margin-top: 50px;
 }
 
+.my-15{
+  margin: 15px 0;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
 .mx-10{
   margin-left: 10px;
   margin-right: 10px;
@@ -29,8 +37,16 @@ body{
   margin-bottom: 50px;
 }
 
+.mb-10{
+  margin-bottom: 10px;
+}
+
 .ml-20{
   margin-left: 20px;
+}
+
+.ml-10{
+  margin-left: 10px;
 }
 
 .text-center{
@@ -52,6 +68,12 @@ a{
 
 .title-1{
   font-family: var(--font);
+}
+
+.title{
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 5px solid var(--cinza);
 }
 
 .column{
@@ -94,4 +116,19 @@ main{
 
 .shadow{
   box-shadow: 3px 3px 25px rgb(0,0,0,0.05);
+}
+
+.destaque-1{
+  color: var(--azul);
+  font-weight: 700;
+  font-family: var(--font);
+  font-size: 20px;
+}
+
+.border{
+  border: 2px solid var(--azul);
+}
+
+.border-r{
+  border-radius: 10px;
 }

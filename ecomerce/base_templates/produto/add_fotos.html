@@ -1,0 +1,11 @@
+{% extends '../base.html' %}
+
+{% block content %}
+  <p>Nome: {{ produto.nome }}</p>
+  
+  <form action="{% url 'produto:add_fotos' produto.codigo %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="enviar">
+  </form>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Produto, ListImages
-from .forms import FormProduto
+from .forms import FormProduto, FormImages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -20,8 +20,10 @@ def ofertas(request):
 
 def detail(request, cod):
   produto = Produto.objects.get(codigo=cod)
+  list_imgs = ListImages.objects.filter(produto__codigo=cod)
   return render(request, "produto/detail.html", {
     "produto": produto,
+    "list_imgs": list_imgs,
   })
 
 def add(request):
@@ -40,4 +42,20 @@ def categoria(request, cat):
   produtos = Produto.objects.filter(categoria__nome=cat)
   return render(request, "produto/list_categoria.html", {
     "produtos": produtos,
+    "categoria": cat,
+  })
+  
+def add_fotos(request, cod):
+  produto = Produto.objects.filter(codigo=cod).get()
+  
+  if request.method == "POST":
+    form = FormImages(request.POST,request.FILES)
+    if form.is_valid():
+      form.save()
+      return HttpResponseRedirect(reverse('produto:index'))
+  else:
+    form = FormImages()
+  return render(request, "produto/add_fotos.html", {
+    "produto": produto,
+    "form": form,
   })

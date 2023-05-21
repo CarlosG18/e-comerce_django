@@ -1,7 +1,40 @@
 {% extends '../base.html' %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/list_produtos.css' %}">
+{% endblock %}
+
+{% block title %}Produto categoria{% endblock %}
 
 {% block content %}
-  {% for p in produtos %}
-    <p>{{ p.nome }}</p>
-  {% endfor %}
+  <div class="box flex column">
+    <h1 class="title">{{ categoria }}</h1>
+    <div>
+      {% if produtos %}
+        {% for p in produtos %}
+        <div class="card shadow flex align-center">
+          <div class="box-img-p">
+            <img src="{{ p.foto.url }}" alt="img_{{ p.nome }}">
+          </div>
+          <div class="descricao">
+            <p><b>nome:</b> {{ p.nome }}</p>
+            {% if p.status == "o" %}
+              <p><b>status:</b> oferta</p>
+            {% elif p.status == "n" %}
+              <p><b>status:</b> normal</p>
+            {% else %}
+              <p><b>status:</b> falta</p>
+            {% endif %}
+            <p><b>quantidade:</b> {{ p.quantidade }}</p>
+          </div>
+          <p class="destaque-1">R${{ p.price }}</p>
+          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+        </div>
+      {% endfor %}
+      {% else %}
+        <p class="destaque-1">esta categoria não possui produtos</p>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}

@@ -1,11 +1,46 @@
 {% extends '../base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/detail_produto.css' %}"> 
+{% endblock %}
+
+{% block title %}Detalhes{% endblock %}
 
 {% block content %}
-    <h1>Detalhes do produto</h1>
-    <div>
-        <p>codigo do produto: {{ produto.codigo }}</p>
-        <p>nome do produto: {{ produto.nome }}</p>
-        <p>preço do produto: {{ produto.price }}</p>
-        <p>descrição do produto: {{ produto.descricao }}</p>
-    </div> 
+  <div class="box mb-50">
+    <h1 class="title">Detalhes do produto</h1>
+    <div class="flex center space-around">
+      <div class="flex column">
+        <div class="box-img">
+          <img src="{{ produto.foto.url }}" alt="img_{{ produto.nome }}">
+        </div>
+        <a class="button my-15 text-center" href="{% url 'produto:add_fotos' produto.codigo %}">adicionar mais fotos</a>
+      </div>
+      <div class="card border border-r shadow">
+        <p><b>Código do Produto:</b> {{produto.codigo}}</p>
+        <p><b>Nome do Produto:</b> {{produto.nome}}</p>
+        <p><b>descrição do Produto:</b> {{produto.descricao}}</p>
+        <p><b>Preço do Produto:</b> {{produto.price}}</p>
+        <p><b>Categoria do Produto:</b> {{produto.categoria}}</p>
+        <p><b>Quantidade do Produto:</b> {{produto.quantidade}}</p>
+        <p><b>Status do Produto:</b> {{produto.status}}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="box">
+    <h1 class="title">Todas as fotos</h1>
+    <div class="flex wrap">
+      {% if list_imgs %}
+        {% for imgs in list_imgs %}
+          <div class="box-img-1 ml-10 mb-10">
+            <img src="{{ imgs.foto.url }}" alt="img">
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="destaque-1">não possui fotos adicionais</p>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
