@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Produto, ListImages
 from .forms import FormProduto, FormImages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 
 def index(request):
@@ -52,7 +52,7 @@ def add_fotos(request, cod):
     form = FormImages(request.POST,request.FILES)
     if form.is_valid():
       form.save()
-      return HttpResponseRedirect(reverse('produto:index'))
+      return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
   else:
     form = FormImages()
   return render(request, "produto/add_fotos.html", {
@@ -64,3 +64,10 @@ def remove(request, cod):
   produto = Produto.objects.get(codigo=cod)
   produto.delete()
   return HttpResponseRedirect(reverse('produto:index'))
+  
+def remove_img(request, id):
+  img = ListImages.objects.get(id=id)
+  produto = img.produto
+  cod = produto.codigo
+  img.delete()
+  return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
