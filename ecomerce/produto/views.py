@@ -59,3 +59,8 @@ def add_fotos(request, cod):
     "produto": produto,
     "form": form,
   })
+  
+def remove(request, cod):
+  produto = Produto.objects.get(codigo=cod)
+  produto.delete()
+  return HttpResponseRedirect(reverse('produto:index'))

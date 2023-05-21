@@ -9,7 +9,11 @@
 
 {% block content %}
   <div class="box mb-50">
-    <h1 class="title">Detalhes do produto</h1>
+    <div class="title flex space-between">
+      <h1>Detalhes do produto</h1>
+      <a class="button" href="{% url 'produto:remove' produto.codigo %}">deletar produto</a>
+    </div>
+    
     <div class="flex center space-around">
       <div class="flex column">
         <div class="box-img">
