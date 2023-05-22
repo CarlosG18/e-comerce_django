@@ -1,3 +1,66 @@
 {% extends '../base.html' %}
+{% load static %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/ofertas.css' %}"> 
+{% endblock %}
 
 {% block title %}Ofertas{% endblock %}
+
+{% block content %}
+  <div class="box mb-50">
+    <h1 class="title">conheça nossas ofertas</h1>
+    <div class="flex">
+      <div class="box-img">
+        <img src="{% static 'imgs/buy.png' %}" alt="">
+      </div>
+      <div class="flex column center text-center">
+        <h1>Produtos com <span class="destaque-2">50%</span> de desconto!</h1>
+        <a class="button">confira aqui</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="box mb-50">
+    <h1 class="title">produtos mais vendidos</h1>
+    <div class="flex space-around">
+      <div class="flex center wrap max-width-300">
+        {% for p in produtos %}
+          <div class="box-img-small">
+            <img src="{{ p.foto.url }}" alt="img_{{p.nome}}">
+          </div>
+        {% endfor %}
+      </div>
+      <div class="border box">
+        <p>Produto mais vendido: </p>
+        <p>quantidade de vendas: </p>
+        <p>preço médio: </p>
+        <div class="card">
+          <p>comentários:</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="box mb-50">
+    <h1 class="title">produtos mais bem avaliados</h1>
+    <div class="flex space-around">
+      <div class="flex center wrap max-width-300">
+        {% for p in produtos %}
+          <div class="box-img-small">
+            <img src="{{ p.foto.url }}" alt="img_{{p.nome}}">
+          </div>
+        {% endfor %}
+      </div>
+      <div class="border box">
+        <p>Produto mais bem avaliado: </p>
+        <p>quantidade de vendas: </p>
+        <p>preço médio: </p>
+        <div class="card">
+          <p>comentários:</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

@@ -54,7 +54,8 @@ def add_fotos(request, cod):
       form.save()
       return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
   else:
-    form = FormImages()
+    initial_data = {'produto': produto}
+    form = FormImages(initial=initial_data)
   return render(request, "produto/add_fotos.html", {
     "produto": produto,
     "form": form,
