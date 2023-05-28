@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 def index(request):
-  produtos = Produto.objects.filter(status="o")
+  produtos = Produto.objects.filter(status="o")[:6]
   categorias = Categoria.objects.all()
   return render(request, "cliente/index.html", {
     "produtos": produtos,

@@ -3,12 +3,13 @@ from .models import Produto, ListImages
 from .forms import FormProduto, FormImages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.views import generic
 
-def index(request):
-  produtos = Produto.objects.all()
-  return render(request, "produto/index.html", {
-    "produtos": produtos,
-  })
+class ProdutoListView(generic.ListView):
+  model = Produto
+  context_object_name = "produtos"
+  template_name = "produto/index.html"
+  paginate_by = 10
 
 def ofertas(request):
   produtos = Produto.objects.all()

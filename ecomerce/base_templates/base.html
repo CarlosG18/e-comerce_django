@@ -35,6 +35,16 @@
     <main>
       {% block content %}{% endblock %}
     </main>
+    
+    {% if is_paginated %}
+    <div class="box mb-50 flex center">
+      <div class="flex">
+        {% for i in page_obj.paginator.page_range %}
+          <a class="destaque-1 mx-10" href="{{request.path}}?page={{i}}">{{i}}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
 
     <footer>
       <div class="flex space-around">
