@@ -8,12 +8,12 @@
 {% block title %}Detalhes{% endblock %}
 
 {% block content %}
+<!-- detalhes do produto -->
   <div class="box mb-50">
     <div class="title flex space-between">
       <h1>Detalhes do produto</h1>
       <a class="button" href="{% url 'produto:remove' produto.codigo %}">deletar produto</a>
     </div>
-    
     <div class="flex center space-around">
       <div class="flex column">
         <div class="box-img">
@@ -33,7 +33,8 @@
     </div>
   </div>
   
-  <div class="box">
+<!-- fotos do produto -->
+  <div class="box mb-50">
     <h1 class="title">Todas as fotos</h1>
     <div class="flex wrap">
       {% if list_imgs %}
@@ -47,6 +48,38 @@
         {% endfor %}
       {% else %}
         <p class="destaque-1">não possui fotos adicionais</p>
+      {% endif %}
+    </div>
+  </div>
+  
+<!-- comentarios sobre o produto -->
+  <div class="box mb-50">
+    <div class="title flex space-between">
+      <h1>comentários</h1>
+      <a class="button" href="">adicionar comentário</a>
+    </div>
+    <div>
+      {% if comentarios %}
+      {% for c in comentarios %}
+        <div class="card-c flex column">
+          <div class="cliente flex align-center">
+            <div class="box-img-avatar">
+              <img src="{{c.cliente.avatar.url }}" alt="avatar">
+            </div>
+            <p class="p-5-10 border border-r"><b>{{c.cliente.nome}}</b></p>
+          </div>
+        <div class="box-text">
+          <p>{{c.comentario}}</p>
+        </div>
+        <div class="flex end">
+          <div class="classificacao">
+            <p>stars: {{c.stars}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p class="destaque-1">o produto não possuí comentários</p>
       {% endif %}
     </div>
   </div>

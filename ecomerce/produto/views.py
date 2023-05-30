@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Produto, ListImages
+from .models import Produto, ListImages, Comentario
 from .forms import FormProduto, FormImages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -22,9 +22,11 @@ def ofertas(request):
 def detail(request, cod):
   produto = Produto.objects.get(codigo=cod)
   list_imgs = ListImages.objects.filter(produto__codigo=cod)
+  comentarios = Comentario.objects.filter(produto__codigo=cod)
   return render(request, "produto/detail.html", {
     "produto": produto,
     "list_imgs": list_imgs,
+    "comentarios": comentarios,
   })
 
 def add(request):

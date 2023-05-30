@@ -1,6 +1,7 @@
 from distutils.command.upload import upload
 from email.policy import default
 from django.db import models
+from cliente.models import Cliente
 import os
 
 def caminho_personalizado(instance, filename):
@@ -22,6 +23,7 @@ class Produto(models.Model):
   quantidade = models.IntegerField(default=0)
   categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
   foto = models.ImageField(upload_to="produto/", default="produto/produto_default.png")
+  media_stars = models.DecimalField(max_digits=3, decimal_places=2,null=True)
   
   STATUS = (
       ("o", "oferta"),
@@ -33,6 +35,7 @@ class Produto(models.Model):
   
   def __str__(self):
     return f' produto {self.nome}'
+  
 
 class ListImages(models.Model):
   produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
@@ -40,3 +43,21 @@ class ListImages(models.Model):
   
   def __str__(self):
     return f'imagem do produto {self.produto.nome}'
+    
+class Comentario(models.Model):
+  cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE)
+  produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+  comentario = models.TextField()
+  
+  STARS = (
+      (1,"péssimo"),
+      (2,"mediano"),
+      (3,"ótimo"),
+      (4,"excelente"),
+      (5,"fantástico")
+    )
+  
+  stars = models.IntegerField(choices=STARS)
+  
+  def __str__(self):
+    return f'comentario da cliente {self.cliente.nome} sobre o produto {self.produto.nome}'
