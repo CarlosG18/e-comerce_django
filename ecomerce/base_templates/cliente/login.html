@@ -1,38 +1,43 @@
 {% extends '../base_create_login.html' %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="flex column center">
-  
-  <form class="box shadow" action="{% url 'cliente:criar_conta' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <h1 class="text-center">Login</h1>
-    <div>
+<div class="card">
+  <div class="forms">
+    <form class="flex" action="{% url 'cliente:criar_conta' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="box-img-logo">
+        <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
+      </div>
+      <div>
       <div class="form-group">
         <div>
-          {{ form.nome.label }}
+          {{ form.email.label }}
         </div>
         <div>
-          {{ form.nome }}
-        </div>
-        <div>
-          {{ form.errors }}
+          {{ form.email }}
         </div>
       </div>
       <div class="form-group">
         <div>
-          {{ form.senha.label }}
+          {{ form.cpf.label }}
         </div>
         <div>
-          {{ form.senha }}
-        </div>
-        <div>
-          {{ form.errors }}
+          {{ form.cpf }}
         </div>
       </div>
-      <input class="button" type="submit" value="enviar">
+      <input class="button" type="submit" value="entrar">
     </div>
+    <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
   </form>
+  </div>
+  <div class="box-img-login">
+    <div class="box-img">
+      <img src="{% static 'imgs/pay.png' %}" alt="logo">
+    </div>
+    <a class="link-w" href="{% url 'cliente:criar_conta' %}">Não possui conta? cria já a sua!</a>
+  </div>
 </div>
 {% endblock %}

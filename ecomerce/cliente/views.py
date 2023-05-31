@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Cliente
 from produto.models import Produto, ListImages, Categoria
-from .forms import FormCriarCliente
+from .forms import FormCriarCliente, FormLogin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -14,7 +14,16 @@ def index(request):
   })
 
 def login(request):
-  return render(request, "cliente/login.html")
+  if request.method == "POST":
+    form = FormLogin(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return HttpResponseRedirect(reverse('cliente:criar_conta'))
+  else:
+    form = FormCriarCliente()
+  return render(request, "cliente/login.html", {
+      "form": form,
+  })
 
 def criar_conta(request):
   if request.method == "POST":

@@ -3,6 +3,7 @@ header{
   height: 8vh;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
   background: rgb(201, 238, 246);
   background: linear-gradient(90deg, rgba(201, 238, 246, 1) 20%, rgba(69, 169, 191, 1) 48%, rgba(31, 131, 170, 1) 100%);
 }
@@ -11,21 +12,35 @@ ul{
    list-style-type: none;
    margin-right: 10px;
 }
-li{
+li:not(a){
   margin-left: 30px;
   cursor: pointer;
   transition: text-decoration .3;
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;
 }
+
+.button-header{
+  background-color: var(--vermelho);
+  color: white;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+
 .color-white{
   color: white;
   font-size: 12px;
   text-decoration: none;
 }
-li:hover{
-   text-decoration: underline 2px;
+a:not(.button-header):hover{
+   text-decoration: underline 1px;
 }
+
+.button-header:hover{
+  background-color: white;
+  color: var(--azul);
+}
+
 .box-img-logo{
   min-width: 70px;
   width: 70px;

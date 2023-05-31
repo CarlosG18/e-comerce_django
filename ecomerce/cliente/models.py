@@ -14,7 +14,7 @@ class Cliente(models.Model):
   )
   
   cpf = models.CharField(primary_key=True, max_length=14, validators=[cpf_setting], unique=True)
-  
+
   TYPE = (
       ("f", "pessoa fisica"),
       ("e", "empresa"),

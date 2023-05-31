@@ -1,3 +1,12 @@
+:root{
+  --azul: rgba(31, 131, 170, 1);
+  --cinza: rgba(0, 0, 0, 0.05);
+  --vermelho: indianred;
+  --font: 'Roboto', sans-serif;
+  --font2: 'Oswald', sans-serif;
+}
+
+
 main{
   display: flex;
   height: 100vh;
@@ -22,6 +31,11 @@ body{
   padding: 90px 70px;
 }
 
+.link-w{
+  color: white;
+  text-decoration: none;
+}
+
 .flex{
   display: flex;
   flex-direction: column;
@@ -32,6 +46,16 @@ body{
   font-size: 30px;
   font-family: Oswald, Sans-Serif;
   color: white;
+  text-align: center;
+}
+
+.mt-30{
+  margin-top: 30px;
+}
+
+.link{
+  color: var(--azul);
+  text-decoration: none;
 }
 
 .box-img-login{
@@ -39,24 +63,34 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  background-color: var(--azul);
   border-radius: 0 10px 10px 0;
   min-width: 400px;
 }
 
 .button{
   color: white;
-  background-color: blue;
+  background-color: var(--vermelho);
   padding: 8px 15px;
   border: none;
   border-radius: 10px;
   width: 100%;
+  margin-top: 30px;
 }
 
-input{
+.button:hover{
+  background-color: var(--azul);
+  cursor: pointer;
+}
+
+input:not(.button){
   border-radius: 8px;
   border: 2px solid rgb(0,0,0,0.05);
   margin: 8px 0;
+}
+
+input:not(.button):hover{
+  border: 2px solid var(--azul);
 }
 
 .box-img-logo{
@@ -70,4 +104,8 @@ input{
 .box-img > img{
   width: 100%;
   height: 100%;
+}
+
+.max-w100{
+  max-width: 200px;
 }
