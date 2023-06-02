@@ -14,45 +14,36 @@
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
       </div>
       <div>
-      <div class="form-group">
-        <div>
-          {{ form.nome.label }}
+        <div class="form-group">
+          <div>
+            {{ form.username.label }}
+          </div>
+          <div>
+            {{ form.username }}
+          </div>
         </div>
-        <div>
-          {{ form.nome }}
+        <div class="form-group">
+          <div>
+            {{ form.email.label }}
+          </div>
+          <div>
+            {{ form.email }}
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div>
-          {{ form.email.label }}
+        <div class="form-group">
+          <div>
+            {{ form.password.label }}
+          </div>
+          <div>
+            {{ form.password }}
+          </div>
         </div>
-        <div>
-          {{ form.email }}
-        </div>
-      </div>
-      <div class="form-group">
-        <div>
-          {{ form.cpf.label }}
-        </div>
-        <div>
-          {{ form.cpf }}
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="type_cliente">
-          {{ form.type_cliente }}
-        </div>
-      </div>
-      <div class="form-group">
-        <div>
-          {{ form.errors }}
-        </div>
-      </div>
       <input class="button" type="submit" value="cadastrar">
     </div>
     <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
-  </form>
-  </div>
+    {{form.errors}}
+    </form>
+    </div>
   <div class="box-img-login">
     <div class="box-img">
       <img src="{% static 'imgs/buy.png' %}" alt="logo">
