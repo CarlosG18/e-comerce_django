@@ -5,7 +5,6 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
 class Cliente(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
   nome = models.CharField(max_length=200)
   avatar = models.ImageField(upload_to="cliente/", default="cliente/avatar_default.png")
   email = models.EmailField(help_text="insira seu email")
@@ -18,7 +17,7 @@ class Cliente(models.Model):
   cpf = models.CharField(primary_key=True, max_length=14, validators=[cpf_setting], unique=True)
 
   TYPE = (
-      ("f", "pessoa fisica"),
+      ("f", "pessoa-fisica"),
       ("e", "empresa"),
     )
     

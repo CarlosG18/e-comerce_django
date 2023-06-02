@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-@login_required
+# @login_required
 def index(request):
   produtos = Produto.objects.filter(status="o")[:6]
   categorias = Categoria.objects.all()
@@ -18,11 +18,11 @@ def index(request):
 
 def criar_conta(request):
   if request.method == "POST":
-    form = FormCriarCliente(request.POST, request.FILES)
+    form = FormCriarCliente(request.POST)
     if form.is_valid():
-      form.save()
-      user = User(username=form.cleaned_data['nome'],email=form.cleaned_data['email'],password=form.cleaned_data['cpf'])
+      user = User.objects.create_user(username=form.cleaned_data['nome'],email=form.cleaned_data['email'],password=form.cleaned_data['cpf'])
       user.save()
+      form.save()
       return HttpResponseRedirect(reverse('cliente:index'))
   else:
     form = FormCriarCliente()
