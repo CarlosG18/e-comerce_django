@@ -6,7 +6,7 @@
 {% block content %}
 <div class="card">
   <div class="forms">
-    <form class="flex" action="{% url 'cliente:criar_conta' %}" method="POST" enctype="multipart/form-data">
+    <form class="flex" action="{% url 'cliente:index' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="box-img-logo">
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
@@ -14,18 +14,18 @@
       <div>
       <div class="form-group">
         <div>
-          {{ form.email.label }}
+          {{ form.username.label }}
         </div>
         <div>
-          {{ form.email }}
+          {{ form.username }}
         </div>
       </div>
       <div class="form-group">
         <div>
-          {{ form.cpf.label }}
+          {{ form.password.label }}
         </div>
         <div>
-          {{ form.cpf }}
+          {{ form.password }}
         </div>
       </div>
       <input class="button" type="submit" value="entrar">

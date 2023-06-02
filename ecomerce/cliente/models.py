@@ -2,8 +2,10 @@ from distutils.command.upload import upload
 from email.policy import default
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 class Cliente(models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
   nome = models.CharField(max_length=200)
   avatar = models.ImageField(upload_to="cliente/", default="cliente/avatar_default.png")
   email = models.EmailField(help_text="insira seu email")
