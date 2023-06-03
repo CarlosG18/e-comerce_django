@@ -1,0 +1,34 @@
+{% extends '../base_create_login.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/criar_conta.css' %}"> {% endblock %}
+
+{% block title %}Criar empresa{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="forms">
+    <form class="flex" action="{% url 'cliente:criar_conta' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="box-img-logo">
+        <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
+      </div>
+      <div>
+        
+      <input class="button" type="submit" value="cadastrar">
+    </div>
+    <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
+    {{form.errors}}
+    </form>
+    </div>
+  <div class="box-img-login">
+    <div class="box-img">
+      <img src="{% static 'imgs/buy.png' %}" alt="logo">
+    </div>
+    <p class="destaque max-w250">Crie sua conta e venha fazer parte dessa família!</p>
+    <a class="link-w" href="{% url 'login' %}">já possui conta? então faça seu login!</a>
+  </div>
+</div>
+
+    
+{% endblock %}

@@ -32,7 +32,7 @@
             <li><a class="color-white" href="{% url 'cliente:perfil' request.user.id %}">perfil</a></li>
             <li><a class="button-header" href="{% url 'logout' %}">sair</a></li>
           {% else %}
-            <li><a class="color-white" href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
+            <li><a class="color-white" href="{% url 'cliente:tipo-cliente' %}">criar conta</a></li>
             <li><a class="button-header" href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </ul>

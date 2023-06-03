@@ -87,6 +87,7 @@ input:not(.button){
   border-radius: 8px;
   border: 2px solid rgb(0,0,0,0.05);
   margin: 8px 0;
+  width: 100%;
 }
 
 input:not(.button):hover{
@@ -106,6 +107,6 @@ input:not(.button):hover{
   height: 100%;
 }
 
-.max-w100{
-  max-width: 200px;
+.max-w250{
+  max-width: 250px;
 }

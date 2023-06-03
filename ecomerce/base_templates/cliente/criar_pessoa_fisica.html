@@ -1,0 +1,28 @@
+{% extends '../base_create_login.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/criar_conta.css' %}"> {% endblock %}
+
+{% block title %}Criar pessoa Fisica{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="forms">
+    <form class="flex" action="{% url 'cliente:tipo-cliente' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="box-img-logo">
+        <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
+      </div>
+      <h1 class="title">criar Pessoa Fisica</h1>
+      <div>
+        
+      </div>
+      <input class="button" type="submit" value="proximo">
+      </div>
+    <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
+    </form>
+  </div>
+</div>
+
+    
+{% endblock %}

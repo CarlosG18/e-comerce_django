@@ -1,0 +1,31 @@
+{% extends '../base_create_login.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/criar_conta.css' %}"> {% endblock %}
+
+{% block title %}Tipo do cliente{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="forms">
+    <form class="flex" action="{% url 'cliente:tipo-cliente' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="box-img-logo">
+        <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
+      </div>
+      <div>
+      <div class="flex">
+        <label for="tipo1">Pessoa Fisica</label>
+        <input id="tipo1" type="radio" name="tipo" value="pessoa">
+        <label for="tipo2">Empresa</label>
+        <input id="tipo2" type="radio" name="tipo" value="empresa">
+      </div>
+      <input class="button" type="submit" value="proximo">
+      </div>
+    <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
+    </form>
+  </div>
+</div>
+
+    
+{% endblock %}
