@@ -8,7 +8,7 @@
 {% block content %}
 <div class="card">
   <div class="forms">
-    <form class="flex" action="{% url 'cliente:criar_conta' %}" method="POST">
+    <form class="flex" action="{% url 'cliente:criar_conta' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="box-img-logo">
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
@@ -32,10 +32,34 @@
         </div>
         <div class="form-group">
           <div>
+            {{ form.avatar.label }}
+          </div>
+          <div>
+            {{ form.avatar }}
+          </div>
+        </div>
+        <div class="form-group">
+          <div>
+            {{ form.cpf.label }}
+          </div>
+          <div>
+            {{ form.cpf }}
+          </div>
+        </div>
+        <div class="form-group">
+          <div>
             {{ form.password.label }}
           </div>
           <div>
             {{ form.password }}
+          </div>
+        </div>
+        <div class="form-group">
+          <div>
+            {{ form.type_cliente.label }}
+          </div>
+          <div>
+            {{ form.type_cliente }}
           </div>
         </div>
       <input class="button" type="submit" value="cadastrar">

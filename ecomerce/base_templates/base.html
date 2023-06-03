@@ -24,10 +24,12 @@
         </div>
       
         <ul>
+          <li><a class="color-white" href="#">{{request.user.username}}</a></li>
           <li><a class="color-white" href="{% url 'cliente:index' %}">Home</a></li>
           <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>
           <li><a class="color-white" href="{% url 'produto:ofertas' %}">Ofertas</a></li>
           {% if user.is_authenticated %}
+            <li><a class="color-white" href="{% url 'cliente:perfil' request.user.id %}">perfil</a></li>
             <li><a class="button-header" href="{% url 'logout' %}">sair</a></li>
           {% else %}
             <li><a class="color-white" href="{% url 'cliente:criar_conta' %}">criar conta</a></li>

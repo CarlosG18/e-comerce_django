@@ -1,0 +1,10 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="box mb-50">
+  {{ cliente.username }}
+  <div class="box-img-avatar">
+    <img src="{{ cliente.avatar.url }}" alt="">
+  </div>
+</div>
+{% endblock %}
