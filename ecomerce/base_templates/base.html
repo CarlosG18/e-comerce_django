@@ -24,11 +24,17 @@
         </div>
       
         <ul>
+          <li><a class="color-white" href="#">{{request.user.username}}</a></li>
           <li><a class="color-white" href="{% url 'cliente:index' %}">Home</a></li>
           <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>
           <li><a class="color-white" href="{% url 'produto:ofertas' %}">Ofertas</a></li>
-          <li><a class="color-white" href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
-          <li><a class="button-header" href="{% url 'cliente:login' %}">Login</a></li>
+          {% if user.is_authenticated %}
+            <li><a class="color-white" href="{% url 'cliente:perfil' request.user.id %}">perfil</a></li>
+            <li><a class="button-header" href="{% url 'logout' %}">sair</a></li>
+          {% else %}
+            <li><a class="color-white" href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
+            <li><a class="button-header" href="{% url 'login' %}">Login</a></li>
+          {% endif %}
         </ul>
     </header>
 
@@ -63,7 +69,7 @@
           <li><a href="{% url 'produto:index' %}">Produtos</a></li>
           <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
           <li><a href="{% url 'cliente:criar_conta' %}">criar conta</a></li>
-          <li><a href="{% url 'cliente:login' %}">Login</a></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
         </ul>
       </div>
       <div>

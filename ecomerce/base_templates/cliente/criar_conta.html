@@ -14,46 +14,66 @@
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
       </div>
       <div>
-      <div class="form-group">
-        <div>
-          {{ form.nome.label }}
+        <div class="form-group">
+          <div>
+            {{ form.username.label }}
+          </div>
+          <div>
+            {{ form.username }}
+          </div>
         </div>
-        <div>
-          {{ form.nome }}
+        <div class="form-group">
+          <div>
+            {{ form.email.label }}
+          </div>
+          <div>
+            {{ form.email }}
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div>
-          {{ form.email.label }}
+        <div class="form-group">
+          <div>
+            {{ form.avatar.label }}
+          </div>
+          <div>
+            {{ form.avatar }}
+          </div>
         </div>
-        <div>
-          {{ form.email }}
+        <div class="form-group">
+          <div>
+            {{ form.cpf.label }}
+          </div>
+          <div>
+            {{ form.cpf }}
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div>
-          {{ form.cpf.label }}
+        <div class="form-group">
+          <div>
+            {{ form.password.label }}
+          </div>
+          <div>
+            {{ form.password }}
+          </div>
         </div>
-        <div>
-          {{ form.cpf }}
+        <div class="form-group">
+          <div>
+            {{ form.type_cliente.label }}
+          </div>
+          <div>
+            {{ form.type_cliente }}
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="type_cliente">
-          {{ form.type_cliente }}
-        </div>
-      </div>
       <input class="button" type="submit" value="cadastrar">
     </div>
     <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
-  </form>
-  </div>
+    {{form.errors}}
+    </form>
+    </div>
   <div class="box-img-login">
     <div class="box-img">
       <img src="{% static 'imgs/buy.png' %}" alt="logo">
     </div>
     <p class="destaque max-w100">Crie sua conta e venha fazer parte dessa família!</p>
-    <a class="link-w" href="{% url 'cliente:login' %}">já possui conta? então faça seu login!</a>
+    <a class="link-w" href="{% url 'login' %}">já possui conta? então faça seu login!</a>
   </div>
 </div>
 
