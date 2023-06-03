@@ -91,6 +91,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'cliente.UserPessoaFisica'
+AUTH_USER_MODEL = 'cliente.UserEmpresa'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

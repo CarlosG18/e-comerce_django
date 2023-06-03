@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Cliente, PessoaFisica, Empresa
+from .models import UserPessoaFisica, UserEmpresa
 from produto.models import Produto, ListImages, Categoria
-from .forms import FormCriarCliente
+from .forms import FormUserPessoaFisica,FormUserEmpresa
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -15,6 +15,7 @@ def index(request):
     "categorias": categorias,
   })
 
+"""
 def criar_conta(request):
     if request.method == 'POST':
         form = FormCriarCliente(request.POST,request.FILES)
@@ -26,6 +27,7 @@ def criar_conta(request):
     else:
         form = FormCriarCliente()
     return render(request, 'cliente/criar_conta.html', {'form': form})
+"""
 
 def perfil(request, id):
   cliente = Cliente.objects.get(id=id)
@@ -43,7 +45,30 @@ def tipocliente(request):
     return render(request, "cliente/type_cliente.html")
     
 def criar_pessoa(request):
-  return render(request, "cliente/criar_pessoa_fisica.html")
+  form = FormUserPessoaFisica()
+  return render(request, "cliente/criar_pessoa_fisica.html",{
+    "form": form,
+  })
+  """
+  if request.method == "POST":
+    form = FormUserPessoaFisica(request.POST,request.FILES)
+    if form.is_valid():
+      form.save()
+      return HttpResponseRedirect(reverse('cliente:index'))
+  else:
+    form = FormUserPessoaFisica()
+  return render(request, "cliente/criar_pessoa_fisica.html", {
+      "form": form,
+  })"""
   
 def criar_empresa(request):
-  return render(request, "cliente/criar_empresa.html")
+  if request.method == "POST":
+    form = FormUserEmpresa(request.POST,request.FILES)
+    if form.is_valid():
+      form.save()
+      return HttpResponseRedirect(reverse('cliente:index'))
+  else:
+    form = FormUserEmpresa()
+  return render(request, "cliente/criar_empresa.html",{
+      "forms": form,
+  })

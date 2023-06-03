@@ -1,9 +1,9 @@
 from django.db import models
-from cliente.models import Cliente
 from produto.models import Produto
+from cliente.models import UserPessoaFisica,UserEmpresa
 
 class Carrinho(models.Model):
-  cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+  cliente = models.ForeignKey(UserPessoaFisica, on_delete=models.CASCADE)
   
   def __str__(self):
     return f'carrinho do cliente {self.cliente.nome}'
@@ -13,5 +13,5 @@ class ItemCarrinho(models.Model):
   produto = models.ForeignKey(Produto,on_delete=models.CASCADE)
   
   def __str__(self):
-    return f' item {self.produto.nome} do carinho do cliente {self.carrinho.cliente.nome}'
+    return f' item {self.produto.nome} do carinho do cliente {self.carrinho.cliente.username}'
 

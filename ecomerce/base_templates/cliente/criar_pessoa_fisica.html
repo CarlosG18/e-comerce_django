@@ -8,14 +8,14 @@
 {% block content %}
 <div class="card">
   <div class="forms">
-    <form class="flex" action="{% url 'cliente:tipo-cliente' %}" method="POST" enctype="multipart/form-data">
+    <form class="flex" action="{% url 'cliente:criar_pessoa' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="box-img-logo">
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
       </div>
       <h1 class="title">criar Pessoa Fisica</h1>
       <div>
-        
+        {{form}}
       </div>
       <input class="button" type="submit" value="proximo">
       </div>
