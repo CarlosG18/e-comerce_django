@@ -14,7 +14,8 @@
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
       </div>
       <div>
-        {{forms}}
+        {{form_user}}
+        {{form_emp}}
       <input class="button" type="submit" value="cadastrar">
     </div>
     <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>

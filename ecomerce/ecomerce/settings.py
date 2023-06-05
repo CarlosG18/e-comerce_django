@@ -91,8 +91,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'cliente.UserPessoaFisica'
-AUTH_USER_MODEL = 'cliente.UserEmpresa'
+# AUTH_USER_MODEL = 'cliente.UserPessoaFisica'
+# AUTH_USER_MODEL = 'cliente.UserEmpresa'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

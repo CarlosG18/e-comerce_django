@@ -1,12 +1,18 @@
 from django import forms
-from .models import UserPessoaFisica, UserEmpresa
+from django.contrib.auth.models import User
+from .models import PessoaFisica, Empresa
 
-class FormUserPessoaFisica(forms.ModelForm):
+class FormUser(forms.ModelForm):
   class Meta:
-    model = UserPessoaFisica
-    fields = '__all__'
+    model = User
+    fields = ("username", "email", "password")
+
+class FormPessoaFisica(forms.ModelForm):
+  class Meta:
+    model = PessoaFisica
+    exclude = ['user']
     
-class FormUserEmpresa(forms.ModelForm):
+class FormEmpresa(forms.ModelForm):
   class Meta:
-    model = UserEmpresa
-    fields = '__all__'
+    model = Empresa
+    exclude = ['user']

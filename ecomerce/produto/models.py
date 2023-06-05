@@ -1,7 +1,7 @@
 from distutils.command.upload import upload
 from email.policy import default
 from django.db import models
-from cliente.models import UserPessoaFisica, UserEmpresa
+from cliente.models import PessoaFisica, Empresa
 import os
 
 """
@@ -26,7 +26,7 @@ class Produto(models.Model):
   categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
   foto = models.ImageField(upload_to="produto/", default="produto/produto_default.png")
   media_stars = models.DecimalField(max_digits=3, decimal_places=2,null=True)
-  loja = models.ForeignKey(UserEmpresa,on_delete=models.CASCADE)
+  loja = models.ForeignKey(Empresa,on_delete=models.CASCADE)
   
   STATUS = (
       ("o", "oferta"),
@@ -48,7 +48,7 @@ class ListImages(models.Model):
     return f'imagem do produto {self.produto.nome}'
     
 class Comentario(models.Model):
-  cliente = models.ForeignKey(UserPessoaFisica,on_delete=models.CASCADE)
+  cliente = models.ForeignKey(PessoaFisica,on_delete=models.CASCADE)
   produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
   comentario = models.TextField()
   

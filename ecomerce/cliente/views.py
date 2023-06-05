@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from .models import UserPessoaFisica, UserEmpresa
 from produto.models import Produto, ListImages, Categoria
-from .forms import FormUserPessoaFisica,FormUserEmpresa
+from .forms import FormPessoaFisica,FormEmpresa, FormUser
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -33,24 +33,36 @@ def tipocliente(request):
     
 def criar_pessoa(request):
   if request.method == "POST":
-    form = FormUserPessoaFisica(request.POST,request.FILES)
-    if form.is_valid():
-      form.save()
-      return HttpResponseRedirect(reverse('cliente:index'))
+    form_user = FormUser(request.POST)
+    form = FormPessoaFisica(request.POST,request.FILES)
+    if form.is_valid() and form_user.is_valid():
+      user = form_user.save()
+      cliente = form.save(commit=False)
+      cliente.user = user
+      cliente.save()
+      return HttpResponseRedirect(reverse('login'))
   else:
-    form = FormUserPessoaFisica()
-  return render(request, "cliente/criar_pessoa_fisica.html", {
-      "form": form,
+    form_user = FormUser()
+    form_pessoa = FormPessoaFisica()
+  return render(request, "cliente/criar_pessoa_fisica.html",{
+      "form_pessoa": form_pessoa,
+      "form_user": form_user,
   })
   
 def criar_empresa(request):
   if request.method == "POST":
-    form = FormUserEmpresa(request.POST,request.FILES)
-    if form.is_valid():
-      form.save()
-      return HttpResponseRedirect(reverse('cliente:index'))
+    form_user = FormUser(request.POST)
+    form = FormEmpresa(request.POST,request.FILES)
+    if form.is_valid() and form_user.is_valid():
+      user = form_user.save()
+      cliente = form.save(commit=False)
+      cliente.user = user
+      cliente.save()
+      return HttpResponseRedirect(reverse('login'))
   else:
-    form = FormUserEmpresa()
+    form_user = FormUser()
+    form = FormEmpresa()
   return render(request, "cliente/criar_empresa.html",{
-      "forms": form,
+      "form_emp": form,
+      "form_user": form_user,
   })
