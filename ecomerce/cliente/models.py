@@ -31,7 +31,7 @@ class UserPessoaFisica(AbstractUser):
   cpf = models.CharField(max_length=14, validators=[cpf_setting], unique=True)
   
   def __str__(self):
-    return f'cliente {self.username}'
+    return f'username = {self.username} password = {self.password}'
 
 class UserEmpresa(AbstractUser):
   class Meta:

@@ -15,7 +15,57 @@
       </div>
       <h1 class="title">criar Pessoa Fisica</h1>
       <div>
-        {{form}}
+        <div class="form-group">
+          <div class="label">
+            {{form.username.label}}
+          </div>
+          <div class="inputs">
+            {{form.username}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            {{form.email.label}}
+          </div>
+          <div class="inputs">
+            {{form.email}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            {{form.cpf.label}}
+          </div>
+          <div class="inputs">
+            {{form.cpf}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            {{form.avatar.label}}
+          </div>
+          <div class="inputs">
+            {{form.avatar}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            {{form.password.label}}
+          </div>
+          <div class="inputs">
+            {{form.password}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            {{form.date_joined.label}}
+          </div>
+          <div class="inputs">
+            {{form.date_joined}}
+          </div>
+        </div>
+        <div>
+          {{form.errors}}
+        </div>
       </div>
       <input class="button" type="submit" value="proximo">
       </div>
