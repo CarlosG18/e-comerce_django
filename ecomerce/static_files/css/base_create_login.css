@@ -1,5 +1,6 @@
 :root{
   --azul: rgba(31, 131, 170, 1);
+  --azul_claro: rgba(31, 131, 170, 0.3);
   --cinza: rgba(0, 0, 0, 0.05);
   --vermelho: indianred;
   --font: 'Roboto', sans-serif;
