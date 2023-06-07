@@ -1,10 +1,17 @@
 {% extends '../base.html' %}
 
 {% block content %}
+{{group}}
+{{user}}
+
 <div class="box mb-50">
-  {{ cliente.username }}
+  {{ request.user.username }}
   <div class="box-img-avatar">
+    {% if request.session['grupo'] == 'pessoafisica' %}
     <img src="{{ cliente.avatar.url }}" alt="">
+    {% elif request.session['grupo'] == 'empresa' %}
+    <img src="{{ cliente.logo.url }}" alt="">
+    {% endif %}
   </div>
 </div>
 {% endblock %}

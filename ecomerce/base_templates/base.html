@@ -29,7 +29,7 @@
           <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>
           <li><a class="color-white" href="{% url 'produto:ofertas' %}">Ofertas</a></li>
           {% if user.is_authenticated %}
-            <li><a class="color-white" href="{% url 'cliente:perfil' request.user.id %}">perfil</a></li>
+            <li><a class="color-white" href="{% url 'cliente:perfil' %}">perfil</a></li>
             <li><a class="button-header" href="{% url 'logout' %}">sair</a></li>
           {% else %}
             <li><a class="color-white" href="{% url 'cliente:tipo-cliente' %}">criar conta</a></li>
