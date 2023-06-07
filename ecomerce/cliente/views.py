@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-@login_required
 def index(request):
   produtos = Produto.objects.filter(status="o")[:6]
   categorias = Categoria.objects.all()

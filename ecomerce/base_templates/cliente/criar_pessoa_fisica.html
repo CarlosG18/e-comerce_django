@@ -3,7 +3,7 @@
 
 {% block css %}<link rel="stylesheet" href="{% static 'css/criar_conta.css' %}"> {% endblock %}
 
-{% block title %}Criar pessoa Fisica{% endblock %}
+{% block title %}Criar Pessoa Física{% endblock %}
 
 {% block content %}
 <div class="card">
@@ -13,66 +13,20 @@
       <div class="box-img-logo">
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
       </div>
-      <h1 class="title">criar Pessoa Fisica</h1>
-      {{form_user}}
-      {{form_pessoa}}
       <div>
-      <!--  <div class="form-group">
-          <div class="label">
-            {{form.username.label}}
-          </div>
-          <div class="inputs">
-            {{form.username}}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            {{form.email.label}}
-          </div>
-          <div class="inputs">
-            {{form.email}}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            {{form.cpf.label}}
-          </div>
-          <div class="inputs">
-            {{form.cpf}}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            {{form.avatar.label}}
-          </div>
-          <div class="inputs">
-            {{form.avatar}}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            {{form.password.label}}
-          </div>
-          <div class="inputs">
-            {{form.password}}
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            {{form.date_joined.label}}
-          </div>
-          <div class="inputs">
-            {{form.date_joined}}
-          </div>
-        </div>
-        <div>
-          {{form.errors}}
-        </div> -->
-      </div>
-      <input class="button" type="submit" value="proximo">
-      </div>
+        {{form_user}}
+        {{form_pessoa}}
+      <input class="button" type="submit" value="cadastrar">
+    </div>
     <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
     </form>
+    </div>
+  <div class="box-img-login">
+    <div class="box-img">
+      <img src="{% static 'imgs/buy.png' %}" alt="logo">
+    </div>
+    <p class="destaque max-w250">Crie sua conta e venha fazer parte dessa família!</p>
+    <a class="link-w" href="{% url 'login' %}">já possui conta? então faça seu login!</a>
   </div>
 </div>
 

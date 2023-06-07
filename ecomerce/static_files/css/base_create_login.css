@@ -29,7 +29,8 @@ body{
 }
 
 .forms{
-  padding: 90px 70px;
+  max-width: 250px;
+  padding: 50px 70px;
 }
 
 .link-w{
@@ -66,7 +67,7 @@ body{
   align-items: center;
   background-color: var(--azul);
   border-radius: 0 10px 10px 0;
-  min-width: 400px;
+  min-width: 350px;
 }
 
 .button{
@@ -100,7 +101,7 @@ input:not(.button):hover{
 }
 
 .box-img{
-  max-width: 300px;
+  max-width: 250px;
 }
 
 .box-img > img{
