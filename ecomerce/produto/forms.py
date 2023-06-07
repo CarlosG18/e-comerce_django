@@ -4,7 +4,7 @@ from .models import Produto, ListImages
 class FormProduto(forms.ModelForm):
     class Meta:
       model = Produto
-      fields = '__all__'
+      exclude = ['loja', 'media_stars']
 
 class FormImages(forms.ModelForm):
   class Meta:

@@ -3,6 +3,8 @@ from .models import Produto, ListImages, Comentario
 from .forms import FormProduto, FormImages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from cliente.models import Empresa
+from django.contrib.auth.models import User
 from django.views import generic
 
 class ProdutoListView(generic.ListView):
@@ -30,10 +32,16 @@ def detail(request, cod):
   })
 
 def add(request):
+  user = User.objects.get(username=request.user.username)
+  empresa = Empresa.objects.get(user=user)
+
   if request.method == "POST":
     form = FormProduto(request.POST, request.FILES)
     if form.is_valid():
-      form.save()
+      produto = form.save(commit=False)
+      produto.media_stars = 0.00
+      produto.loja = empresa
+      produto.save()
       return HttpResponseRedirect(reverse('produto:index'))
   else:
     form = FormProduto()

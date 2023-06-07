@@ -7,9 +7,9 @@
 <div class="box mb-50">
   {{ request.user.username }}
   <div class="box-img-avatar">
-    {% if request.session['grupo'] == 'pessoafisica' %}
+    {% if grupo == 'pessoafisica' %}
     <img src="{{ cliente.avatar.url }}" alt="">
-    {% elif request.session['grupo'] == 'empresa' %}
+    {% elif grupo == 'empresa' %}
     <img src="{{ cliente.logo.url }}" alt="">
     {% endif %}
   </div>

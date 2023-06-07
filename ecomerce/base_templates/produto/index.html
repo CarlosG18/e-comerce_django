@@ -11,6 +11,11 @@
   <div class="box flex column">
     <div class="title flex space-between">
       <h1>Listando produtos</h1>
+      {{request.user}}
+      {% for g in request.user.grups %}
+        {{g.name}}  
+      {% endfor %}
+      {{request.user.groups.name}}
       <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
     </div>
     <div>

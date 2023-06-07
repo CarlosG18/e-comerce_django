@@ -23,16 +23,18 @@ def perfil(request):
 
   for g in group:
     if g.name == 'pessoafisica':
-      request.session['grupo'] = 'pessoafisica'
+      grupo = 'pessoafisica'
       cliente = PessoaFisica.objects.get(user=user)
       return render(request, "cliente/perfil.html",{
         "cliente": cliente,
+        "grupo": grupo,
       })
     elif g.name == 'empresa':
-      request.session['grupo'] = 'empresa'
+      grupo = 'empresa'
       cliente = Empresa.objects.get(user=user)
       return render(request, "cliente/perfil.html",{
         "cliente": cliente,
+        "grupo": grupo,
       })
 
 def tipocliente(request):
@@ -72,6 +74,8 @@ def criar_empresa(request):
       user = User.objects.create_user(username=form_user.cleaned_data["username"], email=form_user.cleaned_data["email"], password=form_user.cleaned_data["password"]) 
       user.save()
       user.groups.add(Group.objects.get(name='empresa'))
+      cat = Categoria(nome=form.cleaned_data["segmento"])
+      cat.save()
       cliente = form.save(commit=False)
       cliente.user = user
       cliente.save()
