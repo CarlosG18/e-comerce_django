@@ -14,8 +14,16 @@
         <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
       </div>
       <div>
-        {{form_user}}
-        {{form_pessoa}}
+        <label for="user">username</label>
+        <input type="text" name="username" id="user">
+        <label for="email">email</label>
+        <input type="email" name="email" id="email">
+        <label for="senha">senha</label>
+        <input type="password" name="password" id="senha">
+
+
+        <!-- {{form_user}} -->
+        <!-- {{form_pessoa}} -->
       <input class="button" type="submit" value="cadastrar">
     </div>
     <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
@@ -26,7 +34,7 @@
       <img src="{% static 'imgs/buy.png' %}" alt="logo">
     </div>
     <p class="destaque max-w250">Crie sua conta e venha fazer parte dessa família!</p>
-    <a class="link-w" href="{% url 'login' %}">já possui conta? então faça seu login!</a>
+    <a class="link-w" href="{% url 'cliente:login' %}">já possui conta? então faça seu login!</a>
   </div>
 </div>
 

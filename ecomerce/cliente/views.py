@@ -4,6 +4,7 @@ from .forms import FormPessoaFisica,FormEmpresa, FormUser
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -30,24 +31,53 @@ def tipocliente(request):
   else:
     return render(request, "cliente/type_cliente.html")
     
+# def criar_pessoa(request):
+#   if request.method == "POST":
+#     form_user = FormUser(request.POST)
+#     form = FormPessoaFisica(request.POST,request.FILES)
+#     if form.is_valid() and form_user.is_valid():
+#       user = form_user.save()
+#       cliente = form.save(commit=False)
+#       cliente.user = user
+#       cliente.save()
+#       return HttpResponseRedirect(reverse('login'))
+#   else:
+#     form_user = FormUser()
+#     form_pessoa = FormPessoaFisica()
+#   return render(request, "cliente/criar_pessoa_fisica.html",{
+#       "form_pessoa": form_pessoa,
+#       "form_user": form_user,
+#   })
+  
 def criar_pessoa(request):
   if request.method == "POST":
-    form_user = FormUser(request.POST)
-    form = FormPessoaFisica(request.POST,request.FILES)
-    if form.is_valid() and form_user.is_valid():
-      user = form_user.save()
-      cliente = form.save(commit=False)
-      cliente.user = user
-      cliente.save()
-      return HttpResponseRedirect(reverse('login'))
+    # form_user = FormUser(request.POST)
+    username = request.POST["username"]
+    email = request.POST["email"]
+    password = request.POST["password"]
+    user = User.objects.create_user(username=username, email=email, password=password)
+    user.save()
+    return HttpResponseRedirect(reverse('cliente:login'))
   else:
-    form_user = FormUser()
-    form_pessoa = FormPessoaFisica()
-  return render(request, "cliente/criar_pessoa_fisica.html",{
-      "form_pessoa": form_pessoa,
-      "form_user": form_user,
-  })
-  
+    return render(request, "cliente/criar_pessoa_fisica.html")
+
+
+def login(request):
+  if request.method == "POST":
+    username = request.POST["username"]
+    password = request.POST["password"]
+    user = authenticate(username=username, password=password)
+    if user is not None:
+      login(request, user)
+      return HttpResponseRedirect(reverse('cliente:index'))
+    else:
+      form_login = AuthenticationForm()
+  else:
+    form_login = AuthenticationForm()
+    return render(request, "cliente/login.html",{
+      "form": form_login,
+    })
+
 def criar_empresa(request):
   if request.method == "POST":
     form_user = FormUser(request.POST)

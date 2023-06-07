@@ -6,11 +6,11 @@
   align-items: center;
   box-shadow: -5px 5px 10px #0000002f;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .box-img-type{
-  min-width: 80px;
+  min-width: 64px;
 }
 
 .box-img-type > img{
@@ -20,5 +20,9 @@
 
 .forms-type{
   max-width: 500px;
-  padding: 90px 110px;
+  padding: 50px 100px;
+}
+
+.flex-row{
+  display: flex;
 }

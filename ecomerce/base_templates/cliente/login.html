@@ -1,0 +1,37 @@
+{% extends '../base_create_login.html' %}
+{% load static %}
+
+{% block title %}Login-cliente{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="forms">
+    <form class="flex" action="{% url 'cliente:login' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="box-img-logo">
+        <img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo">
+      </div>
+      <div>
+          {{form}}
+      <!-- <div class="form-group">
+        <label for="user">username</label>
+        <input type="text" name="username" id="user">
+      </div>
+      <div class="form-group">
+        <label for="senha">senha</label>
+        <input name="password" id="senha" type="password">
+      </div>
+      <input class="button" type="submit" value="entrar">-->
+      <input type="submit" value="entrar">
+    </div>
+    <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
+  </form>
+  </div>
+  <div class="box-img-login">
+    <div class="box-img">
+      <img src="{% static 'imgs/pay.png' %}" alt="logo">
+    </div>
+    <a class="link-w" href="{% url 'cliente:tipo-cliente' %}">Não possui conta? cria já a sua!</a>
+  </div>
+</div>
+{% endblock %}

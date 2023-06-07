@@ -33,7 +33,7 @@
             <li><a class="button-header" href="{% url 'logout' %}">sair</a></li>
           {% else %}
             <li><a class="color-white" href="{% url 'cliente:tipo-cliente' %}">criar conta</a></li>
-            <li><a class="button-header" href="{% url 'cliente:login' %}">Login</a></li>
+            <li><a class="button-header" href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </ul>
     </header>
@@ -69,7 +69,7 @@
           <li><a href="{% url 'produto:index' %}">Produtos</a></li>
           <li><a href="{% url 'produto:ofertas' %}">Ofertas</a></li>
           <li><a href="#">criar conta</a></li>
-          <li><a href="{% url 'cliente:login' %}">Login</a></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
         </ul>
       </div>
       <div>
