@@ -7,13 +7,30 @@ from cliente.models import Empresa
 from django.contrib.auth.models import User
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from cliente.models import Cliente, PessoaFisica, Empresa
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 
 class ProdutoListView(generic.ListView):
   model = Produto
   context_object_name = "produtos"
   template_name = "produto/index.html"
   paginate_by = 10
-
+  
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    user = User.objects.get(username=self.request.user.username)
+    try: 
+      cliente = PessoaFisica.objects.get(user=user)
+      context['user'] = user
+      context['cliente'] = cliente
+      return context
+    except ObjectDoesNotExist:
+      cliente = Empresa.objects.get(user=user)
+      context['user'] = user
+      context['cliente'] = cliente
+      return context
+    
 def ofertas(request):
   produtos = Produto.objects.all()
   list_imgs = ListImages.objects.all()

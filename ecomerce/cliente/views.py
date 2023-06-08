@@ -6,36 +6,35 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import Group
 
+def get_cliente(username):
+  user = User.objects.get(username=username)
+  try:
+    cliente = PessoaFisica.objects.get(user=user)
+    return cliente
+  except ObjectDoesNotExist:
+    cliente = Empresa.objects.get(user=user)
+    return cliente
+
+@login_required
 def index(request):
   produtos = Produto.objects.filter(status="o")[:6]
   categorias = Categoria.objects.all()
+  cliente = get_cliente(request.user.username)
   return render(request, "cliente/index.html", {
     "produtos": produtos,
     "categorias": categorias,
+    "cliente": cliente,
   })
-
+  
 @login_required
 def perfil(request):
-  user = User.objects.get(username=request.user.username)
-  group = user.groups.all()
-
-  for g in group:
-    if g.name == 'pessoafisica':
-      grupo = 'pessoafisica'
-      cliente = PessoaFisica.objects.get(user=user)
-      return render(request, "cliente/perfil.html",{
-        "cliente": cliente,
-        "grupo": grupo,
-      })
-    elif g.name == 'empresa':
-      grupo = 'empresa'
-      cliente = Empresa.objects.get(user=user)
-      return render(request, "cliente/perfil.html",{
-        "cliente": cliente,
-        "grupo": grupo,
-      })
+  cliente = get_cliente(request.user.username)
+  return render(request, "cliente/perfil.html",{
+    "cliente": cliente,
+  })
 
 def tipocliente(request):
   if request.method == "POST":
@@ -53,7 +52,7 @@ def criar_pessoa(request):
     if form.is_valid() and form_user.is_valid():
       user = User.objects.create_user(username=form_user.cleaned_data["username"], email=form_user.cleaned_data["email"], password=form_user.cleaned_data["password"]) 
       user.save()
-      user.groups.add(Group.objects.get(name='pessoafisica'))
+      #user.groups.add(Group.objects.get(name='pessoafisica'))
       cliente = form.save(commit=False)
       cliente.user = user
       cliente.save()
@@ -73,7 +72,7 @@ def criar_empresa(request):
     if form.is_valid() and form_user.is_valid():
       user = User.objects.create_user(username=form_user.cleaned_data["username"], email=form_user.cleaned_data["email"], password=form_user.cleaned_data["password"]) 
       user.save()
-      user.groups.add(Group.objects.get(name='empresa'))
+      #user.groups.add(Group.objects.get(name='empresa'))
       cat = Categoria(nome=form.cleaned_data["segmento"])
       cat.save()
       cliente = form.save(commit=False)

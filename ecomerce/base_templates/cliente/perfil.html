@@ -1,17 +1,17 @@
 {% extends '../base.html' %}
+{% load static %}
 
 {% block content %}
-{{group}}
-{{user}}
 
 <div class="box mb-50">
-  {{ request.user.username }}
-  <div class="box-img-avatar">
-    {% if grupo == 'pessoafisica' %}
-    <img src="{{ cliente.avatar.url }}" alt="">
-    {% elif grupo == 'empresa' %}
-    <img src="{{ cliente.logo.url }}" alt="">
-    {% endif %}
+  <h1 class="title">Perfil</h1>
+  <div>
+    <div class="box-img-perfil">
+      <img src="{{cliente.img.url}}" alt="">
+    </div>
+    <div class="details">
+      
+    </div>
   </div>
 </div>
 {% endblock %}

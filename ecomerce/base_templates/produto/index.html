@@ -11,7 +11,9 @@
   <div class="box flex column">
     <div class="title flex space-between">
       <h1>Listando produtos</h1>
-      <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
+      {% if cliente.type_cliente == 'em' %}
+        <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
+      {% endif %}
     </div>
     <div>
       {% if produtos %}

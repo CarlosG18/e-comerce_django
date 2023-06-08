@@ -8,6 +8,8 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
+
+  {% if cliente.type_cliente == 'pf' %}
   <div class="box mb-50 flex center">
     <div class="cep-img">
       <img src="{% static 'imgs/address.png' %}" alt="img_address">
@@ -56,4 +58,7 @@
     {% endfor %}
     </div>
   </div>
+  {% else %}
+  
+  {% endif %}
 {% endblock %}
