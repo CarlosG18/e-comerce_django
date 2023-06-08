@@ -6,8 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="flex column center">
-  <form class="box shadow" action="{% url 'produto:add' %}" method="POST" enctype="multipart/form-data">
+  <form class="box max-width-300 shadow" action="{% url 'produto:add' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <h1 class="text-center">criando produto</h1>
     <div>
@@ -81,5 +80,4 @@
       <input class="button" type="submit" value="enviar">
     </div>
   </form>
-</div>
 {% endblock %}

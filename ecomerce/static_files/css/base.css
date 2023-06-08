@@ -182,3 +182,19 @@ main{
 .end{
   justify-content: end;
 }
+
+@media(max-width: 800px){
+  .box{
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .cep-img{
+    max-width: 300px;
+  }
+  
+  .cep-img > img{
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -20,9 +20,15 @@
 
 .forms-type{
   max-width: 500px;
-  padding: 50px 100px;
+  padding: 50px;
 }
 
 .flex-row{
   display: flex;
+}
+
+@media (max-width:800px){
+  .forms-type{
+    padding: 20px;
+  }
 }

@@ -7,7 +7,6 @@
   --font2: 'Oswald', sans-serif;
 }
 
-
 main{
   display: flex;
   height: 100vh;
@@ -111,4 +110,19 @@ input:not(.button):hover{
 
 .max-w250{
   max-width: 250px;
+}
+
+@media (max-width:800px){
+  .card{
+    flex-direction: column;
+    margin: 0 10px;
+  }
+  
+  .flex-row{
+    display: block;
+  }
+  
+  .box-img-login{
+    display: none;
+  }
 }
