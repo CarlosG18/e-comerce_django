@@ -12,14 +12,18 @@
   <div class="box mb-50">
     <div class="title flex space-between">
       <h1>Detalhes do produto</h1>
+      {% if cliente.type_cliente == 'em' %}
       <a class="button" href="{% url 'produto:remove' produto.codigo %}">deletar produto</a>
+      {% endif %}
     </div>
     <div class="flex center space-around">
       <div class="flex column">
         <div class="box-img">
           <img src="{{ produto.foto.url }}" alt="img_{{ produto.nome }}">
         </div>
+      {% if cliente.type_cliente == 'em' %}
         <a class="button my-15 text-center" href="{% url 'produto:add_fotos' produto.codigo %}">adicionar mais fotos</a>
+      {% endif %}
       </div>
       <div class="card border border-r shadow">
         <p><b>Código do Produto:</b> {{produto.codigo}}</p>

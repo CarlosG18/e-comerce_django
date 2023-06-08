@@ -11,6 +11,15 @@ from cliente.models import Cliente, PessoaFisica, Empresa
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
+def get_cliente(username):
+  user = User.objects.get(username=username)
+  try:
+    cliente = PessoaFisica.objects.get(user=user)
+    return cliente
+  except ObjectDoesNotExist:
+    cliente = Empresa.objects.get(user=user)
+    return cliente
+
 class ProdutoListView(generic.ListView):
   model = Produto
   context_object_name = "produtos"
@@ -30,23 +39,17 @@ class ProdutoListView(generic.ListView):
       context['user'] = user
       context['cliente'] = cliente
       return context
-    
-def ofertas(request):
-  produtos = Produto.objects.all()
-  list_imgs = ListImages.objects.all()
-  return render(request, "produto/ofertas.html", {
-    "produtos": produtos,
-    "list_imgs": list_imgs,
-  })
 
 def detail(request, cod):
   produto = Produto.objects.get(codigo=cod)
   list_imgs = ListImages.objects.filter(produto__codigo=cod)
   comentarios = Comentario.objects.filter(produto__codigo=cod)
+  cliente = get_cliente(request.user.username)
   return render(request, "produto/detail.html", {
     "produto": produto,
     "list_imgs": list_imgs,
     "comentarios": comentarios,
+    "cliente": cliente,
   })
 
 @login_required
