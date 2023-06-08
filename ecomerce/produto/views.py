@@ -6,6 +6,7 @@ from django.urls import reverse
 from cliente.models import Empresa
 from django.contrib.auth.models import User
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 class ProdutoListView(generic.ListView):
   model = Produto
@@ -31,6 +32,7 @@ def detail(request, cod):
     "comentarios": comentarios,
   })
 
+@login_required
 def add(request):
   user = User.objects.get(username=request.user.username)
   empresa = Empresa.objects.get(user=user)
@@ -55,7 +57,8 @@ def categoria(request, cat):
     "produtos": produtos,
     "categoria": cat,
   })
-  
+
+@login_required
 def add_fotos(request, cod):
   produto = Produto.objects.filter(codigo=cod).get()
   
@@ -71,12 +74,14 @@ def add_fotos(request, cod):
     "produto": produto,
     "form": form,
   })
-  
+
+@login_required
 def remove(request, cod):
   produto = Produto.objects.get(codigo=cod)
   produto.delete()
   return HttpResponseRedirect(reverse('produto:index'))
-  
+
+@login_required
 def remove_img(request, id):
   img = ListImages.objects.get(id=id)
   produto = img.produto

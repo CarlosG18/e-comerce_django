@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
-@login_required
 def index(request):
   produtos = Produto.objects.filter(status="o")[:6]
   categorias = Categoria.objects.all()
@@ -17,6 +16,7 @@ def index(request):
     "categorias": categorias,
   })
 
+@login_required
 def perfil(request):
   user = User.objects.get(username=request.user.username)
   group = user.groups.all()

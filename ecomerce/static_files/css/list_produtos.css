@@ -7,14 +7,42 @@
   height: 100%;
 }
 
-.card{
+.card-produto{
+  display: flex;
   margin: 15px 0;
   padding: 10px;
   border-radius: 10px;
   border: 2px solid var(--azul);
   justify-content: space-around;
+  align-items: center;
 }
 
 .descricao > p{
   margin: 10px 0;
+}
+
+@media (max-width: 800px){
+  .card-produto{
+    flex-direction: column;
+    padding: 20px 0;
+    margin-bottom: 50px;
+  }
+  
+  .box-img-p{
+    max-width: 200px;
+  }
+  
+  .descricao > p{
+    margin: 10px 0;
+  }
+  
+  .destaque-1{
+    font-size: 30px;
+    margin: 10px 0;
+  }
+  
+  .button{
+    text-align: center;
+    margin: 20px 0;
+  }
 }
