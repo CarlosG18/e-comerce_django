@@ -62,17 +62,30 @@
   <div class="box mb-50">
     <div class="title flex space-between">
       <h1>comentários</h1>
-      <a class="button" href="{% url 'produto:add_comentario' produto.codigo %}">adicionar comentário</a>
     </div>
+    {% if cliente.type_cliente == 'pf' %}
+    <div class="card-c">
+      <p class="destaque-1">adicionar comentário</p>
+      <div class="box-img-avatar">
+        <img src="{{cliente.img.url }}" alt="avatar">
+      </div>
+      <form method="POST" action="{% url 'produto:detail' produto.codigo %}">
+          {% csrf_token %}
+          {{form}}
+          <input class="button" type="submit" value="cadastrar comentarios">
+      </form>
+    </div>
+    {% endif %}
+    
     <div>
       {% if comentarios %}
       {% for c in comentarios %}
         <div class="card-c flex column">
           <div class="cliente flex align-center">
             <div class="box-img-avatar">
-              <img src="{{c.cliente.avatar.url }}" alt="avatar">
+              <img src="{{c.cliente.img.url }}" alt="avatar">
             </div>
-            <p class="p-5-10 border border-r"><b>{{c.cliente.nome}}</b></p>
+            <p class="p-5-10 border border-r"><b>{{c.cliente.user.username}}</b></p>
           </div>
         <div class="box-text">
           <p>{{c.comentario}}</p>

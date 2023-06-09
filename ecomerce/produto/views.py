@@ -45,11 +45,23 @@ def detail(request, cod):
   list_imgs = ListImages.objects.filter(produto__codigo=cod)
   comentarios = Comentario.objects.filter(produto__codigo=cod)
   cliente = get_cliente(request.user.username)
+  
+  if request.method == 'POST':
+    form = FormComentario(request.POST)
+    if form.is_valid():
+      comentario = form.save(commit=False)
+      comentario.produto = produto
+      comentario.cliente = cliente
+      comentario.save()
+      return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
+  else:
+    form = FormComentario()
   return render(request, "produto/detail.html", {
     "produto": produto,
     "list_imgs": list_imgs,
     "comentarios": comentarios,
     "cliente": cliente,
+    "form": form,
   })
 
 @login_required
@@ -108,22 +120,3 @@ def remove_img(request, id):
   cod = produto.codigo
   img.delete()
   return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
-  
-def add_comentario(request, cod):
-  cliente = get_cliente(request.user.username)
-  produto = Produto.objects.get(codigo=cod)
-  if request.method == 'POST':
-    form = FormComentario(request.POST)
-    if form.is_valid():
-      produto = form.save(commit=False)
-      produto.produto = produto
-      produto.cliente = cliente
-      produto.save()
-      return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
-  else:
-    form = FormComentario()
-  return render(request, "produto/add_comentario.html", {
-    "produto": produto,
-    "form": form,
-    "cliente": cliente,
-  })

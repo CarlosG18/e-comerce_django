@@ -192,6 +192,7 @@ main{
   border-radius: 50%;
   /*border: 2px solid var(--azul);*/
   max-width: 50px;
+  max-height: 50px;
   overflow: hidden;
   margin-right: 20px;
 }
