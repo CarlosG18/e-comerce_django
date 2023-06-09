@@ -15,15 +15,17 @@
       <img src="{% static 'imgs/address.png' %}" alt="img_address">
     </div>
     <div>
-      <h1 class="title-1 text-center">Calcule quanto de frete você irá pagar!</h1>
+      <p class="destaque-2 txt-blue fs-30">Calcule quanto dr frete</p>
+      <p class="destaque-3 txt-red fs-30">você irá pagar!</p>
       <form class="flex column center" action="">
         <label for="cep">informe o cep:</label>
-        <input type="text">
+        <input class="input" type="text">
         <input class="button" type="submit" value="calcular">
       </form>
     </div>
   </div>
   
+  <!-- box categorias -->
   <div class="box mb-50 flex column">
     <div>
       <h1 class="title">categorias</h1>
@@ -39,7 +41,42 @@
     {% endfor %}
     </div>
   </div>
-
+  
+  <!-- box de produtos de musica -->
+  <div class="box back-personal back-red mb-50">
+    <div class="flex align-center title">
+      <h1 class="txt-white">Top produtos de música</h1>
+      <a class="txt-white ml-20" href="{% url 'produto:index' %}">ver todos os produtos</a>
+    </div>
+    <div class="banner">
+      <div class="box-img-music">
+        <img src="{% static 'imgs/Music/music1.svg' %}" alt="music">
+      </div>
+      <div>
+        <div>
+          <p class="txt-white destaque-2">Deixe a musica</p>
+        </div>
+        <div class="text-banner">
+          <p class="destaque-3">te possuir!</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex space-around wrap">
+    {% for p in produtos_music %}
+      <div class="flex card 
+      back-white column">
+        <h1>{{ p.nome }}</h1>
+        <div class="box-img">
+            <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
+        </div>
+          <p> R$ {{ p.price }}</p>
+          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+        </div>    
+    {% endfor %}
+    </div>
+  </div>
+  
+   <!-- box produtos em oferta -->
   <div class="box flex column mb-50">
     <div class="flex align-center title">
       <h1>produtos em promoção</h1>
@@ -58,6 +95,41 @@
     {% endfor %}
     </div>
   </div>
+  
+  <!-- box com produtos tech -->
+    <div class="box back-tech back-blue mb-50">
+    <div class="flex align-center title">
+      <h1 class="txt-white">Top produtos de tecnologia</h1>
+      <a class="txt-white ml-20" href="{% url 'produto:index' %}">ver todos os produtos</a>
+    </div>
+    <div class="banner">
+      <div class="box-img-tech">
+        <img src="{% static 'imgs/Tech/tech1.svg' %}" alt="tech">
+      </div>
+      <div class="text-banner-tech">
+        <div>
+          <p class="txt-white destaque-2">Vamos</p>
+        </div>
+        <div class="text-banner">
+          <p class="destaque-3">se conectar!</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex space-around wrap">
+    {% for p in produtos_tech %}
+      <div class="flex card 
+      back-white column">
+        <h1>{{ p.nome }}</h1>
+        <div class="box-img">
+            <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
+        </div>
+          <p> R$ {{ p.price }}</p>
+          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+        </div>    
+    {% endfor %}
+    </div>
+  </div>
+  
   {% else %}
   
   {% endif %}

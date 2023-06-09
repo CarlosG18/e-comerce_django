@@ -9,6 +9,9 @@
     --vermelho: indianred;
     --font: 'Roboto', sans-serif;
     --font2: 'Oswald', sans-serif;
+    --font3: 'Staatliches', sans-serif;
+    --font4: 'Rock Salt', sans-serif;
+    --font5: 'Pacifico', sans-serif;
 }
 
 body{
@@ -91,6 +94,7 @@ a{
     color: white;
     padding: 7px 15px;
     border-radius: 10px;
+    border: none;
 }
 
 .button:hover{
@@ -128,6 +132,36 @@ main{
   font-weight: 700;
   font-family: var(--font);
   font-size: 20px;
+}
+
+.destaque-2{
+  font-family: var(--font3);
+  font-size: 100px;
+}
+
+.destaque-3{
+  font-family: var(--font5);
+  font-size: 80px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.fs-30{
+  font-size: 30px;
+}
+
+.input{
+  border: 2px solid var(--cinza);
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.input:hover{
+  border: 2px solid var(--azul);
+}
+
+.text-banner{
+  margin-top: -80px;
 }
 
 .border{

@@ -20,11 +20,18 @@ def get_cliente(username):
 
 @login_required
 def index(request):
+  #visitas = request.session.get("visitas",0)
+  #request.session["visitas"] = visitas+1
+  
   produtos = Produto.objects.filter(status="o")[:6]
+  produtos_music = Produto.objects.filter(categoria__nome='Música')[:3]
+  produtos_tech = Produto.objects.filter(categoria__nome='Tecnologia')
   categorias = Categoria.objects.all()
   cliente = get_cliente(request.user.username)
   return render(request, "cliente/index.html", {
     "produtos": produtos,
+    "produtos_music": produtos_music,
+    "produtos_tech": produtos_tech,
     "categorias": categorias,
     "cliente": cliente,
   })
