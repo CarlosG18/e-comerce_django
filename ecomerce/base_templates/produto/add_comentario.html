@@ -1,0 +1,12 @@
+{% extends '../base.html' %}
+
+{% block content %}
+{{cliente}}
+{{produto}}
+  <form method="POST" action="{% url 'produto:add_comentario' produto.codigo %}">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="cadastrar comentarios">
+  </form>
+
+{% endblock %}

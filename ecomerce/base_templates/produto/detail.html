@@ -47,7 +47,9 @@
             <div class="box-img-1 ml-10 mb-10">
               <img src="{{ imgs.foto.url }}" alt="img">
             </div>
+            {% if cliente.type_cliente == 'em' %}
             <a class="button" href="{% url 'produto:remove_img' imgs.id %}">deletar imagem</a>
+            {% endif %}
           </div>
         {% endfor %}
       {% else %}
@@ -60,7 +62,7 @@
   <div class="box mb-50">
     <div class="title flex space-between">
       <h1>comentários</h1>
-      <a class="button" href="">adicionar comentário</a>
+      <a class="button" href="{% url 'produto:add_comentario' produto.codigo %}">adicionar comentário</a>
     </div>
     <div>
       {% if comentarios %}

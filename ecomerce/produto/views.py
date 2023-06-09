@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Produto, ListImages, Comentario
-from .forms import FormProduto, FormImages
+from .forms import FormProduto, FormImages, FormComentario
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from cliente.models import Empresa
@@ -108,3 +108,22 @@ def remove_img(request, id):
   cod = produto.codigo
   img.delete()
   return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
+  
+def add_comentario(request, cod):
+  cliente = get_cliente(request.user.username)
+  produto = Produto.objects.get(codigo=cod)
+  if request.method == 'POST':
+    form = FormComentario(request.POST)
+    if form.is_valid():
+      produto = form.save(commit=False)
+      produto.produto = produto
+      produto.cliente = cliente
+      produto.save()
+      return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
+  else:
+    form = FormComentario()
+  return render(request, "produto/add_comentario.html", {
+    "produto": produto,
+    "form": form,
+    "cliente": cliente,
+  })
