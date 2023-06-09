@@ -58,25 +58,11 @@
     </div>
   </div>
   
-<!-- comentarios sobre o produto -->
+  <!-- mostrando todos os comentários-->
   <div class="box mb-50">
     <div class="title flex space-between">
       <h1>comentários</h1>
     </div>
-    {% if cliente.type_cliente == 'pf' %}
-    <div class="card-c">
-      <p class="destaque-1">adicionar comentário</p>
-      <div class="box-img-avatar">
-        <img src="{{cliente.img.url }}" alt="avatar">
-      </div>
-      <form method="POST" action="{% url 'produto:detail' produto.codigo %}">
-          {% csrf_token %}
-          {{form}}
-          <input class="button" type="submit" value="cadastrar comentarios">
-      </form>
-    </div>
-    {% endif %}
-    
     <div>
       {% if comentarios %}
       {% for c in comentarios %}
@@ -102,4 +88,38 @@
       {% endif %}
     </div>
   </div>
+  
+  <!-- comentarios sobre o produto -->
+  {% if cliente.type_cliente == 'pf' %}
+  <div class="box mb-50">
+    <div class="title flex space-between">
+      <h1>adicionar comentário</h1>
+    </div>
+    <div class="card-c p20">
+      <div class="flex align-center">
+        <div class="box-img-avatar">
+          <img src="{{cliente.img.url }}" alt="avatar">
+        </div>
+        <p  class="destaque-1">{{cliente.user.username}}</p>
+      </div>
+      <form class="form-c flex column" method="POST" action="{% url 'produto:detail' produto.codigo %}">
+          {% csrf_token %}
+          <div class="form-group">
+            {{form.comentario.label}}
+          </div>
+          {{form.comentario}}
+          <div class="w100p form-group">
+            <div class="label">
+              {{form.stars.label}}
+            </div>
+            <div class="input-c">
+              {{form.stars}}
+            </div>
+          </div>
+          <input class="button" type="submit" value="cadastrar comentarios">
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  
 {% endblock %}
