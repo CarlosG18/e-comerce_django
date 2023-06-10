@@ -27,15 +27,21 @@ def get_carrinhos(cliente):
 def index(request):
   cliente = get_cliente(request.user.username)
   carrinhos = get_carrinhos(cliente)
-  #i = []
-  #for car in carrinhos:
-    #itens = ItemCarrinho.objects.filter(carrinho=car)
-    #i.append(itens)
+  if carrinhos:
+    carrinho1 = carrinhos[0]
+    itens_car = ItemCarrinho.objects.filter(carrinho=carrinho1)
+  else:
+    itens_car = None
+  """
+  itens_car = []
+  for car in carrinhos:
+    itens = ItemCarrinho.objects.filter(carrinho=car)
+    itens_car.append(itens)
+  """
   return render(request, "carrinho/index.html",{
     "cliente": cliente,
     "carrinhos": carrinhos,
-    #"itens_car": itens_car,
-    #"i": i,
+    "itens_car": itens_car,
   })
   
 def create(request):

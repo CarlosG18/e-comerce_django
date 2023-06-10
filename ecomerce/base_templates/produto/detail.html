@@ -15,7 +15,7 @@
       {% if cliente.type_cliente == 'em' %}
       <a class="button" href="{% url 'produto:remove' produto.codigo %}">deletar produto</a>
       {% elif cliente.type_cliente == 'pf' %}
-        <a class="button" href="#">adicionar no carrinho</a>
+        <a class="button" href="{% url 'carrinho:add_item' produto.codigo %}">adicionar no carrinho</a>
       {% endif %}
     </div>
     <div class="flex center space-around">
