@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from cliente.models import Cliente,Empresa, PessoaFisica
 from .models import Carrinho, ItemCarrinho
+from produto.models import Produto
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -26,14 +27,21 @@ def get_carrinhos(cliente):
 def index(request):
   cliente = get_cliente(request.user.username)
   carrinhos = get_carrinhos(cliente)
+  #i = []
+  #for car in carrinhos:
+    #itens = ItemCarrinho.objects.filter(carrinho=car)
+    #i.append(itens)
   return render(request, "carrinho/index.html",{
     "cliente": cliente,
     "carrinhos": carrinhos,
+    #"itens_car": itens_car,
+    #"i": i,
   })
   
 def create(request):
+  nome = request.POST["nome_car"]
   cliente = get_cliente(request.user.username)
-  carrinho = Carrinho(cliente=cliente)
+  carrinho = Carrinho(nome=nome,cliente=cliente)
   carrinho.save()
   return HttpResponseRedirect(reverse('carrinho:index'))
   
@@ -41,3 +49,12 @@ def delete(request, id):
   carrinho = Carrinho.objects.get(id=id)
   carrinho.delete()
   return HttpResponseRedirect(reverse('carrinho:index'))
+  
+def add_item(request, cod):
+  cliente = get_cliente(request.user.username)
+  produto = Produto.objects.get(codigo=cod)
+  carrinhos = get_carrinhos(cliente)
+  for car in carrinhos:
+    item = ItemCarrinho(carrinho=car,produto=produto)
+    item.save()
+  return HttpResponseRedirect(reverse('cliente:index'))

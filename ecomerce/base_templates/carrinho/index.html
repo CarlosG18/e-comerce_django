@@ -4,22 +4,31 @@
   <div class="box mb-50">
     <div class="flex title space-between">
       <h1>seus carrinhos {{carrinhos.count}}</h1>
-      <a class="button" href="{% url 'carrinho:create' %}">adicionar carrinho</a>
+        <form method="POST" action="{% url 'carrinho:create' %}">
+           {% csrf_token %}
+          <label for="nome">nome do carrinho:</label>
+          <input id="nome" type="text" name="nome_car">
+          <input class="button" type="submit" value="adicionar carrinho">
+        </form>
     </div>
     <div>
       {% if carrinhos %}
         {% for c in carrinhos %}
           <div class="card p20 border mb-50">
             <div class="flex space-between header-carrinho">
-              <h1>carrinho {{c.id}}</h1>
+              <h1>carrinho {{c.nome}}</h1>
               <a class="button" href="{% url 'carrinho:delete' c.id %}">deletar carrinho</a>
             </div>
             <div class="content-carrinho">
               <p>produtos: </p>
+              {% for item in itens_car %}
+                <p>{{item.produto.nome}}</p>
+              {% endfor %}
             </div>
             <div class="footer-carrinho">
               <p>quantidade: </p>
-              <p>total: </p>
+              <p>total: {{i}}</p>
+              
               <a class="button" href="">fechar compra</a>
             </div>
           </div>

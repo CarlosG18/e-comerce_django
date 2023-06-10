@@ -70,7 +70,18 @@
             <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
         </div>
           <p> R$ {{ p.price }}</p>
-          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+          <div class="flex center">
+            <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+          <div id="button" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></div>
+          <div id="modal" class="modal box">
+            <span class="close">x</span>
+            <form method="POST" action="{% url 'carrinho:add_item' p.codigo %}">
+              <label for="nome">nome do carrinho</label>
+              <input name="nome_car" id="nome" type="text">
+              <input type="submit" value="add">
+            </form>
+          </div>
+          </div>
         </div>    
     {% endfor %}
     </div>
@@ -90,7 +101,18 @@
             <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
         </div>
           <p> R$ {{ p.price }}</p>
-          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+          <div class="flex center">
+            <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+            <div id="button" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></div>
+          <div id="modal" class="modal box">
+            <span class="close">x</span>
+            <form method="POST" action="{% url 'carrinho:add_item' p.codigo %}">
+              <label for="nome">nome do carrinho</label>
+              <input name="nome_car" id="nome" type="text">
+              <input type="submit" value="add">
+            </form>
+          </div>
+          </div>
         </div>    
     {% endfor %}
     </div>
@@ -124,7 +146,18 @@
             <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
         </div>
           <p> R$ {{ p.price }}</p>
-          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+          <div class="flex center">
+            <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+            <div id="button" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></div>
+          <div id="modal" class="modal box">
+            <span class="close">x</span>
+            <form method="POST" action="{% url 'carrinho:add_item' p.codigo %}">
+              <label for="nome">nome do carrinho</label>
+              <input name="nome_car" id="nome" type="text">
+              <input type="submit" value="add">
+            </form>
+          </div>
+          </div>
         </div>    
     {% endfor %}
     </div>
