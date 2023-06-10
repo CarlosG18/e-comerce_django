@@ -1,0 +1,32 @@
+{% extends '../base.html' %}
+
+{% block content %}
+  <div class="box mb-50">
+    <div class="flex title space-between">
+      <h1>seus carrinhos {{carrinhos.count}}</h1>
+      <a class="button" href="{% url 'carrinho:create' %}">adicionar carrinho</a>
+    </div>
+    <div>
+      {% if carrinhos %}
+        {% for c in carrinhos %}
+          <div class="card p20 border mb-50">
+            <div class="flex space-between header-carrinho">
+              <h1>carrinho {{c.id}}</h1>
+              <a class="button" href="{% url 'carrinho:delete' c.id %}">deletar carrinho</a>
+            </div>
+            <div class="content-carrinho">
+              <p>produtos: </p>
+            </div>
+            <div class="footer-carrinho">
+              <p>quantidade: </p>
+              <p>total: </p>
+              <a class="button" href="">fechar compra</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="destaque-1">você não possui carrinhos adicionados</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
