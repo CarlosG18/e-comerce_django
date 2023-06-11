@@ -32,12 +32,6 @@ def index(request):
     itens_car = ItemCarrinho.objects.filter(carrinho=carrinho1)
   else:
     itens_car = None
-  """
-  itens_car = []
-  for car in carrinhos:
-    itens = ItemCarrinho.objects.filter(carrinho=car)
-    itens_car.append(itens)
-  """
   return render(request, "carrinho/index.html",{
     "cliente": cliente,
     "carrinhos": carrinhos,
@@ -64,3 +58,15 @@ def add_item(request, cod):
     item = ItemCarrinho(carrinho=car,produto=produto)
     item.save()
   return HttpResponseRedirect(reverse('cliente:index'))
+  
+def remove_item(request, cod):
+  produto = Produto.objects.get(codigo=cod)
+  cliente = get_cliente(request.user.username)
+  carrinhos = get_carrinhos(cliente)
+  carrinho1 = carrinhos[0]
+  
+  item = ItemCarrinho(carrinho=carrinho1,produto=produto)
+  item.carrinho = None
+  item.save()
+  
+  return HttpResponseRedirect(reverse('carrinho:index'))

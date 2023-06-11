@@ -10,9 +10,9 @@ class Carrinho(models.Model):
     return f'carrinho do cliente {self.cliente.user.username}'
   
 class ItemCarrinho(models.Model):
-  carrinho = models.ForeignKey(Carrinho,on_delete=models.CASCADE)
+  carrinho = models.ForeignKey(Carrinho,on_delete=models.CASCADE, null=True)
   produto = models.ForeignKey(Produto,on_delete=models.CASCADE)
   
   def __str__(self):
-    return f' item {self.produto.nome} do carinho do cliente {self.carrinho.cliente.user.username}'
+    return f' carrinho = {self.carrinho} - produto = {self.produto}'
 
