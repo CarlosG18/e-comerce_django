@@ -1,17 +1,122 @@
 {% extends '../base.html' %}
 {% load static %}
 
-{% block content %}
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}"> 
+{% endblock %}
 
+{% block content %}
+{% if cliente.type_cliente == 'pf' %}
+<!-- box com dados do cliente pessoa fisica -->
 <div class="box mb-50">
   <h1 class="title">Perfil</h1>
-  <div>
+  <div class="flex mb-50">
     <div class="box-img-perfil">
       <img src="{{cliente.img.url}}" alt="">
     </div>
-    <div class="details">
-      
+    <!-- card de dados do usuario -->
+    <div class="details card shadow">
+      <div class="flex align-center">
+        <p><b>nome:</b> {{cliente.user.username}}</p>
+        <a class="box-img-editar" href=""><img src="{% static 'imgs/editar-texto.png' %}" alt=""></a>
+      </div>
+      <div class="flex align-center">
+        <p><b>email:</b> {{cliente.user.email}}</p>
+        <a class="box-img-editar" href=""><img src="{% static 'imgs/editar-texto.png' %}" alt=""></a>
+      </div>
+      <p><b>cpf:</b> {{cliente.cpf}}</p>
+    </div>
+    
+    <!-- card de estatísticas de compras -->
+    <div class="details card shadow">
+      <div class="flex align-center">
+        <p><b>total de compras efetuadas:</b> 0 </p>
+      </div>
+      <div class="flex align-center">
+        <p><b>total gasto:</b> R$ 00,00</p>
+      </div>
+      <div class="flex align-center">
+        <p><b>última compra:</b> 18/12/2000</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- card de pedidos -->
+  <div class="box shadow mb-50">
+    <div class="title align-center flex space-between">
+      <h1>compras em andamento</h1>
+      <a class="destaque-1" href="">visualizar todos os pedidos</a>
+    </div>
+    <div class="flex column">
+      <div class="pedido border flex align-center space-between">
+        <p><b>produto:</b></p>
+        <p><b>status:</b> em percurso</p>
+        <a class="button" href="">acompanhar pedido</a>
+      </div>
+      <p class="destaque-1">você não possui nenhum pedido realizado</p>
+    </div>
+  </div>
+  
+  <!-- card de cupons -->
+  <div class="box shadow">
+    <div class="title align-center flex space-between">
+      <h1>cupons de promoção</h1>
+      <a class="destaque-1" href="">visualizar todos os seus cupons</a>
+    </div>
+    <div class="flex column">
+      <div class="resg-cupom flex align-center shadow">
+        <p>resgate seu cupom</p>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <label for=cupom><b>código</b></label>
+          <input id="cupom" name="cupom" type="text">
+          <input class="button" type="submit" value = "resgatar">
+        </form>
+      </div>
+    <div class="flex column">
+      <div class="pedido border flex align-center space-between">
+        <p><b>codigo do cupom:</b>61718817</p>
+        <p><b>status:</b> validado</p>
+        <p><b>desconto:</b> 20% de desconto em qualquer categoria</p>
+        <a class="button" href="">usar compom</a>
+      </div>
+      <p class="destaque-1">você não possui nenhum cupom resgatado</p>
     </div>
   </div>
 </div>
+{% elif cliente.type_cliente == 'em' %}
+<!-- box com dados do cliente empresa -->
+<div class="box mb-50">
+  <h1 class="title">Perfil</h1>
+  <div class="flex mb-50">
+    <div class="box-img-perfil">
+      <img src="{{cliente.img.url}}" alt="">
+    </div>
+    <!-- card de dados do usuario -->
+    <div class="details card shadow">
+      <div class="flex align-center">
+        <p><b>nome:</b> {{cliente.user.username}}</p>
+        <a class="box-img-editar" href=""><img src="{% static 'imgs/editar-texto.png' %}" alt=""></a>
+      </div>
+      <div class="flex align-center">
+        <p><b>email:</b> {{cliente.user.email}}</p>
+        <a class="box-img-editar" href=""><img src="{% static 'imgs/editar-texto.png' %}" alt=""></a>
+      </div>
+      <p><b>cnpj:</b> {{cliente.cnpj}}</p>
+    </div>
+    
+    <!-- card de estatísticas de compras -->
+    <div class="details card shadow">
+      <div class="flex align-center">
+        <p><b>total de produtos vendidos:</b> 0 </p>
+      </div>
+      <div class="flex align-center">
+        <p><b>total ganho:</b> R$ 00,00</p>
+      </div>
+      <div class="flex align-center">
+        <p><b>última venda:</b> 18/12/2000</p>
+      </div>
+    </div>
+  </div>
+{% endif %}
 {% endblock %}
