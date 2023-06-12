@@ -68,8 +68,12 @@ def remove_item(request, cod):
   carrinhos = get_carrinhos(cliente)
   carrinho1 = carrinhos[0]
   
-  item = ItemCarrinho(carrinho=carrinho1,produto=produto)
-  item.carrinho = None
-  item.save()
+  item = ItemCarrinho.objects.filter(carrinho=carrinho1,produto=produto)
+  for i in item:
+    i.carrinho = None
+    i.save()
+    carrinho1.qtd_produtos = carrinho1.qtd_produtos - 1
+    carrinho1.preco_total = carrinho1.preco_total - i.produto.price
+    carrinho1.save()
   
   return HttpResponseRedirect(reverse('carrinho:index'))

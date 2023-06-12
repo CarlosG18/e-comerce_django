@@ -10,7 +10,11 @@
 {% block content %}
   <div class="box flex column">
     <div class="title flex space-between">
-      <h1>Listando produtos</h1>
+      {% if categoria %}
+        <h1>Listando produtos de {{categoria}}</h1>
+      {% else %}
+        <h1>Listando todos produtos</h1>
+      {% endif %}
       {% if cliente.type_cliente == 'em' %}
         <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
       {% endif %}
@@ -34,8 +38,11 @@
             <p><b>quantidade:</b> {{ p.quantidade }}</p>
           </div>
           <p class="destaque-1">R${{ p.price }}</p>
-          <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
-        </div>
+          <div class="flex center">
+            <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+            <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>
+          </div>
+          </div>
       {% endfor %}
       {% else %}
         <p class="destaque-1">esta categoria não possui produtos</p>

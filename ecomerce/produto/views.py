@@ -96,9 +96,11 @@ def add(request):
   
 def categoria(request, cat):
   produtos = Produto.objects.filter(categoria__nome=cat)
-  return render(request, "produto/list_categoria.html", {
+  cliente = get_cliente(request.user.username)
+  return render(request, "produto/index.html", {
     "produtos": produtos,
     "categoria": cat,
+    "cliente": cliente,
   })
 
 @login_required

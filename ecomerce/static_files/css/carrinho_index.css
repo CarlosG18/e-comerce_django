@@ -25,7 +25,12 @@
   max-width: 100px;
 }
 
-.box-img-produto > img{
+.box-img-produto > a{
+  width: 100%;
+  height: 100%;
+}
+
+a > img{
   width: 100%;
   height: 100%;
 }

@@ -7,7 +7,6 @@
 
 {% block content %}
 
-{{item}}
   <div class="box mb-50">
     <!-- parte do titulo -->
     <div class="flex title space-between">
@@ -19,7 +18,6 @@
           <input class="button" type="submit" value="adicionar carrinho">
         </form>
     </div>
-    
     
     <div>
       {% if carrinhos %}
@@ -33,8 +31,9 @@
               {% for item in itens_car %}
                 <div class="card-pro flex">
                   <div class="box-img-produto">
-                    <img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}">
-                  </div>
+                    <a href="{% url 'produto:detail' item.produto.codigo %}"><img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}">
+                    </a>
+                    </div>
                   <p>{{ item.produto.nome }}</p>
                   <p>R$ {{ item.produto.price }}</p>
                   <div class="quantidade">
