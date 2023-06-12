@@ -13,7 +13,11 @@
       {% if categoria %}
         <h1>Listando produtos de {{categoria}}</h1>
       {% else %}
-        <h1>Listando todos produtos</h1>
+        {% if cliente.type_cliente == 'em' %}
+          <h1>Listando todos os seus produtos</h1>
+        {% else %}
+          <h1>Listando todos produtos</h1>
+        {% endif %}
       {% endif %}
       {% if cliente.type_cliente == 'em' %}
         <a class="button" href="{% url 'produto:add' %}">adicionar novo produto</a>
@@ -40,7 +44,9 @@
           <p class="destaque-1">R${{ p.price }}</p>
           <div class="flex center">
             <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+            {% if cliente.type_cliente == 'pf' %}
             <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>
+            {% endif %}
           </div>
           </div>
       {% endfor %}

@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block content %}
-{% if cliente.type_cliente == 'pf' %}
 <!-- box com dados do cliente pessoa fisica -->
 <div class="box mb-50">
   <h1 class="title">Perfil</h1>
@@ -84,39 +83,4 @@
     </div>
   </div>
 </div>
-{% elif cliente.type_cliente == 'em' %}
-<!-- box com dados do cliente empresa -->
-<div class="box mb-50">
-  <h1 class="title">Perfil</h1>
-  <div class="flex mb-50">
-    <div class="box-img-perfil">
-      <img src="{{cliente.img.url}}" alt="">
-    </div>
-    <!-- card de dados do usuario -->
-    <div class="details card shadow">
-      <div class="flex align-center">
-        <p><b>nome:</b> {{cliente.user.username}}</p>
-        <a class="box-img-editar" href=""><img src="{% static 'imgs/editar-texto.png' %}" alt=""></a>
-      </div>
-      <div class="flex align-center">
-        <p><b>email:</b> {{cliente.user.email}}</p>
-        <a class="box-img-editar" href=""><img src="{% static 'imgs/editar-texto.png' %}" alt=""></a>
-      </div>
-      <p><b>cnpj:</b> {{cliente.cnpj}}</p>
-    </div>
-    
-    <!-- card de estatísticas de compras -->
-    <div class="details card shadow">
-      <div class="flex align-center">
-        <p><b>total de produtos vendidos:</b> 0 </p>
-      </div>
-      <div class="flex align-center">
-        <p><b>total ganho:</b> R$ 00,00</p>
-      </div>
-      <div class="flex align-center">
-        <p><b>última venda:</b> 18/12/2000</p>
-      </div>
-    </div>
-  </div>
-{% endif %}
 {% endblock %}

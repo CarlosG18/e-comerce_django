@@ -87,7 +87,7 @@ def add(request):
       produto.media_stars = 0.00
       produto.loja = empresa
       produto.save()
-      return HttpResponseRedirect(reverse('produto:index'))
+      return HttpResponseRedirect(reverse('produto:produtos_emp'))
   else:
     form = FormProduto()
   return render(request, "produto/add.html", {
@@ -124,7 +124,7 @@ def add_fotos(request, cod):
 def remove(request, cod):
   produto = Produto.objects.get(codigo=cod)
   produto.delete()
-  return HttpResponseRedirect(reverse('produto:index'))
+  return HttpResponseRedirect(reverse('produto:produtos_emp'))
 
 @login_required
 def remove_img(request, id):
@@ -133,3 +133,14 @@ def remove_img(request, id):
   cod = produto.codigo
   img.delete()
   return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
+
+def produtos_emp(request):
+  empresa = Empresa.objects.get(user__username=request.user.username)
+  produtos = Produto.objects.filter(loja=empresa)
+  user = User.objects.get(username=request.user.username)
+  cliente = get_cliente(request.user.username)
+  return render(request, "produto/index.html", {
+    "produtos": produtos,
+    "user": user,
+    "cliente": cliente,
+  })

@@ -28,13 +28,15 @@
       
         <ul>
           <li class="color-white">{{request.user.username}}</li>
-          <li><a class="color-white" href="{% url 'cliente:index' %}">Home</a></li>
-          <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>
+          <li><a class="color-white" href="{% url 'cliente:index' %}">Home</a></li>      
           {% if cliente.type_cliente == 'pf' %}
+            <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>  
             <li><a class="color-white" href="{% url 'carrinho:index' %}">Carrinho</a></li>
+            <li><a class="color-white" href="{% url 'cliente:perfil' %}">perfil</a></li>
+          {% else  %}
+          <li><a class="color-white" href="{% url 'produto:produtos_emp' %}">Produtos</a></li>
           {% endif %}
           {% if user.is_authenticated %}
-            <li><a class="color-white" href="{% url 'cliente:perfil' %}">perfil</a></li>
             <li><a class="button-header" href="{% url 'logout' %}">sair</a></li>
           {% else %}
             <li><a class="color-white" href="{% url 'cliente:tipo-cliente' %}">criar conta</a></li>
