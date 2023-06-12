@@ -57,6 +57,9 @@ def add_item(request, cod):
   for car in carrinhos:
     item = ItemCarrinho(carrinho=car,produto=produto)
     item.save()
+    car.qtd_produtos = car.qtd_produtos + 1
+    car.preco_total = car.preco_total + item.produto.price
+    car.save()
   return HttpResponseRedirect(reverse('cliente:index'))
   
 def remove_item(request, cod):
