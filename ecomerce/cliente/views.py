@@ -25,7 +25,7 @@ def index(request):
   
   produtos = Produto.objects.filter(status="o")[:6]
   produtos_music = Produto.objects.filter(categoria__nome='Música')[:3]
-  produtos_tech = Produto.objects.filter(categoria__nome='Tecnologia')
+  produtos_tech = Produto.objects.filter(categoria__nome='Tecnologia')[:3]
   categorias = Categoria.objects.all()
   cliente = get_cliente(request.user.username)
   return render(request, "cliente/index.html", {

@@ -22,7 +22,7 @@
       <div class="flex column">
         <div class="box-img">
           <img src="{{ produto.foto.url }}" alt="img_{{ produto.nome }}">
-        </div>
+        </div>  
       {% if cliente.type_cliente == 'em' %}
         <a class="button my-15 text-center" href="{% url 'produto:add_fotos' produto.codigo %}">adicionar mais fotos</a>
       {% endif %}
@@ -36,6 +36,13 @@
         <p><b>Quantidade do Produto:</b> {{produto.quantidade}}</p>
         <p><b>Status do Produto:</b> {{produto.status}}</p>
       </div>
+    </div>
+    <div class="box shadow">
+      {% if comentarios %}
+        <p class="destaque-1">Avaliação do produto: {{produto.media_stars|floatformat:2}}</p>
+      {% else %}
+      <p class="destaque-1">Avaliação do produto: sem avaliações</p>
+      {% endif %}
     </div>
   </div>
   

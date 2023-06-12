@@ -40,10 +40,21 @@ class ProdutoListView(generic.ListView):
       context['cliente'] = cliente
       return context
 
+def update_stars(produto, qtd_stars, qtd_comentarios):
+  media = qtd_stars/qtd_comentarios
+  produto.media_stars = media
+
 def detail(request, cod):
   produto = Produto.objects.get(codigo=cod)
   list_imgs = ListImages.objects.filter(produto__codigo=cod)
   comentarios = Comentario.objects.filter(produto__codigo=cod)
+  qtd_comentarios = comentarios.count()
+  if comentarios:
+    stars = 0
+    for c in comentarios:
+      stars += c.stars
+    update_stars(produto, stars, qtd_comentarios)
+
   cliente = get_cliente(request.user.username)
   
   if request.method == 'POST':

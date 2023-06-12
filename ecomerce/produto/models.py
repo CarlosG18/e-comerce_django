@@ -25,7 +25,7 @@ class Produto(models.Model):
   quantidade = models.IntegerField(default=0)
   categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
   foto = models.ImageField(upload_to="produto/", default="produto/produto_default.png")
-  media_stars = models.DecimalField(max_digits=3, decimal_places=2,null=True)
+  media_stars = models.DecimalField(max_digits=3, decimal_places=2,default=0)
   loja = models.ForeignKey(Empresa,on_delete=models.CASCADE)
   
   STATUS = (
