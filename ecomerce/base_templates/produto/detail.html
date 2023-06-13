@@ -76,12 +76,18 @@
       {% if comentarios %}
       {% for c in comentarios %}
         <div class="card-c flex column">
-          <div class="cliente flex align-center">
-            <div class="box-img-avatar">
-              <img src="{{c.cliente.img.url }}" alt="avatar">
+          <div class="flex align-center space-between">
+            <div class="flex cliente align-center">
+              <div class="box-img-avatar">
+                <img src="{{c.cliente.img.url }}" alt="avatar">
+              </div>
+              <p class="p-5-10 border border-r"><b>{{c.cliente.user.username}}</b></p>
             </div>
-            <p class="p-5-10 border border-r"><b>{{c.cliente.user.username}}</b></p>
+            {% if request.user.username == c.cliente.user.username %}
+              <a class="button-c" href="{% url 'produto:remove_comentario' id=c.id cod=c.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
+            {% endif %}
           </div>
+            
         <div class="box-text">
           <p>{{c.comentario}}</p>
         </div>

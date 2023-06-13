@@ -144,3 +144,8 @@ def produtos_emp(request):
     "user": user,
     "cliente": cliente,
   })
+  
+def remove_comentario(request, id, cod):
+  comentario = Comentario.objects.get(id=id)
+  comentario.delete()
+  return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
