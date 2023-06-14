@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import Group
+import django
+
+# help(Group) - olhar a documentação
 
 def get_cliente(username):
   user = User.objects.get(username=username)
