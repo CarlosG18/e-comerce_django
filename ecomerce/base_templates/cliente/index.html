@@ -9,8 +9,9 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
-
   {% if cliente.type_cliente == 'pf' %}
+  
+  <!-- box calcular frete -->
   <div class="box mb-50 flex center">
     <div class="cep-img">
       <img src="{% static 'imgs/address.png' %}" alt="img_address">
@@ -39,6 +40,41 @@
           <img src="" alt="">
         </div>
       </div>
+    {% endfor %}
+    </div>
+  </div>
+  
+  <!-- produtos mais bem avaliados -->
+  <div class="box mb-50">
+    <div class="flex align-center title">
+      <h1>produtos mais bem avaliados</h1>
+      <a class="ml-20" href="{% url 'produto:index' %}">ver todos os produtos</a>
+    </div>
+    <div class="banner">
+      <div  class="flex column center">
+        <div>
+          <p class="txt-blue destaque-2">os produtos</p>
+        </div>
+        <div class="text-banner">
+          <p class="destaque-3">mais bem avaliados!</p>
+        </div>
+      </div>
+    </div>
+    <!-- apresentando produtos -->
+    <div class="flex space-around wrap">
+    {% for p in produtos_avaliados %}
+      <div class="flex card 
+      back-white column">
+        <h1>{{ p.nome }}</h1>
+        <div class="box-img">
+            <img src="{{ p.foto.url }}" alt="img{{p.nome}}">
+        </div>
+          <p> R$ {{ p.price }}</p>
+          <div class="flex center">
+            <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+            <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>
+            </div>
+          </div>
     {% endfor %}
     </div>
   </div>
@@ -110,7 +146,7 @@
       <h1 class="txt-white">Top produtos de tecnologia</h1>
       <a class="txt-white ml-20" href="{% url 'produto:index' %}">ver todos os produtos</a>
     </div>
-    <div class="banner">
+    <div class="banner mt--30">
       <div class="box-img-tech">
         <img src="{% static 'imgs/Tech/tech1.svg' %}" alt="tech">
       </div>
@@ -123,7 +159,7 @@
         </div>
       </div>
     </div>
-    <div class="flex space-around wrap">
+    <div class="flex mt--30 space-around wrap">
     {% for p in produtos_tech %}
       <div class="flex card 
       back-white column">

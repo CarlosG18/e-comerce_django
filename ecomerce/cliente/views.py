@@ -20,6 +20,17 @@ def get_cliente(username):
   except ObjectDoesNotExist:
     cliente = Empresa.objects.get(user=user)
     return cliente
+    
+def notaMedia():
+  produtos = Produto.objects.all()
+  cont = 0
+  nota_geral = 0
+  
+  for p in produtos:
+    if p.media_stars != 0:
+      cont += 1
+      nota_geral += p.media_stars
+  return nota_geral/cont
 
 @login_required
 def index(request):
@@ -30,6 +41,8 @@ def index(request):
   produtos_music = Produto.objects.filter(categoria__nome='Música')[:3]
   produtos_tech = Produto.objects.filter(categoria__nome='Tecnologia')[:3]
   categorias = Categoria.objects.all()
+  nota = notaMedia()
+  produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
   return render(request, "cliente/index.html", {
     "produtos": produtos,
@@ -37,6 +50,7 @@ def index(request):
     "produtos_tech": produtos_tech,
     "categorias": categorias,
     "cliente": cliente,
+    "produtos_avaliados": produtos_avaliados,
   })
   
 @login_required

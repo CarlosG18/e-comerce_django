@@ -40,21 +40,24 @@ class ProdutoListView(generic.ListView):
       context['cliente'] = cliente
       return context
 
-def update_stars(produto, qtd_stars, qtd_comentarios):
-  media = qtd_stars/qtd_comentarios
-  produto.media_stars = media
-
+def update_stars(produto,comentarios):
+  if comentarios:
+    stars = 0
+    qtd_comentarios = comentarios.count()
+    for c in comentarios:
+      stars += c.stars
+    media = stars/qtd_comentarios
+    produto.media_stars = media
+    produto.save()
+  else:
+    produto.media_stars = 0.00
+    produto.save()
+  
 def detail(request, cod):
   produto = Produto.objects.get(codigo=cod)
   list_imgs = ListImages.objects.filter(produto__codigo=cod)
   comentarios = Comentario.objects.filter(produto__codigo=cod)
-  qtd_comentarios = comentarios.count()
-  if comentarios:
-    stars = 0
-    for c in comentarios:
-      stars += c.stars
-    update_stars(produto, stars, qtd_comentarios)
-
+  update_stars(produto,comentarios)
   cliente = get_cliente(request.user.username)
   
   if request.method == 'POST':
@@ -148,4 +151,7 @@ def produtos_emp(request):
 def remove_comentario(request, id, cod):
   comentario = Comentario.objects.get(id=id)
   comentario.delete()
+  produto = Produto.objects.get(codigo=cod)
+  comentarios = Comentario.objects.filter(produto__codigo=cod)
+  update_stars(produto,comentarios)
   return HttpResponseRedirect(reverse('produto:detail', args=[cod]))

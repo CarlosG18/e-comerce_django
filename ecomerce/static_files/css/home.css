@@ -53,7 +53,7 @@ form > *{
 }
 
 .box-img-music{
-  max-width: 300px;
+  max-width: 200px;
 }
 
 .box-img-music > img{
@@ -62,7 +62,7 @@ form > *{
 }
 
 .box-img-tech{
-  min-width: 500px;
+  min-width: 400px;
 }
 
 .box-img-tech > img{
