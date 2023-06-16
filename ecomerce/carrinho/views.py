@@ -24,6 +24,14 @@ def get_carrinhos(cliente):
   except ObjectDoesNotExist:
     return None
 
+def get_itens_car(carrinho):
+  try:
+    itens = ItemCarrinho.objects.filter(carrinho=carrinho)
+    return itens
+  except ObjectDoesNotExist:
+    return None
+
+
 def index(request):
   cliente = get_cliente(request.user.username)
   carrinhos = get_carrinhos(cliente)
@@ -72,10 +80,25 @@ def add_item(request, cod):
   cliente = get_cliente(request.user.username)
   produto = Produto.objects.get(codigo=cod)
   carrinhos = get_carrinhos(cliente)
-  for car in carrinhos:
+  car = carrinhos[0]
+  itens = get_itens_car(car)
+  search = False
+
+  if itens:
+    for i in itens:
+      if i.produto == produto:
+        search = True
+        add_qtd(request, i.produto.codigo)
+        break
+    if search == False:
+      item = ItemCarrinho(carrinho=car,produto=produto)
+      item.save()
+      upgrade_carrinho(car, item, "add")
+  else:
     item = ItemCarrinho(carrinho=car,produto=produto)
     item.save()
     upgrade_carrinho(car, item, "add")
+
   return HttpResponseRedirect(reverse('cliente:index'))
   
 def remove_item(request, cod):
@@ -114,6 +137,8 @@ def remove_qtd(request, cod):
   item = ItemCarrinho.objects.get(carrinho=carrinho1,produto=produto)
   item.quantidade -= 1
   item.save()
+  if item.quantidade < 1:
+    remove_item(request, item.produto.codigo)
   upgrade_carrinho(carrinho1,item,"remove")
   return HttpResponseRedirect(reverse('carrinho:index'))
   
