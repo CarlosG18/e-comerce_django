@@ -114,10 +114,8 @@ def remove_item(request, cod):
   carrinho1 = carrinhos[0]
   item = ItemCarrinho.objects.filter(carrinho=carrinho1,produto=produto)
   for i in item:
-    i.carrinho = None
     carrinho1.qtd_produtos -= i.quantidade
-    i.quantidade = 0
-    i.save()
+    i.delete()
     carrinho1.save()
     upgrade_preco_total(carrinho1)
   
@@ -144,10 +142,11 @@ def remove_qtd(request, cod):
   carrinhos = get_carrinhos(cliente)
   carrinho1 = carrinhos[0]
   item = ItemCarrinho.objects.get(carrinho=carrinho1,produto=produto)
-  item.quantidade -= 1
-  item.save()
-  if item.quantidade < 1:
+  if item.quantidade == 1:
     remove_item(request, item.produto.codigo)
-  upgrade_carrinho(carrinho1,item,"remove")
+  else:
+    item.quantidade -= 1
+    item.save()
+    upgrade_carrinho(carrinho1,item,"remove")
   return HttpResponseRedirect(reverse('carrinho:index'))
   
