@@ -36,8 +36,10 @@
                     </div>
                   <p>{{ item.produto.nome }}</p>
                   <p>R$ {{ item.produto.price }}</p>
-                  <div class="quantidade">
-                    aumentar o numero da quantidade
+                  <div class="quantidade flex center">
+                    <a class="button mr-10" href="{% url 'carrinho:remove_qtd' item.produto.codigo %}">-</a>
+                    <p>{{item.quantidade}}</p>
+                    <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
                   </div>
                   <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
                 </div>

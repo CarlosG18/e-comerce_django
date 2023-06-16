@@ -15,6 +15,8 @@ class Carrinho(models.Model):
 class ItemCarrinho(models.Model):
   carrinho = models.ForeignKey(Carrinho,on_delete=models.CASCADE, null=True)
   produto = models.ForeignKey(Produto,on_delete=models.CASCADE)
+  quantidade = models.IntegerField(default=1)
+  preco_acumulado = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
   
   def __str__(self):
     return f' carrinho = {self.carrinho} - produto = {self.produto}'

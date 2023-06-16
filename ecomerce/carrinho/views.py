@@ -50,6 +50,24 @@ def delete(request, id):
   carrinho.delete()
   return HttpResponseRedirect(reverse('carrinho:index'))
   
+def upgrade_preco_total(car):
+  itens = ItemCarrinho.objects.filter(carrinho=car)
+  preco = 0
+  for i in itens:
+    preco += i.preco_acumulado
+  car.preco_total = preco
+  car.save()
+  
+def upgrade_carrinho(car, item, op):
+  item.preco_acumulado = item.produto.price * item.quantidade
+  item.save()
+  if op == "add":
+    car.qtd_produtos += 1
+    upgrade_preco_total(car)
+  elif op == "remove":
+    car.qtd_produtos -= 1
+    upgrade_preco_total(car)
+  
 def add_item(request, cod):
   cliente = get_cliente(request.user.username)
   produto = Produto.objects.get(codigo=cod)
@@ -57,9 +75,7 @@ def add_item(request, cod):
   for car in carrinhos:
     item = ItemCarrinho(carrinho=car,produto=produto)
     item.save()
-    car.qtd_produtos = car.qtd_produtos + 1
-    car.preco_total = car.preco_total + item.produto.price
-    car.save()
+    upgrade_carrinho(car, item, "add")
   return HttpResponseRedirect(reverse('cliente:index'))
   
 def remove_item(request, cod):
@@ -71,9 +87,33 @@ def remove_item(request, cod):
   item = ItemCarrinho.objects.filter(carrinho=carrinho1,produto=produto)
   for i in item:
     i.carrinho = None
+    carrinho1.qtd_produtos -= i.quantidade
+    i.quantidade = 0
     i.save()
-    carrinho1.qtd_produtos = carrinho1.qtd_produtos - 1
-    carrinho1.preco_total = carrinho1.preco_total - i.produto.price
     carrinho1.save()
+    upgrade_preco_total(carrinho1)
   
   return HttpResponseRedirect(reverse('carrinho:index'))
+  
+def add_qtd(request, cod):
+  cliente = get_cliente(request.user.username)
+  produto = Produto.objects.get(codigo=cod)
+  carrinhos = get_carrinhos(cliente)
+  carrinho1 = carrinhos[0]
+  item = ItemCarrinho.objects.get(carrinho=carrinho1,produto=produto)
+  item.quantidade += 1
+  item.save()
+  upgrade_carrinho(carrinho1,item,"add")
+  return HttpResponseRedirect(reverse('carrinho:index'))
+  
+def remove_qtd(request, cod):
+  cliente = get_cliente(request.user.username)
+  produto = Produto.objects.get(codigo=cod)
+  carrinhos = get_carrinhos(cliente)
+  carrinho1 = carrinhos[0]
+  item = ItemCarrinho.objects.get(carrinho=carrinho1,produto=produto)
+  item.quantidade -= 1
+  item.save()
+  upgrade_carrinho(carrinho1,item,"remove")
+  return HttpResponseRedirect(reverse('carrinho:index'))
+  
