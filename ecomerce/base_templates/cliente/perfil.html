@@ -46,13 +46,20 @@
       <h1>compras em andamento</h1>
       <a class="destaque-1" href="">visualizar todos os pedidos</a>
     </div>
+    {% if compra %}
+    {% for c in compra %}
     <div class="flex column">
       <div class="pedido border flex align-center space-between">
         <p><b>produto:</b></p>
-        <p><b>status:</b> em percurso</p>
+        <p><b>status: </b>{{c.status}}</p>
+        <p><b>preço: </b>{{c.carrinho.preco_total}}</p>
+        <p><b>data da compra: </b>{{c.data}}</p>
         <a class="button" href="">acompanhar pedido</a>
       </div>
+      {% endfor %}
+    {% else %}
       <p class="destaque-1">você não possui nenhum pedido realizado</p>
+    {% endif %}
     </div>
   </div>
   

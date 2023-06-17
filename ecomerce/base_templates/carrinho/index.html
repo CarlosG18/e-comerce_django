@@ -25,7 +25,9 @@
           <div class="card p20 border-r border mb-50">
             <div class="flex space-between header-carrinho">
               <h1>carrinho {{c.nome}}</h1>
+              {% if c.close_car == False %}
               <a class="button" href="{% url 'carrinho:delete' c.id %}">deletar carrinho</a>
+              {% endif %}
             </div>
             <div class="content-carrinho">
               {% for item in itens_car %}
@@ -37,19 +39,26 @@
                   <p>{{ item.produto.nome }}</p>
                   <p>R$ {{ item.produto.price }}</p>
                   <div class="quantidade flex center">
+                {% if c.close_car == False %}
                     <a class="button mr-10" href="{% url 'carrinho:remove_qtd' item.produto.codigo %}">-</a>
+                  {% endif %}
                     <p>{{item.quantidade}}</p>
+                  {% if c.close_car == False %}
                     <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
+                    {% endif %}
                   </div>
+              {% if c.close_car == False %}
                   <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
+                {% endif %}
                 </div>
-              
               {% endfor %}
             </div>
             <div class="footer-carrinho">
               <p>quantidade: {{c.qtd_produtos}}</p>
               <p>total: R$ {{c.preco_total}}</p>
-              <a class="button" href="">fechar compra</a>
+              {% if c.close_car == False %}
+              <a class="button" href="{% url 'carrinho:close_compra' c.id %}">fechar compra</a>
+              {% endif %}
             </div>
             
           </div>

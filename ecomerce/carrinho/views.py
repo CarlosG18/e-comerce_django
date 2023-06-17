@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from cliente.models import Cliente,Empresa, PessoaFisica
-from .models import Carrinho, ItemCarrinho
+from .models import Carrinho, ItemCarrinho, Compra
 from produto.models import Produto
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from datetime import datetime
 
 def get_cliente(username):
   user = User.objects.get(username=username)
@@ -149,4 +150,13 @@ def remove_qtd(request, cod):
     item.save()
     upgrade_carrinho(carrinho1,item,"remove")
   return HttpResponseRedirect(reverse('carrinho:index'))
+  
+def close_compra(request, id):
+  carrinho = Carrinho.objects.get(id=id)
+  carrinho.close_car = True
+  carrinho.save()
+  data_atual = datetime.now()
+  compra = Compra(carrinho=carrinho,status='pp',data=data_atual)
+  compra.save()
+  return HttpResponseRedirect(reverse('cliente:perfil'))
   

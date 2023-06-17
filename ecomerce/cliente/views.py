@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from cliente.models import Empresa, PessoaFisica
 from produto.models import Produto,Categoria
+from carrinho.models import Compra,Carrinho
 from .forms import FormPessoaFisica,FormEmpresa, FormUser
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -53,11 +54,26 @@ def index(request):
     "produtos_avaliados": produtos_avaliados,
   })
   
+def get_carrinhos(cliente):
+  try:
+    carrinhos = Carrinho.objects.filter(cliente=cliente)
+    return carrinhos
+  except ObjectDoesNotExist:
+    return None
+  
 @login_required
 def perfil(request):
   cliente = get_cliente(request.user.username)
+  carrinhos = get_carrinhos(cliente)
+  if carrinhos:
+    carrinho = carrinhos[0]
+    compra = Compra.objects.filter(carrinho=carrinho)
+  else:
+    compra = None
+  
   return render(request, "cliente/perfil.html",{
     "cliente": cliente,
+    "compra": compra,
   })
 
 def tipocliente(request):
