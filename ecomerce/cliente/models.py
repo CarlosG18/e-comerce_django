@@ -19,6 +19,8 @@ class PessoaFisica(Cliente):
   message="o cpf informado deverá esta no formato 999.999.999-99",
   )
   cpf = models.CharField(max_length=14, validators=[cpf_setting], unique=True)
+  total_gasto = models.DecimalField(max_digits=10,decimal_places=2, default=0.00)
+  total_compras = models.IntegerField(default=0)
   
   def __str__(self):
     return f'username = {self.user.username} password = {self.user.password}'
@@ -30,6 +32,8 @@ class Empresa(Cliente):
   )
   cnpj = models.CharField(max_length=18, validators=[cnpj_setting], unique=True)
   segmento = models.CharField(max_length=100)
+  total_ganho = models.DecimalField(max_digits=10,decimal_places=2, default=0.00)
+  total_vendas = models.IntegerField(default=0)
 
   def __str__(self):
       return f'empresa {self.user.username}'
