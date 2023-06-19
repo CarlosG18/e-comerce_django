@@ -10,27 +10,18 @@
   <div class="box mb-50">
     <!-- parte do titulo -->
     <div class="flex title space-between">
-      <h1>seus carrinhos {{carrinhos.count}}</h1>
-        <form method="POST" action="{% url 'carrinho:create' %}">
-           {% csrf_token %}
-          <label for="nome">nome do carrinho:</label>
-          <input id="nome" type="text" name="nome_car">
-          <input class="button" type="submit" value="adicionar carrinho">
-        </form>
+      <h1>seu carrinho</h1>
     </div>
-    
+
     <div>
       {% if carrinhos %}
-        {% for c in carrinhos %}
+        
           <div class="card p20 border-r border mb-50">
             <div class="flex space-between header-carrinho">
-              <h1>{{c.nome}}</h1>
-              {% if c.close_car == False %}
-              <a class="button" href="{% url 'carrinho:delete' c.id %}">deletar carrinho</a>
-              {% endif %}
+              <h1>{{itens.carrinho.nome}}</h1>
             </div>
             <div class="content-carrinho">
-              {% for item in itens_car %}
+              {% for item in itens.itens %}
                 <div class="card-pro flex">
                   <div class="box-img-produto">
                     <a href="{% url 'produto:detail' item.produto.codigo %}"><img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}">
@@ -39,32 +30,31 @@
                   <p>{{ item.produto.nome }}</p>
                   <p>R$ {{ item.produto.price }}</p>
                   <div class="quantidade flex center">
-                {% if c.close_car == False %}
+                {% if itens.carrinho.close_car == False %}
                     <a class="button mr-10" href="{% url 'carrinho:remove_qtd' item.produto.codigo %}">-</a>
                   {% endif %}
                     <p>{{item.quantidade}}</p>
-                  {% if c.close_car == False %}
+                  {% if itens.carrinho.close_car == False %}
                     <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
                     {% endif %}
                   </div>
-              {% if c.close_car == False %}
+              {% if itens.carrinho.close_car == False %}
                   <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
                 {% endif %}
                 </div>
               {% endfor %}
             </div>
             <div class="footer-carrinho">
-              <p>quantidade: {{c.qtd_produtos}}</p>
-              <p>total: R$ {{c.preco_total}}</p>
-              {% if c.close_car == False %}
-              <a class="button" href="{% url 'carrinho:close_compra' c.id %}">fechar compra</a>
+              <p>quantidade: {{itens.carrinho.qtd_produtos}}</p>
+              <p>total: R$ {{itens.carrinho.preco_total}}</p>
+              {% if itens.carrinho.close_car == False %}
+              <a class="button" href="{% url 'carrinho:close_compra' itens.carrinho.id %}">fechar compra</a>
               {% endif %}
             </div>
             
           </div>
-        {% endfor %}
       {% else %}
-        <p class="destaque-1">você não possui carrinhos adicionados</p>
+        <p class="destaque-1">você não possui produtos adicionados no carrinho</p>
       {% endif %}
     </div>
   </div>

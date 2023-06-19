@@ -35,15 +35,17 @@ def get_itens_car(carrinho):
 def index(request):
   cliente = get_cliente(request.user.username)
   carrinhos = get_carrinhos(cliente)
-  if carrinhos:
-    carrinho1 = carrinhos[0]
-    itens_car = ItemCarrinho.objects.filter(carrinho=carrinho1)
-  else:
-    itens_car = None
+  # itens = []
+  itens = {}
+
+  for c in carrinhos:
+    itens_car = ItemCarrinho.objects.filter(carrinho=c)
+    itens.update({'carrinho': c, 'itens': itens_car})
+
   return render(request, "carrinho/index.html",{
     "cliente": cliente,
     "carrinhos": carrinhos,
-    "itens_car": itens_car,
+    "itens": itens,
   })
   
 def create(request):
@@ -83,8 +85,17 @@ def add_item(request, cod):
   cliente = get_cliente(request.user.username)
   produto = Produto.objects.get(codigo=cod)
   carrinhos = get_carrinhos(cliente)
+  
   if carrinhos:
-    car = carrinhos[0]
+    for c in carrinhos:
+      if not c.close_car:
+        car = c
+        break
+      else:
+        carrinho = Carrinho(cliente=cliente)
+        carrinho.save()
+        car = carrinho
+        break
   else:
     car = Carrinho(cliente=cliente)
     car.save()
@@ -106,7 +117,7 @@ def add_item(request, cod):
     item.save()
     upgrade_carrinho(car, item, "add")
 
-  return HttpResponseRedirect(reverse('cliente:index'))
+  return HttpResponseRedirect(reverse('carrinho:index'))
   
 def remove_item(request, cod):
   produto = Produto.objects.get(codigo=cod)

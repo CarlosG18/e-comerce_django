@@ -8,8 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.models import Group
-import django
+# from django.contrib.auth.models import Group
 
 # help(Group) - olhar a documentação
 
@@ -52,7 +51,13 @@ def index(request):
   nota = notaMedia()
   produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
-  carrinhos = get_carrinhos(cliente)
+  try:
+    carrinho = Carrinho.objects.get(cliente=cliente)
+
+  except ObjectDoesNotExist: 
+    carrinho = Carrinho(cliente=cliente)
+    carrinho.save()
+
   return render(request, "cliente/index.html", {
     "produtos": produtos,
     "produtos_music": produtos_music,
@@ -60,7 +65,6 @@ def index(request):
     "categorias": categorias,
     "cliente": cliente,
     "produtos_avaliados": produtos_avaliados,
-    "carrinhos": carrinhos,
   })
   
 def get_carrinhos(cliente):
