@@ -72,7 +72,18 @@
           <p> R$ {{ p.price }}</p>
           <div class="flex center">
             <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
-            <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>
+              {% if carrinhos %}
+                  <form action="{% url 'carrinho:add_item' p.codigo %}">
+                    <select name="carriho" id="car">
+                      {% for c in carrinhos %}
+                      <option value="{{c.nome}}">{{c.nome}}</option>
+                      {% endfor %}
+                    </select>
+                    <input class="button" value="add" type="submit">
+                  </form>
+              {% else %}
+                <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>   
+              {% endif %}
             </div>
           </div>
     {% endfor %}

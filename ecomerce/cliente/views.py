@@ -33,6 +33,13 @@ def notaMedia():
       nota_geral += p.media_stars
   return nota_geral/cont
 
+def get_carrinhos(cliente):
+  try:
+    carrinhos = Carrinho.objects.filter(cliente=cliente)
+    return carrinhos
+  except ObjectDoesNotExist:
+    return None
+
 @login_required
 def index(request):
   #visitas = request.session.get("visitas",0)
@@ -45,6 +52,7 @@ def index(request):
   nota = notaMedia()
   produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
+  carrinhos = get_carrinhos(cliente)
   return render(request, "cliente/index.html", {
     "produtos": produtos,
     "produtos_music": produtos_music,
@@ -52,6 +60,7 @@ def index(request):
     "categorias": categorias,
     "cliente": cliente,
     "produtos_avaliados": produtos_avaliados,
+    "carrinhos": carrinhos,
   })
   
 def get_carrinhos(cliente):
@@ -126,3 +135,4 @@ def criar_empresa(request):
       "form_emp": form,
       "form_user": form_user,
   })
+

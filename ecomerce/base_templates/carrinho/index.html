@@ -24,7 +24,7 @@
         {% for c in carrinhos %}
           <div class="card p20 border-r border mb-50">
             <div class="flex space-between header-carrinho">
-              <h1>carrinho {{c.nome}}</h1>
+              <h1>{{c.nome}}</h1>
               {% if c.close_car == False %}
               <a class="button" href="{% url 'carrinho:delete' c.id %}">deletar carrinho</a>
               {% endif %}

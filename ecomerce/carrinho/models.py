@@ -3,7 +3,7 @@ from produto.models import Produto
 from cliente.models import PessoaFisica
 
 class Carrinho(models.Model):
-  nome = models.CharField(max_length=200, default="carrinho_default")
+  nome = models.CharField(max_length=200, default="carrinho")
   cliente = models.ForeignKey(PessoaFisica, on_delete=models.CASCADE)
   qtd_produtos = models.IntegerField(default=0)
   preco_total = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
@@ -11,7 +11,7 @@ class Carrinho(models.Model):
   
 
   def __str__(self):
-    return f'carrinho do cliente {self.cliente.user.username}'
+    return f'carrinho {self.nome} do cliente {self.cliente.user.username}'
   
 class ItemCarrinho(models.Model):
   carrinho = models.ForeignKey(Carrinho,on_delete=models.CASCADE, null=True)
