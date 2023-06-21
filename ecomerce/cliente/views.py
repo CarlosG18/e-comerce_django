@@ -41,9 +41,6 @@ def get_carrinhos(cliente):
 
 @login_required
 def index(request):
-  #visitas = request.session.get("visitas",0)
-  #request.session["visitas"] = visitas+1
-  
   produtos = Produto.objects.filter(status="o")[:6]
   produtos_music = Produto.objects.filter(categoria__nome='Música')[:3]
   produtos_tech = Produto.objects.filter(categoria__nome='Tecnologia')[:3]
@@ -51,15 +48,17 @@ def index(request):
   nota = notaMedia()
   produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
+  
   try:
     carrinhos = Carrinho.objects.filter(cliente=cliente)
-    for c in carrinhos:
-      if c.close_car:
-        carrinho = Carrinho(cliente=cliente)
-        carrinho.save()
   except ObjectDoesNotExist: 
-    carrinho = Carrinho(cliente=cliente)
-    carrinho.save()
+    carrinhos = Carrinho(cliente=cliente)
+    carrinhos.save()
+
+  for c in carrinhos:
+    if c.close_car:
+      carrinho = Carrinho(cliente=cliente)
+      carrinho.save()
 
   return render(request, "cliente/index.html", {
     "produtos": produtos,

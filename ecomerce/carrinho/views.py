@@ -35,19 +35,36 @@ def get_itens_car(carrinho):
 def index(request):
   cliente = get_cliente(request.user.username)
   carrinhos = get_carrinhos(cliente)
-  itens = []
+  if not carrinhos.exists():
+    car = Carrinho(cliente=cliente)
+    car.save()
 
   for c in carrinhos:
-    item = {}
-    itens_car = ItemCarrinho.objects.filter(carrinho=c)
-    item['carrinho'] = c
-    item['produtos'] = itens_car
-    itens.append(item)
+    if c.close_car:
+      carrinho = Carrinho(cliente=cliente)
+      carrinho.save()
+
+  car_atual = {}
+  carrinhos_closed = []
+
+  for c in carrinhos:
+    if c.close_car:
+      item = {}
+      itens_car = ItemCarrinho.objects.filter(carrinho=c)
+      item['carrinho'] = c
+      item['produtos'] = itens_car
+      carrinhos_closed.append(item)
+    else:
+      itens_car_atual = ItemCarrinho.objects.filter(carrinho=c)
+      aux_car = {'carrinho': c, 'produtos': itens_car_atual}
+      car_atual.update(aux_car)
+
 
   return render(request, "carrinho/index.html",{
     "cliente": cliente,
     "carrinhos": carrinhos,
-    "itens": itens,
+    "car_atual": car_atual,
+    "carrinhos_closed": carrinhos_closed,
   })
   
 def create(request):
@@ -139,15 +156,24 @@ def add_qtd(request, cod):
   cliente = get_cliente(request.user.username)
   produto = Produto.objects.get(codigo=cod)
   carrinhos = get_carrinhos(cliente)
+  
   if carrinhos:
-    carrinho1 = carrinhos[0]
+    for c in carrinhos:
+      if not c.close_car:
+        car = c
+        break
+      else:
+        carrinho = Carrinho(cliente=cliente)
+        carrinho.save()
+        car = carrinho
+        break
   else:
-    carrinho1 = Carrinho(cliente=cliente)
-    carrinho1.save()
-  item = ItemCarrinho.objects.get(carrinho=carrinho1,produto=produto)
+    car = Carrinho(cliente=cliente)
+    car.save()
+  item = ItemCarrinho.objects.get(carrinho=car, produto=produto)
   item.quantidade += 1
   item.save()
-  upgrade_carrinho(carrinho1,item,"add")
+  upgrade_carrinho(car,item,"add")
   return HttpResponseRedirect(reverse('carrinho:index'))
   
 def remove_qtd(request, cod):

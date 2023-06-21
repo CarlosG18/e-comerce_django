@@ -6,39 +6,41 @@
 {% endblock %}
 
 {% block content %}
+  carrinhos: {{carrinhos}}
+  <br>
+  <br>
+  carrinho atual: {{car_atual}}
+  <br><br>
+  carrinhos_closed: {{carrinhos_closed}}
+
   <div class="box mb-50">
     <!-- parte do titulo -->
     <div class="flex title space-between">
       <h1>seu carrinho</h1>
     </div>
-    
     <div>
-      {% for car in itens %}
-        {% if not car.carrinho.close_car %}
-          <div class="card p20 border-r border mb-50">
-            {% for item in car.produtos %}
-              <div class="card-pro flex">
-                <div class="box-img-produto">
-                  <a href="{% url 'produto:detail' item.produto.codigo %}"><img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}"></a>
-                </div>
-                <p>{{ item.produto.nome }}</p>
-                <p>R$ {{ item.produto.price }}</p>
-                <div class="quantidade flex center">
-                  <a class="button mr-10" href="{% url 'carrinho:remove_qtd' item.produto.codigo %}">-</a>
-                  <p>{{item.quantidade}}</p>
-                  <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
-                  </div>
-                  <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
-              </div>
-            {% endfor %}
-            <div class="footer-carrinho">
-              <p>quantidade: {{car.carrinho.qtd_produtos}}</p>
-              <p>total: R$ {{car.carrinho.preco_total}}</p>
-              <a class="button" href="{% url 'carrinho:close_compra' car.carrinho.id %}">fechar compra</a>
+      <div class="card p20 border-r border mb-50">
+        {% for item in car_atual.produtos %}
+          <div class="card-pro flex">
+            <div class="box-img-produto">
+              <a href="{% url 'produto:detail' item.produto.codigo %}"><img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}"></a>
             </div>
+            <p>{{ item.produto.nome }}</p>
+            <p>R$ {{ item.produto.price }}</p>
+            <div class="quantidade flex center">
+              <a class="button mr-10" href="{% url 'carrinho:remove_qtd' item.produto.codigo %}">-</a>
+              <p>{{item.quantidade}}</p>
+              <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
+            </div>
+              <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
+            </div>
+        {% endfor %}
+          <div class="footer-carrinho">
+            <p>quantidade: {{car_atual.carrinho.qtd_produtos}}</p>
+            <p>total: R$ {{car_atual.carrinho.preco_total}}</p>
+            <a class="button" href="{% url 'carrinho:close_compra' car_atual.carrinho.id %}">fechar compra</a>
           </div>
-        {% endif %}
-      {% endfor %}
+        </div>
     </div>
   </div>
   
@@ -50,8 +52,8 @@
     </div>
     
     <div>
-      {% for car in itens %}
-        {% if car.carrinho.close_car %}
+      {% if carrinhos_closed %}
+      {% for car in carrinhos_closed %}
           <div class="card p20 border-r border mb-50">
             {% for item in car.produtos %}
               <div class="card-pro flex">
@@ -70,9 +72,9 @@
               <p>total: R$ {{car.carrinho.preco_total}}</p>
             </div>
           </div>
+        {% endfor %}
         {% else %}
           <p class="destaque-1">você não possui carrinhos fechados</p>
         {% endif %}
-      {% endfor %}
     </div>
 {% endblock %}
