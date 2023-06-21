@@ -52,8 +52,11 @@ def index(request):
   produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
   try:
-    carrinho = Carrinho.objects.get(cliente=cliente)
-
+    carrinhos = Carrinho.objects.filter(cliente=cliente)
+    for c in carrinhos:
+      if c.close_car:
+        carrinho = Carrinho(cliente=cliente)
+        carrinho.save()
   except ObjectDoesNotExist: 
     carrinho = Carrinho(cliente=cliente)
     carrinho.save()

@@ -6,56 +6,73 @@
 {% endblock %}
 
 {% block content %}
-
   <div class="box mb-50">
     <!-- parte do titulo -->
     <div class="flex title space-between">
       <h1>seu carrinho</h1>
     </div>
-
+    
     <div>
-      {% if carrinhos %}
-        
+      {% for car in itens %}
+        {% if not car.carrinho.close_car %}
           <div class="card p20 border-r border mb-50">
-            <div class="flex space-between header-carrinho">
-              <h1>{{itens.carrinho.nome}}</h1>
-            </div>
-            <div class="content-carrinho">
-              {% for item in itens.itens %}
-                <div class="card-pro flex">
-                  <div class="box-img-produto">
-                    <a href="{% url 'produto:detail' item.produto.codigo %}"><img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}">
-                    </a>
-                    </div>
-                  <p>{{ item.produto.nome }}</p>
-                  <p>R$ {{ item.produto.price }}</p>
-                  <div class="quantidade flex center">
-                {% if itens.carrinho.close_car == False %}
-                    <a class="button mr-10" href="{% url 'carrinho:remove_qtd' item.produto.codigo %}">-</a>
-                  {% endif %}
-                    <p>{{item.quantidade}}</p>
-                  {% if itens.carrinho.close_car == False %}
-                    <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
-                    {% endif %}
-                  </div>
-              {% if itens.carrinho.close_car == False %}
-                  <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
-                {% endif %}
+            {% for item in car.produtos %}
+              <div class="card-pro flex">
+                <div class="box-img-produto">
+                  <a href="{% url 'produto:detail' item.produto.codigo %}"><img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}"></a>
                 </div>
-              {% endfor %}
-            </div>
+                <p>{{ item.produto.nome }}</p>
+                <p>R$ {{ item.produto.price }}</p>
+                <div class="quantidade flex center">
+                  <a class="button mr-10" href="{% url 'carrinho:remove_qtd' item.produto.codigo %}">-</a>
+                  <p>{{item.quantidade}}</p>
+                  <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
+                  </div>
+                  <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
+              </div>
+            {% endfor %}
             <div class="footer-carrinho">
-              <p>quantidade: {{itens.carrinho.qtd_produtos}}</p>
-              <p>total: R$ {{itens.carrinho.preco_total}}</p>
-              {% if itens.carrinho.close_car == False %}
-              <a class="button" href="{% url 'carrinho:close_compra' itens.carrinho.id %}">fechar compra</a>
-              {% endif %}
+              <p>quantidade: {{car.carrinho.qtd_produtos}}</p>
+              <p>total: R$ {{car.carrinho.preco_total}}</p>
+              <a class="button" href="{% url 'carrinho:close_compra' car.carrinho.id %}">fechar compra</a>
             </div>
-            
           </div>
-      {% else %}
-        <p class="destaque-1">você não possui produtos adicionados no carrinho</p>
-      {% endif %}
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
+  
+  <!-- carrinhos fechados -->
+  <div class="box mb-50">
+    <div class="flex title space-between">
+      <h1>ultimos carrinhos fechados</h1>
+      <a class="button" href="">visualizar todos os carrinhos fechados</a>
+    </div>
+    
+    <div>
+      {% for car in itens %}
+        {% if car.carrinho.close_car %}
+          <div class="card p20 border-r border mb-50">
+            {% for item in car.produtos %}
+              <div class="card-pro flex">
+                <div class="box-img-produto">
+                  <a href="{% url 'produto:detail' item.produto.codigo %}"><img src="{{ item.produto.foto.url }}" alt="img{{item.produto.nome}}"></a>
+                </div>
+                <p>{{ item.produto.nome }}</p>
+                <p>R$ {{ item.produto.price }}</p>
+                <div class="quantidade flex center">
+                  <p>{{item.quantidade}}</p>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="footer-carrinho">
+              <p>quantidade: {{car.carrinho.qtd_produtos}}</p>
+              <p>total: R$ {{car.carrinho.preco_total}}</p>
+            </div>
+          </div>
+        {% else %}
+          <p class="destaque-1">você não possui carrinhos fechados</p>
+        {% endif %}
+      {% endfor %}
+    </div>
 {% endblock %}

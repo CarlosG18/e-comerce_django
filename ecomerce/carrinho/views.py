@@ -35,12 +35,14 @@ def get_itens_car(carrinho):
 def index(request):
   cliente = get_cliente(request.user.username)
   carrinhos = get_carrinhos(cliente)
-  # itens = []
-  itens = {}
+  itens = []
 
   for c in carrinhos:
+    item = {}
     itens_car = ItemCarrinho.objects.filter(carrinho=c)
-    itens.update({'carrinho': c, 'itens': itens_car})
+    item['carrinho'] = c
+    item['produtos'] = itens_car
+    itens.append(item)
 
   return render(request, "carrinho/index.html",{
     "cliente": cliente,
