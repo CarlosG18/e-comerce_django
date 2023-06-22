@@ -6,18 +6,12 @@
 {% endblock %}
 
 {% block content %}
-  carrinhos: {{carrinhos}}
-  <br>
-  <br>
-  carrinho atual: {{car_atual}}
-  <br><br>
-  carrinhos_closed: {{carrinhos_closed}}
-
   <div class="box mb-50">
     <!-- parte do titulo -->
     <div class="flex title space-between">
       <h1>seu carrinho</h1>
     </div>
+    {% if car_atual.produtos|length != 0 %}
     <div>
       <div class="card p20 border-r border mb-50">
         {% for item in car_atual.produtos %}
@@ -32,7 +26,7 @@
               <p>{{item.quantidade}}</p>
               <a class="button ml-10" href="{% url 'carrinho:add_qtd' item.produto.codigo %}">+</a>
             </div>
-              <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
+              <a class="button-c" href="{% url 'carrinho:remove_item' item.produto.codigo car_atual.carrinho.id %}"><img src="{% static 'imgs/x.png' %}" alt="x_icon"></a>
             </div>
         {% endfor %}
           <div class="footer-carrinho">
@@ -42,6 +36,12 @@
           </div>
         </div>
     </div>
+    {% else %}
+    <div class="flex space-between">
+      <p class="destaque-1">você ainda não adicionou nenhum produto</p>
+      <a class="button" href="{% url 'produto:index' %}">adicionar agora!</a>
+    </div>
+    {% endif %}
   </div>
   
   <!-- carrinhos fechados -->

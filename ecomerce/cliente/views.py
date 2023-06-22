@@ -48,17 +48,6 @@ def index(request):
   nota = notaMedia()
   produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
-  
-  try:
-    carrinhos = Carrinho.objects.filter(cliente=cliente)
-  except ObjectDoesNotExist: 
-    carrinhos = Carrinho(cliente=cliente)
-    carrinhos.save()
-
-  for c in carrinhos:
-    if c.close_car:
-      carrinho = Carrinho(cliente=cliente)
-      carrinho.save()
 
   return render(request, "cliente/index.html", {
     "produtos": produtos,
