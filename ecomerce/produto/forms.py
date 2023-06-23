@@ -5,6 +5,12 @@ class FormProduto(forms.ModelForm):
     class Meta:
       model = Produto
       exclude = ['loja', 'media_stars']
+      
+      widgets = {
+            'descricao': forms.Textarea(attrs={'class': 'text-area'}),
+            'status': forms.Select(attrs={'class': 'status'}),
+            'categoria': forms.Select(attrs={'class': 'status'}),
+        }
 
 class FormImages(forms.ModelForm):
   class Meta:

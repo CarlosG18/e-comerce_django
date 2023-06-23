@@ -7,6 +7,40 @@
   margin: 0 10px;
 }
 
-form{
-  max-width: 400px;
+.form-element{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.w100p{
+  width: 100%;
+}
+
+.text-area{
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid var(--cinza);
+}
+
+.status{
+  background-color: var(--vermelho);
+  padding: 3px 5px;
+  color: white;
+  border-style: none;
+  border-radius: 7px;
+}
+
+.form-element > *{
+  margin-right: 10px;
+}
+
+.form-element > input{
+  margin-left: 10px;
+}
+
+input{
+  border-radius: 7px;
+  border: 2px solid var(--cinza);
+  padding: 2px 5px;
 }
