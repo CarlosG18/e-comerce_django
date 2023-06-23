@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 :root{
   --azul: rgba(31, 131, 170, 1);
   --azul_claro: rgba(31, 131, 170, 0.3);
@@ -9,10 +14,21 @@
 
 main{
   display: flex;
-  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 20px 0;
+}
+
+.mini-txt{
+  font-size: 11px;
+}
+
+.errors{
+  color: red;
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 5px 0;
 }
 
 body{
@@ -54,9 +70,14 @@ body{
   margin-top: 30px;
 }
 
+.mt-20{
+  margin-top: 20px;
+}
+
 .link{
   color: var(--azul);
   text-decoration: none;
+  font-size: 12px;
 }
 
 .box-img-login{
@@ -110,6 +131,21 @@ input:not(.button):hover{
 
 .max-w250{
   max-width: 250px;
+}
+
+.form-group{
+  margin: 10px 0;
+}
+
+
+
+.type_cli{
+  margin-left: 10px;
+  padding: 5px;
+  background-color: var(--vermelho);
+  color: white;
+  border-radius: 5px;
+  border-style: none;
 }
 
 @media (max-width:800px){

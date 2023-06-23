@@ -16,22 +16,22 @@
       <img src="{% static 'imgs/address.png' %}" alt="img_address">
     </div>
     <div>
-      <p class="destaque-2 txt-blue fs-30">Calcule quanto dr frete</p>
+      <p class="text-frete destaque-2 txt-blue fs-30">Calcule quanto de frete</p>
       <p class="destaque-3 txt-red fs-30">você irá pagar!</p>
-      <form class="flex column center" action="">
+      <form class="flex column center mt-10" action="">
         <label for="cep">informe o cep:</label>
-        <input class="input" type="text">
-        <input class="button" type="submit" value="calcular">
+        <input class="input mt-10" type="text">
+        <input class="button mt-10" type="submit" value="calcular">
       </form>
     </div>
   </div>
   
   <!-- box categorias -->
   <div class="box mb-50 flex column">
-    <div>
-      <h1 class="title">categorias</h1>
+    <div class="title w100p">
+      <h1>categorias</h1>
     </div>
-    <div class="flex wrap">
+    <div class="flex center wrap">
     {% for c in categorias %}
       <div class="card-p">
         <a class="title-1" href="{% url 'produto:categoria' c.nome %}">{{ c.nome }}</a>
@@ -145,20 +145,20 @@
       <h1 class="txt-white">Top produtos de tecnologia</h1>
       <a class="txt-white ml-20" href="{% url 'produto:index' %}">ver todos os produtos</a>
     </div>
-    <div class="banner mt--30">
+    <div class="banner">
       <div class="box-img-tech">
         <img src="{% static 'imgs/Tech/tech1.svg' %}" alt="tech">
       </div>
       <div class="text-banner-tech">
         <div>
-          <p class="txt-white destaque-2">Vamos</p>
+          <p class="txt-white text-center destaque-2">Vamos</p>
         </div>
         <div class="text-banner">
           <p class="destaque-3">se conectar!</p>
         </div>
       </div>
     </div>
-    <div class="flex mt--30 space-around wrap">
+    <div class="flex mt-30 space-around wrap">
     {% for p in produtos_tech %}
       <div class="flex card 
       back-white column">

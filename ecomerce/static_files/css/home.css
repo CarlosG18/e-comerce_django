@@ -1,6 +1,4 @@
-body{
 
-}
 
 .card{
   max-width: 200px;
@@ -108,4 +106,33 @@ form > *{
 
 .text-banner-tech{
   margin-left: -50px;
+}
+
+@media (max-width: 800px){
+  .title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .destaque-2{
+    font-size: 50px;
+  }
+
+  .destaque-3{
+    margin-top: 30px;
+    font-size: 40px;
+  }
+
+  .box-img-tech{
+    display: none;
+  }
+
+  .text-banner-tech{
+    margin-left: 0;
+  }
+
+  .text-frete{
+    text-align: center;
+  }
 }

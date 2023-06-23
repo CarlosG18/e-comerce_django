@@ -16,13 +16,14 @@
       <input class="button" type="submit" value="entrar">
     </div>
     <a class="mt-30 link" href="{% url 'cliente:index' %}">voltar para a home</a>
+    <a class="mt-10 link" href="{% url 'cliente:tipo-cliente' %}">crie sua conta</a>
   </form>
   </div>
   <div class="box-img-login">
     <div class="box-img">
       <img src="{% static 'imgs/pay.png' %}" alt="logo">
     </div>
-    <a class="link-w" href="{% url 'cliente:tipo-cliente' %}">Não possui conta? cria já a sua!</a>
+    <!-- <a class="link-w" href="{% url 'cliente:tipo-cliente' %}">Não possui conta? cria já a sua!</a> -->
   </div>
 </div>
 {% endblock %}
