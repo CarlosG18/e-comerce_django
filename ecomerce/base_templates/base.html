@@ -35,6 +35,7 @@
             <li><a class="color-white" href="{% url 'cliente:perfil' %}">perfil</a></li>
           {% else  %}
           <li><a class="color-white" href="{% url 'produto:produtos_emp' %}">Produtos</a></li>
+          <li><a class="color-white" href="{% url 'produto:estoque' %}">Estoque</a></li>
           {% endif %}
           {% if user.is_authenticated %}
             <li><a class="button-header" href="{% url 'logout' %}">sair</a></li>

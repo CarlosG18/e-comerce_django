@@ -71,7 +71,9 @@
           <p> R$ {{ p.price }}</p>
           <div class="flex center">
             <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+              {% if p.quantidade != 0 %}
                 <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a> 
+              {% endif %}
             </div>
           </div>
     {% endfor %}
@@ -109,7 +111,9 @@
           <p> R$ {{ p.price }}</p>
           <div class="flex center">
             <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+          {% if p.quantidade != 0 %}
             <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>
+          {% endif %}
             </div>
           </div>
     {% endfor %}
@@ -132,7 +136,9 @@
           <p> R$ {{ p.price }}</p>
           <div class="flex center">
             <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+          {% if p.quantidade != 0 %}
             <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>
+          {% endif %}
           </div>
         </div>    
     {% endfor %}
@@ -169,7 +175,9 @@
           <p> R$ {{ p.price }}</p>
           <div class="flex center">
             <a class="button" href="{% url 'produto:detail' p.codigo %}">detalhes</a>
+          {% if p.quantidade != 0 %}
             <a href="{% url 'carrinho:add_item' p.codigo %}" class="button-c"><img src="{% static 'imgs/carrinho.png' %}" alt="carrinho_icon"></a>
+          {% endif %}
           </div>
         </div>    
     {% endfor %}

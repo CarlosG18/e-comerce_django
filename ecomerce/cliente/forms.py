@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.models import User
-from matplotlib import widgets
 from .models import PessoaFisica, Empresa
 
 class FormUser(forms.ModelForm):

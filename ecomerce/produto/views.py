@@ -155,3 +155,14 @@ def remove_comentario(request, id, cod):
   comentarios = Comentario.objects.filter(produto__codigo=cod)
   update_stars(produto,comentarios)
   return HttpResponseRedirect(reverse('produto:detail', args=[cod]))
+  
+def estoque(request):
+  cliente = get_cliente(request.user.username)
+  produtos = Produto.objects.filter(loja=cliente)
+  produtos_falta = Produto.objects.filter(status="f",loja=cliente)
+  produtos_oferta = Produto.objects.filter(status="o",loja=cliente)
+  return render(request, "cliente/empresa/estoque.html", {
+    "produtos_falta": produtos_falta,
+    "produtos_oferta": produtos_oferta,
+    "produtos": produtos,
+  })

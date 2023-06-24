@@ -36,8 +36,6 @@ body{
   margin-top: 20px;
 }
 
-
-
 .my-15{
   margin: 15px 0;
 }
@@ -51,12 +49,25 @@ body{
   margin-right: 10px;
 }
 
+.font1{
+  font-family: var(--font3);
+  letter-spacing: 1px;
+}
+
 .mb-50{
   margin-bottom: 50px;
 }
 
+.mt-5{
+  margin-top: 5px;
+}
+
 .mb-10{
   margin-bottom: 10px;
+}
+
+.mb-20{
+  margin-bottom: 20px;
 }
 
 .mt--30{
@@ -261,6 +272,10 @@ main{
 .form-group{
   margin: 15px 0;
   width: 100%;
+}
+
+.border-red{
+  border: 2px solid var(--vermelho);
 }
 
 @media(max-width: 800px){

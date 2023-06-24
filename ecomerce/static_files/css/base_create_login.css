@@ -14,10 +14,15 @@
 
 main{
   display: flex;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 20px;
+}
+
+.border{
+  border: 3px solid red;
 }
 
 .mini-txt{
@@ -160,5 +165,13 @@ input:not(.button):hover{
   
   .box-img-login{
     display: none;
+  }
+  
+  main{
+    height: auto;
+  }
+  
+  .forms{
+    padding: 20px 30px;
   }
 }

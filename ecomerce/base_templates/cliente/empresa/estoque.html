@@ -1,0 +1,105 @@
+{% extends '../../base.html' %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/empresa/estoque.css' %}"> 
+{% endblock %}
+
+{% block content %}
+  <div class="box mb-50 test">
+    <div class="title">
+      <h1>Estoque</h1>
+    </div>
+    <div class="estoque">
+      
+      <div class="box-qtd mb-50">
+        <div class="element-qtd">
+          <h1>produtos</h1>
+          <p class="num">{{produtos.count}}</p>
+        </div>
+        <div class="line"></div>
+        <div class="element-qtd">
+          <h1>em falta</h1>
+          <p class="num">{{produtos_falta.count}}</p>
+        </div>
+        <div class="line"></div>
+        <div class="element-qtd">
+          <h1>em oferta</h1>
+          <p class="num">{{produtos_oferta.count}}</p>
+        </div>
+      </div>
+      
+      <div class="box-falta mb-50">
+        <div class="flex center header-falta">
+          <div class="button">produtos em falta!</div>
+          <div class="line-h"></div>
+          <div class="box-icon">
+            <img src="{% static 'imgs/x.png' %}" alt="">
+          </div>
+        </div>
+        <div class="border-red border-r mt-20 content-falta">
+          {% for p in produtos_falta %}
+          <div class="flex space-around align-center card-produto">
+            <div class="text-center maxw-200 produto">
+              <div class="box-img-prod">
+                <img src="{{p.foto.url }}" alt="">
+              </div>
+              <p class="mt-5 font1">{{p.nome}}</p>
+            </div>
+            <div class="add-rem flex center">
+              <div class="flex center button-circle red">
+                <div class="font1">-</div>
+              </div>
+              <div class="qtd-p text-center">
+                <p><b>quantidade</b></p>
+                <p class="mt-5 num1">{{p.quantidade}}</p>
+              </div>
+              <div class="flex center button-circle red">
+                <p class="font1">+</p>
+              </div>
+            </div>
+            <a class="button" href="">salvar alterações</a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="box-falta">
+        <div class="flex center header-falta">
+          <div class="button">produtos em oferta!</div>
+          <div class="line-h"></div>
+          <div class="box-icon">
+            <img src="{% static 'imgs/x.png' %}" alt="">
+          </div>
+        </div>
+        <div class="border border-r mt-20 content-falta">
+          {% for p in produtos_oferta %}
+          <div class="flex space-around align-center card-produto">
+            <div class="text-center maxw-200 produto">
+              <div class="box-img-prod">
+                <img src="{{p.foto.url }}" alt="">
+              </div>
+              <p class="mt-5 font1">{{p.nome}}</p>
+            </div>
+            <div class="add-rem flex center">
+              <div class="flex center button-circle red">
+                <div class="font1">-</div>
+              </div>
+              <div class="qtd-p text-center">
+                <p><b>quantidade</b></p>
+                <p class="mt-5 num1">{{p.quantidade}}</p>
+              </div>
+              <div class="flex center button-circle red">
+                <p class="font1">+</p>
+              </div>
+            </div>
+            <a class="button" href="">salvar alterações</a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+{% endblock %}
+

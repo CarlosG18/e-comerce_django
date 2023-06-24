@@ -127,6 +127,10 @@ form > *{
   .box-img-tech{
     display: none;
   }
+  
+  .box-img-music{
+    display: none;
+  }
 
   .text-banner-tech{
     margin-left: 0;

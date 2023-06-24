@@ -1,0 +1,93 @@
+.estoque{
+  padding: 10px 40px;
+}
+
+.box-qtd{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--azul);
+  color: white;
+  border-radius: 10px;
+  border: 10px double white;
+  padding: 20px 50px;
+}
+
+.element-qtd{
+  text-align: center;
+}
+
+.line{
+  border: 2px solid white;
+  height: 70px;
+}
+
+.line-h{
+  border: 1px solid var(--vermelho);
+  width: 80%;
+  height: 0;
+}
+
+.box-icon{
+  max-width: 20px;
+  height: auto;
+}
+
+.box-icon > img{
+  width: 100%;
+  height: 100%;
+}
+
+.num{
+  font-family: var(--font3);
+  font-size: 60px;
+}
+
+.num1{
+  font-family: var(--font3);
+  font-size: 30px;
+}
+
+.maxw-200{
+  max-width: 100px;
+  height: auto;
+}
+
+.box-img-prod{
+  max-width: 100px;
+  height: auto;
+}
+
+.box-img-prod > img{
+  width: 100%;
+  height: 100%;
+}
+
+.card-produto{
+  border: 2px solid var(--cinza);
+  margin: 15px;
+  border-radius: 10px;
+  padding: 15px 0;
+}
+
+.add-rem{
+  background-color: var(--cinza);
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.qtd-p{
+  margin: 0 30px;
+}
+
+.button-circle{
+  border-radius: 50%;
+  min-width: 30px;
+  height: 30px;
+  color: white;
+  font-size: 20px;
+}
+
+.red{
+  background-color: var(--vermelho);
+}

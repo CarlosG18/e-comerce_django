@@ -35,6 +35,7 @@ def get_itens_car(carrinho):
 def index(request):
   cliente = get_cliente(request.user.username)
   carrinhos = get_carrinhos(cliente)
+  compras = Compra.objects.filter(carrinho__cliente=cliente).order_by('-id')[:3]
   
   #caso em que não tem carrinho
   if not carrinhos.exists():
@@ -61,6 +62,7 @@ def index(request):
     "carrinhos": carrinhos,
     "car_atual": car_atual,
     "carrinhos_closed": carrinhos_closed,
+    "compras": compras,
   })
   
 def create(request):
@@ -156,9 +158,10 @@ def add_qtd(request, cod):
     car = Carrinho(cliente=cliente)
     car.save()
   item = ItemCarrinho.objects.get(carrinho=car, produto=produto)
-  item.quantidade += 1
-  item.save()
-  upgrade_carrinho(car,item,"add")
+  if item.quantidade < item.produto.quantidade:
+    item.quantidade += 1
+    item.save()
+    upgrade_carrinho(car,item,"add")
   return HttpResponseRedirect(reverse('carrinho:index'))
   
 def remove_qtd(request, cod):
@@ -173,7 +176,7 @@ def remove_qtd(request, cod):
   
   item = ItemCarrinho.objects.get(carrinho=carrinho1,produto=produto)
   if item.quantidade == 1:
-    remove_item(request, item.produto.codigo)
+    remove_item(request, item.produto.codigo, carrinho1.id)
   else:
     item.quantidade -= 1
     item.save()
@@ -183,6 +186,15 @@ def remove_qtd(request, cod):
 def close_compra(request, id):
   cliente = get_cliente(request.user.username)
   carrinho = Carrinho.objects.get(id=id)
+  itens_car = get_itens_car(carrinho)
+      
+  for i in itens_car:
+    i.produto.quantidade -= i.quantidade
+    i.produto.save()
+    if i.produto.quantidade <= 0:
+      i.produto.status = "f"
+      i.produto.save()
+      
   carrinho.close_car = True
   carrinho.save()
   cliente.total_compras += 1
@@ -194,4 +206,3 @@ def close_compra(request, id):
   compra = Compra(carrinho=carrinho,status='pp',data=data_atual)
   compra.save()
   return HttpResponseRedirect(reverse('cliente:perfil'))
-  
