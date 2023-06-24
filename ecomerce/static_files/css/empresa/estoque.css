@@ -28,6 +28,12 @@
   height: 0;
 }
 
+.line-h-blue{
+  border: 1px solid var(--azul);
+  width: 80%;
+  height: 0;
+}
+
 .box-icon{
   max-width: 20px;
   height: auto;
@@ -90,4 +96,8 @@
 
 .red{
   background-color: var(--vermelho);
+}
+
+.blue{
+  background-color: var(--azul);
 }

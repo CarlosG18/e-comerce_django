@@ -66,8 +66,8 @@
       
       <div class="box-falta">
         <div class="flex center header-falta">
-          <div class="button">produtos em oferta!</div>
-          <div class="line-h"></div>
+          <div class="button-blue">produtos em oferta!</div>
+          <div class="line-h-blue"></div>
           <div class="box-icon">
             <img src="{% static 'imgs/x.png' %}" alt="">
           </div>
@@ -82,18 +82,18 @@
               <p class="mt-5 font1">{{p.nome}}</p>
             </div>
             <div class="add-rem flex center">
-              <div class="flex center button-circle red">
+              <div class="flex center button-circle blue">
                 <div class="font1">-</div>
               </div>
               <div class="qtd-p text-center">
                 <p><b>quantidade</b></p>
                 <p class="mt-5 num1">{{p.quantidade}}</p>
               </div>
-              <div class="flex center button-circle red">
+              <div class="flex center button-circle blue">
                 <p class="font1">+</p>
               </div>
             </div>
-            <a class="button" href="">salvar alterações</a>
+            <a class="button-blue" href="">salvar alterações</a>
           </div>
           {% endfor %}
         </div>

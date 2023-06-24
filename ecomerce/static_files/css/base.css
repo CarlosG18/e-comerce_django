@@ -130,6 +130,14 @@ a{
     border: none;
 }
 
+.button-blue{
+    background-color: var(--azul);
+    color: white;
+    padding: 7px 15px;
+    border-radius: 10px;
+    border: none;
+}
+
 .button-c{
   max-width: 20px;
   margin-left: 10px;
