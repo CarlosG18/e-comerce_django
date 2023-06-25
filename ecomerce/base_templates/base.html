@@ -27,7 +27,6 @@
         </div>
       
         <ul>
-          <li class="color-white">{{request.user.username}}</li>
           <li><a class="color-white" href="{% url 'cliente:index' %}">Home</a></li>      
           {% if cliente.type_cliente == 'pf' %}
             <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>  
