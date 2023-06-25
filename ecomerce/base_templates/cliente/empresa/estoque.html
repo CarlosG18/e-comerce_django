@@ -47,14 +47,14 @@
               <p class="mt-5 font1">{{p.nome}}</p>
             </div>
             <div class="add-rem flex center">
-              <div class="flex center button-circle red">
+              <div id="btn-remove" class="flex center button-circle red">
                 <div class="font1">-</div>
               </div>
               <div class="qtd-p text-center">
                 <p><b>quantidade</b></p>
-                <p class="mt-5 num1">{{p.quantidade}}</p>
+                <p id="qtd_falta" class="mt-5 num1">0</p>
               </div>
-              <div class="flex center button-circle red">
+              <div id="btn-add" class="flex center button-circle red">
                 <p class="font1">+</p>
               </div>
             </div>
@@ -103,3 +103,6 @@
   </div>
 {% endblock %}
 
+{% block js %}
+<script src="{% static 'js/estoque.js' %}"></script>
+{% endblock %}

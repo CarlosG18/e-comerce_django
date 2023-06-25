@@ -7,6 +7,7 @@ from cliente.models import Empresa
 from django.contrib.auth.models import User
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+import random as r
 from cliente.models import Cliente, PessoaFisica, Empresa
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
@@ -77,6 +78,34 @@ def detail(request, cod):
     "cliente": cliente,
     "form": form,
   })
+  
+def hash_cod(nome,price,qtd):
+  codigo = ""
+  cont = 0
+  price_int = int(price)
+  tabela_vogal = {
+    'a': '1',
+    'e': '2',
+    'i': '3',
+    'o': '4',
+    'u': '5',
+  }
+  
+  while cont<9:
+  	for letra in nome:
+  		for vogal,peso in tabela_vogal.items():
+  			if letra == vogal:
+  				codigo += peso
+  				cont += 1
+  				break
+  			else:
+  				num = r.randint(0,(qtd*cont)%10)
+  				codigo += str(num)
+  				cont += 1
+  				break
+  
+  int_codigo = int(codigo)
+  return codigo
 
 @login_required
 def add(request):
@@ -89,6 +118,7 @@ def add(request):
       produto = form.save(commit=False)
       produto.media_stars = 0.00
       produto.loja = empresa
+      produto.codigo = hash_cod(form.cleaned_data["nome"],form.cleaned_data["price"],form.cleaned_data["quantidade"])
       produto.save()
       return HttpResponseRedirect(reverse('produto:produtos_emp'))
   else:

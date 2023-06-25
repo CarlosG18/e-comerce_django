@@ -4,7 +4,7 @@ from .models import Produto, ListImages, Comentario
 class FormProduto(forms.ModelForm):
     class Meta:
       model = Produto
-      exclude = ['loja', 'media_stars']
+      exclude = ['codigo','loja', 'media_stars']
       
       widgets = {
             'descricao': forms.Textarea(attrs={'class': 'text-area'}),
