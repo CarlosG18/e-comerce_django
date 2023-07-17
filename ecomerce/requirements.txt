@@ -9,7 +9,6 @@ colorama==0.4.4
 configobj==5.0.6
 cryptography==3.4.8
 dbus-python==1.2.18
-defer==1.0.6
 distro==1.7.0
 dj-database-url==2.0.0
 Django==4.2.3
