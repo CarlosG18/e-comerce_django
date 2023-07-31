@@ -47,19 +47,21 @@
               </div>
               <p class="mt-5 font1">{{p.nome}}</p>
             </div>
-            <form method="POST" action="{% url 'produto:estoque_up' p.codigo %}" class="add-rem flex center">
+            <form method="POST" action="{% url 'produto:estoque_up' p.codigo %}" class="form-qtd flex center">
               {% csrf_token %}
-              <div id="btn-remove" class="flex center button-circle remove red">
-                <div class="font1">-</div>
+              <div class="add-rem">
+                <div id="btn-remove" class="flex center button-circle remove red">
+                  <div class="font1">-</div>
+                </div>
+                <div class="qtd-p text-center">
+                  <p><b>quantidade</b></p>
+                  <input type="text" class="mt-5 num1 qtd_produto" value="{{p.quantidade}}" name="qtd_produto">
+                </div>
+                <div id="btn-add" class="flex center button-circle plus red">
+                  <p class="font1">+</p>
+                </div>
               </div>
-              <div class="qtd-p text-center">
-                <p><b>quantidade</b></p>
-                <input type="text" class="mt-5 num1 qtd_produto" value="{{p.quantidade}}" name="qtd_produto">
-              </div>
-              <div id="btn-add" class="flex center button-circle plus red">
-                <p class="font1">+</p>
-              </div>
-              <button type="submit">salvar alterações</button>
+              <button class="button" type="submit">salvar alterações</button>
             </form>
           </div>
           {% endfor %}
@@ -87,20 +89,22 @@
               </div>
               <p class="mt-5 font1">{{p.nome}}</p>
             </div>
-            <div class="add-rem flex center">
-              <div class="flex center button-circle remove blue">
-                <div class="font1">-</div>
+            <form method="POST" action="{% url 'produto:estoque_up' p.codigo %}" class="form-qtd flex center">
+              {% csrf_token %}
+              <div class="add-rem">
+                <div id="btn-remove" class="flex center button-circle remove blue">
+                  <div class="font1">-</div>
+                </div>
+                <div class="qtd-p text-center">
+                  <p><b>quantidade</b></p>
+                  <input type="text" class="mt-5 num1 qtd_produto" value="{{p.quantidade}}" name="qtd_produto">
+                </div>
+                <div id="btn-add" class="flex center button-circle plus blue">
+                  <p class="font1">+</p>
+                </div>
               </div>
-              <div class="qtd-p text-center">
-                <p><b>quantidade</b></p>
-                <p class="mt-5 num1 qtd_produto">{{p.quantidade}}</p>
-              </div>
-              <div class="flex center button-circle blue plus">
-                <p class="font1">+</p>
-              </div>
-            </div>
-            <a class="button-blue" href="">salvar alterações</a>
-          </div>
+              <button class="button-blue" type="submit">salvar alterações</button>
+            </form>
           {% endfor %}
         </div>
       </div>

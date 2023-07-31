@@ -80,6 +80,23 @@
   background-color: var(--cinza);
   padding: 15px;
   border-radius: 20px;
+  display: flex;
+  max-width: 200px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form-qtd{
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.qtd_produto{
+  max-width: 40px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
 }
 
 .qtd-p{
@@ -92,6 +109,10 @@
   height: 30px;
   color: white;
   font-size: 20px;
+}
+
+.button-circle:hover{
+  cursor: pointer;
 }
 
 .red{

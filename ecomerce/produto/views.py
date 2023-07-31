@@ -202,6 +202,7 @@ def estoque_up(request, cod):
   produto = Produto.objects.get(codigo=cod)
   qtd_produto = request.POST['qtd_produto']
   produto.quantidade = qtd_produto
-  produto.status = 'n'
+  if produto.status == 'f':
+    produto.status = 'n'
   produto.save()
   return HttpResponseRedirect(reverse('produto:estoque'))
