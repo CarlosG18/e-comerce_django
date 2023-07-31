@@ -92,20 +92,20 @@ def hash_cod(nome,price,qtd):
   }
   
   while cont<9:
-  	for letra in nome:
-  		for vogal,peso in tabela_vogal.items():
-  			if letra == vogal:
-  				codigo += peso
-  				cont += 1
-  				break
-  			else:
-  				num = r.randint(0,(qtd*cont)%10)
-  				codigo += str(num)
-  				cont += 1
-  				break
+    for letra in nome:
+      for vogal,peso in tabela_vogal.items():
+        if letra == vogal:
+          codigo += peso
+          cont += 1
+          break
+        else:
+          num = r.randint(0,(qtd*cont)%10)
+          codigo += str(num)
+          cont += 1
+          break
   
   int_codigo = int(codigo)
-  return codigo
+  return int_codigo
 
 @login_required
 def add(request):
@@ -196,3 +196,12 @@ def estoque(request):
     "produtos_oferta": produtos_oferta,
     "produtos": produtos,
   })
+
+
+def estoque_up(request, cod):
+  produto = Produto.objects.get(codigo=cod)
+  qtd_produto = request.POST['qtd_produto']
+  produto.quantidade = qtd_produto
+  produto.status = 'n'
+  produto.save()
+  return HttpResponseRedirect(reverse('produto:estoque'))

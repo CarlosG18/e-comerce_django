@@ -29,6 +29,7 @@
         </div>
       </div>
       
+      {% if produtos_falta %}
       <div class="box-falta mb-50">
         <div class="flex center header-falta">
           <div class="button">produtos em falta!</div>
@@ -36,7 +37,7 @@
           <div class="box-icon">
             <img src="{% static 'imgs/x.png' %}" alt="">
           </div>
-        </div>
+        </div>   
         <div class="border-red border-r mt-20 content-falta">
           {% for p in produtos_falta %}
           <div class="flex space-around align-center card-produto">
@@ -46,24 +47,29 @@
               </div>
               <p class="mt-5 font1">{{p.nome}}</p>
             </div>
-            <div class="add-rem flex center">
-              <div id="btn-remove" class="flex center button-circle red">
+            <form method="POST" action="{% url 'produto:estoque_up' p.codigo %}" class="add-rem flex center">
+              {% csrf_token %}
+              <div id="btn-remove" class="flex center button-circle remove red">
                 <div class="font1">-</div>
               </div>
               <div class="qtd-p text-center">
                 <p><b>quantidade</b></p>
-                <p id="qtd_falta" class="mt-5 num1">0</p>
+                <input type="text" class="mt-5 num1 qtd_produto" value="{{p.quantidade}}" name="qtd_produto">
               </div>
-              <div id="btn-add" class="flex center button-circle red">
+              <div id="btn-add" class="flex center button-circle plus red">
                 <p class="font1">+</p>
               </div>
-            </div>
-            <a class="button" href="">salvar alterações</a>
+              <button type="submit">salvar alterações</button>
+            </form>
           </div>
           {% endfor %}
         </div>
       </div>
+      {% else %}
+        <p class="destaque-1 title">você não possui produtos em falta!</p>
+      {% endif %}
       
+      {% if produtos_oferta %}
       <div class="box-falta">
         <div class="flex center header-falta">
           <div class="button-blue">produtos em oferta!</div>
@@ -82,14 +88,14 @@
               <p class="mt-5 font1">{{p.nome}}</p>
             </div>
             <div class="add-rem flex center">
-              <div class="flex center button-circle blue">
+              <div class="flex center button-circle remove blue">
                 <div class="font1">-</div>
               </div>
               <div class="qtd-p text-center">
                 <p><b>quantidade</b></p>
-                <p class="mt-5 num1">{{p.quantidade}}</p>
+                <p class="mt-5 num1 qtd_produto">{{p.quantidade}}</p>
               </div>
-              <div class="flex center button-circle blue">
+              <div class="flex center button-circle blue plus">
                 <p class="font1">+</p>
               </div>
             </div>
@@ -98,11 +104,14 @@
           {% endfor %}
         </div>
       </div>
-      
+      {% else %}
+        <p class="destaque-1 title">você não possui produtos em oferta!</p>
+      {% endif %}
     </div>
   </div>
+
 {% endblock %}
 
 {% block js %}
-<script src="{% static 'js/estoque.js' %}"></script>
+  <script src="{% static 'js/empresa/estoque.js' %}"></script>
 {% endblock %}
