@@ -4,6 +4,7 @@
 {% block css %} 
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/home_empresa.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/empresa/estoque.css' %}"> 
 {% endblock %}
 
 {% block title%}Home{% endblock %}
@@ -239,7 +240,23 @@
     </div>
     <div class="flex column">
       <div class="pedido border flex align-center space-between">
-        <!-- mostrar produtos em falta ou quase faltando -->     
+        <!-- mostrar produtos em falta ou quase faltando --> 
+          <div class="box-qtd">
+            <div class="element-qtd">
+              <h1>produtos</h1>
+              <p class="num">{{qtd_produtos}}</p>
+            </div>
+            <div class="line"></div>
+            <div class="element-qtd">
+              <h1>em falta</h1>
+              <p class="num">{{produtos_falta}}</p>
+            </div>
+            <div class="line"></div>
+            <div class="element-qtd">
+              <h1>em oferta</h1>
+              <p class="num">{{produtos_oferta}}</p>
+            </div>
+        </div>  
       </div>
     </div>
   </div>

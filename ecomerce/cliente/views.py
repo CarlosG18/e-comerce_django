@@ -49,13 +49,21 @@ def index(request):
   produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
 
+  produtos_all = Produto.objects.filter(loja=cliente).count
+  produtos_falta = Produto.objects.filter(status="f",loja=cliente).count
+  produtos_oferta = Produto.objects.filter(status="o",loja=cliente).count
+  
+
   return render(request, "cliente/index.html", {
     "produtos": produtos,
+    "qtd_produtos": produtos_all,
     "produtos_music": produtos_music,
     "produtos_tech": produtos_tech,
     "categorias": categorias,
     "cliente": cliente,
     "produtos_avaliados": produtos_avaliados,
+    "produtos_falta": produtos_falta,
+    "produtos_oferta": produtos_oferta,  
   })
   
 def get_carrinhos(cliente):
