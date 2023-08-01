@@ -26,7 +26,7 @@
           <a href="{% url 'cliente:index' %}"><img class="imagem" src="{% static 'imgs/logo.png' %}" alt="logo"></a>
         </div>
       
-        <ul>
+        <ul class="nav-menu">
           <li><a class="color-white" href="{% url 'cliente:index' %}">Home</a></li>      
           {% if cliente.type_cliente == 'pf' %}
             <li><a class="color-white" href="{% url 'produto:index' %}">Produtos</a></li>  
@@ -43,6 +43,11 @@
             <li><a class="button-header" href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </ul>
+        <div class="button-drop">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
     </header>
 
     <main>

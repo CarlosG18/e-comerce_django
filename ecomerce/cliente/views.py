@@ -48,11 +48,14 @@ def index(request):
   nota = notaMedia()
   produtos_avaliados = Produto.objects.filter(media_stars__gte=nota)[:3]
   cliente = get_cliente(request.user.username)
-
-  produtos_all = Produto.objects.filter(loja=cliente).count
-  produtos_falta = Produto.objects.filter(status="f",loja=cliente).count
-  produtos_oferta = Produto.objects.filter(status="o",loja=cliente).count
-  
+  if cliente.type_cliente == 'em':
+    produtos_all = Produto.objects.filter(loja=cliente).count
+    produtos_falta = Produto.objects.filter(status="f",loja=cliente).count
+    produtos_oferta = Produto.objects.filter(status="o",loja=cliente).count
+  else:
+    produtos_all = None
+    produtos_oferta = None
+    produtos_falta = None
 
   return render(request, "cliente/index.html", {
     "produtos": produtos,
