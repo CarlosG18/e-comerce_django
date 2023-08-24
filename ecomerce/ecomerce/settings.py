@@ -9,13 +9,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#vr-b2sdwd+6nsezyzkefmj-bih4%g0%c_%*40!^*jlo9ysli^'
+SECRET_KEY = "#vr-b2sdwd+6nsezyzkefmj-bih4%g0%c_%*40!^*jlo9ysli^85854934fjfwf$%SS*gsd99d0dDJda0ij"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["www.compronline3213.com.br"]
+SECURE_HSTS_SECONDS = True
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -61,6 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecomerce.wsgi.application'
 
+SESSION_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
