@@ -21,13 +21,13 @@ O projeto de e-commerce **Compronline** em Django foi desenvolvido com o objetiv
 
 ## 📝 Etapas de desenvolvimento:
 
-- [📋 Engenharia de Requisitos](https://github.com/CarlosG18/datarunner/blob/main/content/requisitos.md)
+- [📋 Engenharia de Requisitos](https://github.com/CarlosG18/e-comerce_django/blob/main/content/requisitos.md)
 
-- [💾 Modelagem do Banco de Dados](https://github.com/CarlosG18/datarunner/blob/main/content/modelagem_bd.md)
+- [💾 Modelagem do Banco de Dados](https://github.com/CarlosG18/e-comerce_django/blob/main/content/modelagem_bd.md)
 
-- [🔙 Backend da Aplicação](https://github.com/CarlosG18/datarunner/blob/main/content/backend.md)
+- [🔙 Backend da Aplicação](https://github.com/CarlosG18/e-comerce_django/blob/main/content/backend.md)
 
-- [🎨 Frontend da Aplicação](https://github.com/CarlosG18/datarunner/blob/main/content/frontend.md)
+- [🎨 Frontend da Aplicação](https://github.com/CarlosG18/e-comerce_django/blob/main/content/frontend.md)
 
 ## 📁 Estrutura do Projeto
 
@@ -35,7 +35,7 @@ O projeto de e-commerce **Compronline** em Django foi desenvolvido com o objetiv
 
 Descubra as novas funcionalidades e aprimoramentos planejados para tornar nosso sistema ficar ainda melhor.
 
-- [🔨 melhorias futuras](https://github.com/CarlosG18/datarunner/blob/main/content/melhorias.md)
+- [🔨 melhorias futuras](https://github.com/CarlosG18/e-comerce_django/blob/main/content/melhorias.md)
 
 ## 🌐 Deploy
 
