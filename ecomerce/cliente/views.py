@@ -114,9 +114,9 @@ def criar_pessoa(request):
       return HttpResponseRedirect(reverse('login'))
   else:
     form_user = FormUser()
-    form_pessoa = FormPessoaFisica()
+    form = FormPessoaFisica()
   return render(request, "cliente/criar_pessoa_fisica.html",{
-      "form_pessoa": form_pessoa,
+      "form_pessoa": form,
       "form_user": form_user,
   })
 
