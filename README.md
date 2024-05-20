@@ -21,15 +21,9 @@ O projeto de e-commerce **Compronline** em Django foi desenvolvido com o objetiv
 
 ## 📝 Etapas de desenvolvimento:
 
-- [📋 Engenharia de Requisitos](https://github.com/CarlosG18/e-comerce_django/blob/main/content/requisitos.md)
+- [📋 Engenharia de Requisitos](./content/requisitos.md)
 
-- [💾 Modelagem do Banco de Dados](https://github.com/CarlosG18/e-comerce_django/blob/main/content/modelagem_bd.md)
-
-- [🔙 Backend da Aplicação](https://github.com/CarlosG18/e-comerce_django/blob/main/content/backend.md)
-
-- [🎨 Frontend da Aplicação](https://github.com/CarlosG18/e-comerce_django/blob/main/content/frontend.md)
-
-## 📁 Estrutura do Projeto
+- [💾 Modelagem do Banco de Dados](./content/modelagem_bd.md)
 
 ## 🆕 Updates
 

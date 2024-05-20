@@ -2,38 +2,56 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
+def path_img_client(instance, filename):
+  if instance.type_cliente == 'pf':
+    return f'cliente/pessoa_fisica/{filename}'
+  else:
+    return f'cliente/empresa/{filename}'
+
+
+class Segmento(models.Model):
+  nome = models.CharField(max_length=200, null=False, blank=False)
+
+  def __str__(self):
+    return self.nome
+
 class Cliente(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
-  
   TYPE = (
       ('pf', 'pessoa fisica'),
       ('em', 'empresa'),
     )
-  type_cliente = models.CharField(max_length=2, choices=TYPE, default='pf')
+  
+  user = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
+  type_cliente = models.CharField(max_length=2, choices=TYPE, default='pf',null=False, blank=False)  
+  img = models.ImageField(upload_to=path_img_client, default="cliente/avatar_default.png",null=False, blank=True)
+
   class Meta:
     abstract = True
 
 class PessoaFisica(Cliente):
-  img = models.ImageField(upload_to="cliente/", default="cliente/avatar_default.png")
-  cpf_setting = RegexValidator(regex=r'^\d{3}\.\d{3}\.\d{3}-\d{2}$',
-  message="o cpf informado deverá esta no formato 999.999.999-99",
+  cpf_setting = RegexValidator(
+    regex=r'^\d{3}\.\d{3}\.\d{3}-\d{2}$',
+    message="o cpf informado deverá esta no formato 999.999.999-99",
   )
-  cpf = models.CharField(max_length=14, validators=[cpf_setting], unique=True)
-  total_gasto = models.DecimalField(max_digits=10,decimal_places=2, default=0.00, blank=True)
-  total_compras = models.IntegerField(default=0, blank=True)
+
+  cpf = models.CharField(max_length=14, validators=[cpf_setting],help_text='formato: 999.999.999-99', unique=True,null=False, blank=False)
+  total_gasto = models.DecimalField(max_digits=10,decimal_places=2, default=0.00, null=False, blank=True)
+  total_compras = models.IntegerField(default=0,null=False, blank=True)
   
   def __str__(self):
-    return f'username = {self.user.username} password = {self.user.password}'
+    return self.user.username
     
 class Empresa(Cliente):
-  img = models.ImageField(upload_to="cliente/empresa", default="cliente/avatar_default.png")
-  cnpj_setting = RegexValidator(regex=r'^\d{2}\.\d{3}\.\d{7}\-\d{2}$',
-  message="o cnpj informado deverá esta no formato XX.XXX.XXX0001-XX",
+  cnpj_setting = RegexValidator(
+    regex=r'^\d{2}\.\d{3}\.\d{7}\-\d{2}$',
+    message="o cnpj informado deverá esta no formato XX.XXX.XXX0001-XX",
   )
-  cnpj = models.CharField(max_length=18, validators=[cnpj_setting], unique=True)
-  segmento = models.CharField(max_length=100)
-  total_ganho = models.DecimalField(max_digits=10,decimal_places=2, default=0.00, blank=True)
-  total_vendas = models.IntegerField(default=0, blank=True)
+
+  nome_social = models.CharField(max_length=200, null=False, blank=False)
+  cnpj = models.CharField(max_length=18, validators=[cnpj_setting],help_text='formato: XX.XXX.XXX0001-XX', unique=True,null=False, blank=False)
+  segmento = models.ManyToManyField(to=Segmento,blank=False)
+  total_ganho = models.DecimalField(max_digits=10,decimal_places=2, default=0.00,null=False, blank=True)
+  total_vendas = models.IntegerField(default=0, null=False, blank=True)
 
   def __str__(self):
-      return f'empresa {self.user.username}'
+      return self.nome_social
